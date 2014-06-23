@@ -3,47 +3,47 @@
   "swaggerVersion": "1.2",
   "apis": [
     {
-      "path": "http://www.stori.es/api/listings/accounts",
+      "path": "http://www.stori.es/api/website/listings/accounts",
       "description": "Operations for accounts"
     },
     {
-      "path": "http://www.stori.es/api/listings/collections",
+      "path": "http://www.stori.es/api/website/listings/collections",
       "description": "Operations for collections"
     },
     {
-      "path": "http://www.stori.es/api/listings/contents",
+      "path": "http://www.stori.es/api/website/listings/contents",
       "description": "Operations for content documents"
     },
     {
-      "path": "http://www.stori.es/api/listings/links",
+      "path": "http://www.stori.es/api/website/listings/links",
       "description": "Operations for link documents"
     },
     {
-      "path": "http://www.stori.es/api/listings/notes",
+      "path": "http://www.stori.es/api/website/listings/notes",
       "description": "Operations for note documents"
     },
     {
-      "path": "http://www.stori.es/api/listings/organizations",
+      "path": "http://www.stori.es/api/website/listings/organizations",
       "description": "Operations for organizations"
     },
     {
-      "path": "http://www.stori.es/api/listings/permissions",
+      "path": "http://www.stori.es/api/website/listings/permissions",
       "description": "Operations for permission documents"
     },
     {
-      "path": "http://www.stori.es/api/listings/profiles",
+      "path": "http://www.stori.es/api/website/listings/profiles",
       "description": "Operations for profiles"
     },
     {
-      "path": "http://www.stori.es/api/listings/questionnaires",
+      "path": "http://www.stori.es/api/website/listings/questionnaires",
       "description": "Operations for questionnaires"
     },
     {
-      "path": "http://www.stori.es/api/listings/responses",
+      "path": "http://www.stori.es/api/website/listings/responses",
       "description": "Operations for response documents"
     },
     {
-      "path": "http://www.stori.es/api/listings/stories",
+      "path": "http://www.stori.es/api/website/listings/stories",
       "description": "Operations for stories"
     }
   ],
