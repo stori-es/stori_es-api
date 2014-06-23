@@ -1,0 +1,491 @@
+apiVersion: 1
+swaggerVersion: 1.2
+basePath: 'http://www.stori.es/api/listings'
+description: 'Operations for stories'
+resourcePath: '/stories'
+produces:
+  - 'application/vnd.api+json'
+consumes:
+  - 'application/vnd.api+json'
+apis:
+  -
+    path: '/stories'
+    operations:          
+      -
+        method: 'POST'
+        summary: 'Create a new story'
+        notes: 'Creates a new story and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        type: 'Response'
+        nickname: 'create_story'
+        parameters:
+          -
+            name: 'body'
+            description: 'The new story to be created'
+            required: true
+            type: 'StoryPost'
+            paramType: 'body'
+        responseMessages:
+          -
+            code: 201
+            message: 'Resource successfully created'
+            responseModel: 'Response'
+          -
+            code: 400
+            message: 'Invalid input'
+            responseModel: 'Response'
+          -
+            code: 403
+            message: 'Not authorized to create the requested resource'
+            responseModel: 'Response'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Response'
+  -
+    path: '/stories/{story_id}'
+    operations:
+      -
+        method: 'GET'
+        summary: 'Retrieve a specific story'
+        notes: 'Returns a specific story accessible to the current user'
+        type: 'Response'
+        nickname: 'get_story'
+        parameters:
+          -
+            name: 'story_id'
+            description: 'The ID of the story to retrieve'
+            required: true
+            type: 'string'
+            paramType: 'path'
+        responseMessages:
+          -
+            code: 200
+            message: 'Resource successfully retrieved'
+            responseModel: 'Response'
+          -
+            code: 403
+            message: 'Not authorized to access the requested resource'
+            responseModel: 'Response'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Response'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Response'
+      -
+        method: 'DELETE'
+        summary: 'Delete a story'
+        notes: 'Deletes a story owned by the current user'
+        type: 'void'
+        nickname: 'delete_story'
+        parameters:
+          -
+            name: 'story_id'
+            description: 'The ID of the story to delete'
+            required: true
+            type: 'string'
+            paramType: 'path'
+        responseMessages:
+          -
+            code: 204
+            message: 'Resource successfully deleted'
+          -
+            code: 403
+            message: 'Not authorized to delete the requested resource'
+            responseModel: 'Response'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Response'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Response'
+      -
+        method: 'PATCH'
+        summary: 'Update a story'
+        notes: 'Updates a story administered by the current user'
+        type: 'Response'
+        nickname: 'update_story'
+        consumes:
+          - 'application/json-patch+json'
+        parameters:
+          -
+            name: 'story_id'
+            description: 'The ID of the story to update'
+            required: true
+            type: 'string'
+            paramType: 'path'
+          -
+            name: 'body'
+            description: 'Requested modifications in JSON Patch format (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document (PATCH)">JSON API</a>)'
+            required: true
+            type: 'PatchOperations'
+            paramType: 'body'
+        responseMessages:
+          -
+            code: 200
+            message: 'Resource successfully updated'
+            responseModel: 'Response'
+          -
+            code: 400
+            message: 'Invalid input'
+            responseModel: 'Response'
+          -
+            code: 403
+            message: 'Not authorized to update the requested resource'
+            responseModel: 'Response'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Response'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Response'
+models:
+  Sort:
+    id: 'Sort'
+    description: 'Sort order details indexed by resource name'
+    required:
+      - 'stories'
+    properties:
+      stories:
+        type: 'array'
+        description: 'Sort order for story resources'
+        uniqueItems: true
+        items:
+          type: 'string'
+  Navigation:
+    id: 'Navigation'
+    description: 'Navigation details for this response'
+    properties:
+      first:
+        type: 'string'
+        description: 'URL for first set of results'
+      prev:
+        type: 'string'
+        description: 'URL for previous set of results'
+      next:
+        type: 'string'
+        description: 'URL for next set of results'
+      last:
+        type: 'string'
+        description: 'URL for last set of results'
+  Pagination:
+    id: 'Pagination'
+    description: 'Pagination details for this response'
+    properties:
+      limit:
+        type: 'integer'
+        format: 'int32'
+        description: 'Maximum number of results to return (default = 8, maximum = 50)'
+        minimum: 1
+        maximum: 50
+        defaultValue: 8
+      offset:
+        type: 'integer'
+        format: 'int32'
+        description: 'Starting index, 0-based (default = 0)'
+        minimum: 0
+        defaultValue: 0
+      sort:
+        $ref: 'Sort'
+        description: 'Sort order, indexed by resource'
+      navigation:
+        $ref: 'Navigation'
+        description: 'Navigation details for this response'
+  Message:
+    id: 'Message'
+    description: 'A message generated by a request'
+    required:
+      - 'summary'
+      - 'message_code'
+    properties:
+      target:
+        type: 'string'
+        description: 'Target of this message (field, object, etc.)'
+      summary:
+        type: 'string'
+        description: 'Message summary'
+      message_code:
+        type: 'string'
+        description: 'stori.es internal message code'
+      detail_url:
+        type: 'string'
+        description: 'URL for message details'
+  Metadata:
+    id: 'Metadata'
+    description: 'Metadata about this response'
+    required:
+      - 'self'
+      - 'http_code'
+      - 'status'
+    properties:
+      self:
+        type: 'string'
+        description: 'Full request URL'
+      status:
+        type: 'string'
+        description: 'High-level status of response'
+        enum:
+          - 'success'
+          - 'fail'
+          - 'error'
+      http_code:
+        type: 'string'
+        description: 'HTTP response status code'
+      messages:
+        type: 'array'
+        description: 'Array of messages generated by request'
+        items:
+          $ref: 'Message'
+      pagination:
+        $ref: 'Pagination'
+        description: 'Pagination details for this response'
+  Templates:
+    id: 'Templates'
+    description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
+    required:
+      - 'stories.contents'
+      - 'stories.default_content'
+      - 'stories.responses'
+      - 'stories.notes'
+      - 'stories.attachments'
+      - 'stories.permissions'
+    properties:
+      'stories.contents':
+        type: 'string'
+        description: 'URL Template for story content documents'
+      'stories.default_content':
+        type: 'string'
+        description: 'URL Template for story content documents'
+      'stories.responses':
+        type: 'string'
+        description: 'URL Template for story response documents'
+      'stories.notes':
+        type: 'string'
+        description: 'URL Template for story note documents'
+      'stories.attachments':
+        type: 'string'
+        description: 'URL Template for story attachment documents'
+      'stories.permissions':
+        type: 'string'
+        description: 'URL Template for story permission documents'
+  ResourceLink:
+    id: 'ResourceLink'
+    description: 'Metadata about a resource'
+    required:
+      - 'type'
+      - 'id'
+      - 'href'
+    properties:
+      type:
+        type: 'string'
+        description: 'The type of the resource'
+      id:
+        type: 'string'
+        description: 'The ID of the resource'
+      href:
+        type: 'string'
+        description: 'The URL of the resource'
+  ResourceLinks:
+    id: 'ResourceLinks'
+    description: 'The IDs and metadata of resources associated with a story'
+    required:
+      - 'creator'
+      - 'owner'
+    properties:
+      creator:
+        $ref: 'ResourceLink'
+        description: 'Metadata about the creator of this entity'
+      owner:
+        $ref: 'ResourceLink'
+        description: 'Metadata about the owner of this entity'
+      administrators:
+        type: 'array'
+        description: 'Metadata about the administrators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      curators:
+        type: 'array'
+        description: 'Metadata about the curators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      readers:
+        type: 'array'
+        description: 'Metadata about the readers of this entity'
+        items:
+          $ref: 'ResourceLink'
+      contents:
+        type: 'array'
+        description: 'The IDs of content documents associated with this entity'
+        items: 
+          type: 'string'
+      default_content:
+        type: 'string'
+        description: 'The ID of the default content document associated with this entity'
+      responses:
+        type: 'array'
+        description: 'The IDs of response documents associated with this entity'
+        items: 
+          type: 'string'
+      notes:
+        type: 'array'
+        description: 'The IDs of note documents associated with this entity'
+        items: 
+          type: 'string'
+      attachments:
+        type: 'array'
+        description: 'The IDs of attachment documents associated with this entity'
+        items: 
+          type: 'string'
+      permissions:
+        type: 'array'
+        description: 'The IDs of permissions documents associated with this entity'
+        items: 
+          type: 'string'
+  Story:
+    id: 'Story'
+    description: 'The representation of a story on the stori.es platform'
+    required:
+       - 'id'
+       - 'title'
+       - 'created_on'
+       - 'updated_on'
+       - 'publication_status'
+    properties:
+      id:
+        type: 'string'
+        description: 'The unique ID for this entity'
+      title:
+        type: 'string'
+        description: 'The title of this entity'
+      byline:
+        type: 'string'
+        description: 'The byline of this story'
+      path:
+        type: 'string'
+        description: 'The URL path fragment associated with this entity; its namespace'
+      links:
+        $ref: 'ResourceLinks'
+        description: 'The IDs and metadata about resources associated with this entity'
+      created_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The creation date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      updated_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      publication_status:
+        type: 'string'
+        description: 'The current publication status of this entity'
+        enum:
+          - 'draft'
+          - 'published'
+      published_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+  Response:
+    id: 'Response'
+    description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
+    required:
+      - 'meta'
+      - 'links'
+      - 'stories'
+    properties:
+      meta:
+        $ref: 'Metadata'
+        description: 'Metadata about this response'
+      links:
+        $ref: 'Templates'
+        description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
+      stories:
+        type: 'array'
+        description: 'Array of requested story resources'
+        items:
+          $ref: 'Story'
+  StoryPost:
+    id: 'StoryPost'
+    description: 'The representation of a new story to be added to the stori.es platform'
+    required:
+       - 'title'
+    properties:
+      title:
+        type: 'string'
+        description: 'The title of this entity'
+      byline:
+        type: 'string'
+        description: 'The byline of this story'
+      path:
+        type: 'string'
+        description: 'The URL path fragment associated with this entity; its namespace'
+      content_ids:
+        type: 'array'
+        description: 'The IDs of content documents associated with this entity'
+        items: 
+          type: 'string'
+      default_content_id:
+        type: 'string'
+        description: 'The ID of the default content document associated with this entity'
+      response_ids:
+        type: 'array'
+        description: 'The IDs of response documents associated with this entity'
+        items: 
+          type: 'string'
+      note_ids:
+        type: 'array'
+        description: 'The IDs of note documents associated with this entity'
+        items: 
+          type: 'string'
+      attachment_ids:
+        type: 'array'
+        description: 'The IDs of attachment documents associated with this entity'
+        items: 
+          type: 'string'
+      permission_ids:
+        type: 'array'
+        description: 'The IDs of permissions documents associated with this entity'
+        items: 
+          type: 'string'
+  PatchOperation:
+    id: 'PatchOperation'
+    description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'
+    required:
+      - 'op'
+      - 'path'
+    properties:
+      op:
+        type: 'string'
+        description: 'The operation to perform'
+        enum:
+          - 'add'
+          - 'remove'
+          - 'replace'
+          - 'move'
+          - 'copy'
+          - 'test'
+      path:
+        type: 'string'
+        description: 'A JSON Pointer value (see <a href="http://tools.ietf.org/html/rfc6901" title="RFC6901 - JSON Pointer">RFC6901</a>) referencing a location within the target document where the operation is to be performed'
+      value:
+        type: 'string'
+        description: 'The value to patch'
+      from:
+        type: 'string'
+        description: 'A JSON Pointer value (see <a href="http://tools.ietf.org/html/rfc6901" title="RFC6901 - JSON Pointer">RFC6901</a>) referencing a location within the target document to move or copy'
+  PatchOperations:
+    id: 'PatchOperations'
+    description: 'The representation of requested modifications to an entity on the stori.es platform'
+    required:
+      - 'operations'
+    properties:
+      operations:
+        type: 'array'
+        description: 'The set of operations composing requested modifications to a target entity'
+        items:
+          $ref: 'PatchOperation'

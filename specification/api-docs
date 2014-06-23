@@ -1,0 +1,58 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "apis": [
+    {
+      "path": "http://www.stori.es/api/listings/accounts",
+      "description": "Operations for accounts"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/collections",
+      "description": "Operations for collections"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/contents",
+      "description": "Operations for content documents"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/links",
+      "description": "Operations for link documents"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/notes",
+      "description": "Operations for note documents"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/organizations",
+      "description": "Operations for organizations"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/permissions",
+      "description": "Operations for permission documents"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/profiles",
+      "description": "Operations for profiles"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/questionnaires",
+      "description": "Operations for questionnaires"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/responses",
+      "description": "Operations for response documents"
+    },
+    {
+      "path": "http://www.stori.es/api/listings/stories",
+      "description": "Operations for stories"
+    }
+  ],
+  "info": {
+    "title": "stori.es API",
+    "description": "The stori.es API provides a programmatic interface to the stori.es platform.",
+    "termsOfServiceUrl": "http://www.stori.es/terms-of-service",
+    "contact": "info@stori.es",
+    "license": "stori.es Software as a Service Agreement",
+    "licenseUrl": "http://www.stori.es/software-as-a-service-agreement"
+  }
+}

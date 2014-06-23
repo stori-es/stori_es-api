@@ -1,0 +1,193 @@
+apiVersion: 1
+swaggerVersion: 1.2
+basePath: 'http://www.stori.es/api/listings'
+description: 'Operations for link documents'
+resourcePath: '/links'
+produces:
+  - 'application/json'
+consumes:
+  - 'application/json'
+apis:
+  -
+    path: '/links'
+    operations:
+      -
+        method: 'POST'
+        summary: 'Create a new link'
+        notes: 'Creates a new link and returns it. Declares the resource URL in the Location header.'
+        type: 'Link'
+        nickname: 'create_link'
+        parameters:
+          -
+            name: 'body'
+            description: 'The new link to be created'
+            required: true
+            type: 'Link'
+            paramType: 'body'
+        responseMessages:
+          -
+            code: 201
+            message: 'Resource successfully created'
+            responseModel: 'Link'
+          -
+            code: 400
+            message: 'Invalid input'
+            responseModel: 'Error'
+          -
+            code: 403
+            message: 'Not authorized to create the requested resource'
+            responseModel: 'Error'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Error'
+  -
+    path: '/links/{link_id}'
+    operations:
+      -
+        method: 'GET'
+        summary: 'Retrieve a specific link'
+        notes: 'Returns a specific link accessible to the current user'
+        type: 'Link'
+        nickname: 'get_link'
+        parameters:
+          -
+            name: 'link_id'
+            description: 'The ID of the link to retrieve'
+            required: true
+            type: 'integer'
+            format: 'int64'
+            paramType: 'path'
+        responseMessages:
+          -
+            code: 200
+            message: 'Resource successfully retrieved'
+            responseModel: 'Link'
+          -
+            code: 403
+            message: 'Not authorized to access the requested resource'
+            responseModel: 'Error'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Error'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Error'
+      -
+        method: 'DELETE'
+        summary: 'Deletes a link'
+        notes: 'Deletes a link owned by the current user'
+        type: 'void'
+        nickname: 'delete_link'
+        parameters:
+          -
+            name: 'link_id'
+            description: 'The ID of the link to delete'
+            required: true
+            type: 'integer'
+            format: 'int64'
+            paramType: 'path'
+        responseMessages:
+          -
+            code: 204
+            message: 'Resource successfully deleted'
+          -
+            code: 403
+            message: 'Not authorized to delete the requested resource'
+            responseModel: 'Error'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Error'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Error'
+      -
+        method: 'PATCH'
+        summary: 'Updates a link'
+        notes: 'Updates a link administered by the current user'
+        type: 'Link'
+        nickname: 'update_link'
+        parameters:
+          -
+            name: 'link_id'
+            description: 'The ID of the link to update'
+            required: true
+            type: 'integer'
+            format: 'int64'
+            paramType: 'path'
+          -
+            name: 'body'
+            description: 'The updated link'
+            required: true
+            type: 'Link'
+            paramType: 'body'
+        responseMessages:
+          -
+            code: 200
+            message: 'Resource successfully updated'
+            responseModel: 'Link'
+          -
+            code: 400
+            message: 'Invalid input'
+            responseModel: 'Error'
+          -
+            code: 403
+            message: 'Not authorized to update the requested resource'
+            responseModel: 'Error'
+          -
+            code: 404
+            message: 'Resource not found'
+            responseModel: 'Error'
+          -
+            code: 503
+            message: 'Service is currently unavailable'
+            responseModel: 'Error'
+models:
+  Link:
+    id: 'Link'
+    description: 'The representation of a link on the stori.es platform'
+    required:
+       - 'id'
+       - 'title'
+       - 'permalink'
+       - 'entity_id'
+    properties:
+      id:
+        type: 'string'
+        description: 'The unique ID for this entity'
+      title:
+        type: 'string'
+        description: 'The title of this document'
+      permalink:
+        type: 'string'
+        description: 'The URL of this document'
+      entity_id:
+        type: 'integer'
+        format: 'int64'
+        description: 'The entity which this document is associated with'
+        minimum: 1
+  Error:
+    id: 'Error'
+    description: 'The representation of a stori.es API error'
+    required:
+       - 'http_status_code'
+       - 'error_code'
+       - 'summary'
+    properties:
+      http_status_code:
+        type: 'integer'
+        format: 'int64'
+        description: 'The HTTP status code'
+      error_code:
+        type: 'string'
+        description: 'The stori.es internal error code'
+      summary:
+        type: 'string'
+        description: 'A brief summary of the error encountered'
+      detail_url:
+        type: 'string'
+        description: 'A URL for developers containing more detail about the error'
