@@ -1,0 +1,277 @@
+{
+  "apiVersion": 1,
+  "swaggerVersion": 1.2,
+  "basePath": "http://www.stori.es/api/listings",
+  "description": "Operations for collections",
+  "resourcePath": "/collections",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "apis": [
+    {
+      "path": "/collections",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a new collection",
+          "notes": "Creates a new collection and returns it. Declares the resource URL in the Location header.",
+          "type": "Collection",
+          "nickname": "create_collection",
+          "parameters": [
+            {
+              "name": "body",
+              "description": "The new collection to be created",
+              "required": true,
+              "type": "Collection",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 201,
+              "message": "Resource successfully created",
+              "responseModel": "Collection"
+            },
+            {
+              "code": 400,
+              "message": "Invalid input",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Not authorized to create the requested resource",
+              "responseModel": "Error"
+            },
+            {
+              "code": 503,
+              "message": "Service is currently unavailable",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/collections/{collection_id}",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Retrieve a specific collection",
+          "notes": "Returns a specific collection accessible to the current user",
+          "type": "Collection",
+          "nickname": "get_collection",
+          "parameters": [
+            {
+              "name": "collection_id",
+              "description": "The ID of the collection to retrieve",
+              "required": true,
+              "type": "integer",
+              "format": "int64",
+              "paramType": "path"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Resource successfully retrieved",
+              "responseModel": "Collection"
+            },
+            {
+              "code": 403,
+              "message": "Not authorized to access the requested resource",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 503,
+              "message": "Service is currently unavailable",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "DELETE",
+          "summary": "Deletes a collection",
+          "notes": "Deletes a collection owned by the current user",
+          "type": "void",
+          "nickname": "delete_collection",
+          "parameters": [
+            {
+              "name": "collection_id",
+              "description": "The ID of the collection to delete",
+              "required": true,
+              "type": "integer",
+              "format": "int64",
+              "paramType": "path"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 204,
+              "message": "Resource successfully deleted"
+            },
+            {
+              "code": 403,
+              "message": "Not authorized to delete the requested resource",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 503,
+              "message": "Service is currently unavailable",
+              "responseModel": "Error"
+            }
+          ]
+        },
+        {
+          "method": "PATCH",
+          "summary": "Updates a collection",
+          "notes": "Updates a collection administered by the current user",
+          "type": "Collection",
+          "nickname": "update_collection",
+          "parameters": [
+            {
+              "name": "collection_id",
+              "description": "The ID of the collection to update",
+              "required": true,
+              "type": "integer",
+              "format": "int64",
+              "paramType": "path"
+            },
+            {
+              "name": "body",
+              "description": "The updated collection",
+              "required": true,
+              "type": "Collection",
+              "paramType": "body"
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 200,
+              "message": "Resource successfully updated",
+              "responseModel": "Collection"
+            },
+            {
+              "code": 400,
+              "message": "Invalid input",
+              "responseModel": "Error"
+            },
+            {
+              "code": 403,
+              "message": "Not authorized to update the requested resource",
+              "responseModel": "Error"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "responseModel": "Error"
+            },
+            {
+              "code": 503,
+              "message": "Service is currently unavailable",
+              "responseModel": "Error"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Collection": {
+      "id": "Collection",
+      "description": "The representation of a collection on the stori.es platform",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID for this entity"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "path": {
+          "type": "string",
+          "description": "The URL path fragment associated with this entity; its namespace"
+        },
+        "permalink": {
+          "type": "string",
+          "description": "The URL of this entity on the stori.es platform"
+        },
+        "theme_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ID of the theme for this entity",
+          "minimum": 1,
+          "defaultValue": 1
+        },
+        "story_ids": {
+          "type": "array",
+          "description": "The IDs of stories associated with this collection",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "note_ids": {
+          "type": "array",
+          "description": "The IDs of notes associated with this entity",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "link_ids": {
+          "type": "array",
+          "description": "The IDs of links associated with this entity",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "Error": {
+      "id": "Error",
+      "description": "The representation of a stori.es API error",
+      "required": [
+        "http_status_code",
+        "error_code",
+        "summary"
+      ],
+      "properties": {
+        "http_status_code": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The HTTP status code"
+        },
+        "error_code": {
+          "type": "string",
+          "description": "The stori.es internal error code"
+        },
+        "summary": {
+          "type": "string",
+          "description": "A brief summary of the error encountered"
+        },
+        "detail_url": {
+          "type": "string",
+          "description": "A URL for developers containing more detail about the error"
+        }
+      }
+    }
+  }
+}
