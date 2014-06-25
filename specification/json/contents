@@ -18,7 +18,7 @@
           "method": "POST",
           "summary": "Create a new content document",
           "notes": "Creates a new content document and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
-          "type": "Response",
+          "type": "ApiResponse",
           "nickname": "create_content",
           "parameters": [
             {
@@ -33,22 +33,22 @@
             {
               "code": 201,
               "message": "Resource successfully created",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to create the requested resource",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -61,7 +61,7 @@
           "method": "GET",
           "summary": "Retrieve a specific content document",
           "notes": "Returns a specific content document accessible to the current user",
-          "type": "Response",
+          "type": "ApiResponse",
           "nickname": "get_content",
           "parameters": [
             {
@@ -76,22 +76,22 @@
             {
               "code": 200,
               "message": "Resource successfully retrieved",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to access the requested resource",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -118,17 +118,17 @@
             {
               "code": 403,
               "message": "Not authorized to delete the requested resource",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -136,7 +136,7 @@
           "method": "PATCH",
           "summary": "Update a content document",
           "notes": "Updates a content document administered by the current user",
-          "type": "Response",
+          "type": "ApiResponse",
           "nickname": "update_content",
           "consumes": [
             "application/json-patch+json"
@@ -161,27 +161,27 @@
             {
               "code": 200,
               "message": "Resource successfully updated",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to update the requested resource",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Response"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -326,27 +326,23 @@
       "id": "Templates",
       "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
       "required": [
+        "contents.theme",
         "contents.blocks",
-        "contents.notes",
-        "contents.attachments",
-        "contents.permissions"
+        "contents.permissions",
+        "contents.responses"
       ],
       "properties": {
+        "contents.theme": {
+          "type": "string",
+          "description": "URL Template for themes"
+        },
         "contents.blocks": {
           "type": "string",
           "description": "URL Template for blocks"
         },
-        "contents.notes": {
-          "type": "string",
-          "description": "URL Template for content note documents"
-        },
-        "contents.attachments": {
-          "type": "string",
-          "description": "URL Template for content attachment documents"
-        },
         "contents.permissions": {
           "type": "string",
-          "description": "URL Template for content permission documents"
+          "description": "URL Template for permission documents"
         }
       }
     },
@@ -379,6 +375,7 @@
       "required": [
         "creator",
         "owner",
+        "theme",
         "blocks",
         "permissions"
       ],
@@ -412,40 +409,20 @@
             "$ref": "ResourceLink"
           }
         },
+        "theme": {
+          "type": "string",
+          "description": "The ID of the theme associated with this entity"
+        },
         "blocks": {
           "type": "array",
-          "description": "The IDs of blocks that compose this document",
-          "items": {
-            "type": "string"
-          }
-        },
-        "entities": {
-          "type": "array",
-          "description": "Metadata about entities which this document is associated with",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "notes": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachments": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
+          "description": "The ordered IDs of blocks that compose this document",
           "items": {
             "type": "string"
           }
         },
         "permissions": {
-          "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "The ID of the permissions document associated with this entity"
         }
       }
     },
@@ -502,8 +479,8 @@
         }
       }
     },
-    "Response": {
-      "id": "Response",
+    "ApiResponse": {
+      "id": "ApiResponse",
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
       "required": [
         "meta",
@@ -532,7 +509,8 @@
       "id": "ContentPost",
       "description": "The representation of a new content document to be added to the stori.es platform",
       "required": [
-        "path"
+        "path",
+        "theme_id"
       ],
       "properties": {
         "title": {
@@ -543,33 +521,20 @@
           "type": "string",
           "description": "The URL path fragment associated with this entity; its namespace"
         },
+        "theme_id": {
+          "type": "string",
+          "description": "The ID of the theme associated with this entity"
+        },
         "block_ids": {
           "type": "array",
-          "description": "The IDs of blocks that compose this document",
+          "description": "The ordered IDs of blocks that compose this document",
           "items": {
             "type": "string"
           }
         },
-        "note_ids": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachment_ids": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "permission_ids": {
-          "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
+        "permission_id": {
+          "type": "string",
+          "description": "The ID of the permissions document associated with this entity"
         }
       }
     },

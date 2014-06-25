@@ -15,7 +15,7 @@ apis:
         method: 'POST'
         summary: 'Create a new story'
         notes: 'Creates a new story and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'create_story'
         parameters:
           -
@@ -28,19 +28,19 @@ apis:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
   -
     path: '/stories/{story_id}'
     operations:
@@ -48,7 +48,7 @@ apis:
         method: 'GET'
         summary: 'Retrieve a specific story'
         notes: 'Returns a specific story accessible to the current user'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'get_story'
         parameters:
           -
@@ -61,19 +61,19 @@ apis:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
       -
         method: 'DELETE'
         summary: 'Delete a story'
@@ -94,20 +94,20 @@ apis:
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
       -
         method: 'PATCH'
         summary: 'Update a story'
         notes: 'Updates a story administered by the current user'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'update_story'
         consumes:
           - 'application/json-patch+json'
@@ -128,23 +128,23 @@ apis:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
 models:
   Sort:
     id: 'Sort'
@@ -258,22 +258,22 @@ models:
     properties:
       'stories.contents':
         type: 'string'
-        description: 'URL Template for story content documents'
+        description: 'URL Template for content documents'
       'stories.default_content':
         type: 'string'
-        description: 'URL Template for story content documents'
+        description: 'URL Template for content documents'
       'stories.responses':
         type: 'string'
-        description: 'URL Template for story response documents'
+        description: 'URL Template for response documents'
       'stories.notes':
         type: 'string'
-        description: 'URL Template for story note documents'
+        description: 'URL Template for note documents'
       'stories.attachments':
         type: 'string'
-        description: 'URL Template for story attachment documents'
+        description: 'URL Template for attachment documents'
       'stories.permissions':
         type: 'string'
-        description: 'URL Template for story permission documents'
+        description: 'URL Template for permission documents'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata about a resource'
@@ -390,8 +390,8 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-  Response:
-    id: 'Response'
+  ApiResponse:
+    id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'

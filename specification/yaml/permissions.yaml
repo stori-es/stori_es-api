@@ -4,9 +4,9 @@ basePath: 'http://www.stori.es/api/website/listings'
 description: 'Operations for permissions documents'
 resourcePath: '/permissions'
 produces:
-  - 'application/json'
+  - 'application/vnd.api+json'
 consumes:
-  - 'application/json'
+  - 'application/vnd.api+json'
 apis:
   -
     path: '/permissions'
@@ -14,33 +14,33 @@ apis:
       -
         method: 'POST'
         summary: 'Create a new permissions document'
-        notes: 'Creates a new permissions document and returns it. Declares the resource URL in the Location header.'
-        type: 'Permissions'
+        notes: 'Creates a new permissions document and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        type: 'ApiResponse'
         nickname: 'create_permissions'
         parameters:
           -
             name: 'body'
             description: 'The new permissions document to be created'
             required: true
-            type: 'Permissions'
+            type: 'PermissionsPost'
             paramType: 'body'
         responseMessages:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'Permissions'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
   -
     path: '/permissions/{permissions_id}'
     operations:
@@ -48,33 +48,32 @@ apis:
         method: 'GET'
         summary: 'Retrieve a specific permissions document'
         notes: 'Returns a specific permissions document accessible to the current user'
-        type: 'Permissions'
+        type: 'ApiResponse'
         nickname: 'get_permissions'
         parameters:
           -
             name: 'permissions_id'
             description: 'The ID of the permissions document to retrieve'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'Permissions'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'DELETE'
         summary: 'Deletes a permissions document'
@@ -86,8 +85,7 @@ apis:
             name: 'permissions_id'
             description: 'The ID of the permissions document to delete'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
@@ -96,56 +94,57 @@ apis:
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'PATCH'
         summary: 'Updates a permissions document'
         notes: 'Updates a permissions document administered by the current user'
-        type: 'Permissions'
+        type: 'ApiResponse'
         nickname: 'update_permissions'
+        consumes:
+          - 'application/json-patch+json'
         parameters:
           -
             name: 'permissions_id'
             description: 'The ID of the permissions document to update'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
           -
             name: 'body'
-            description: 'The updated permissions document'
+            description: 'Requested modifications in JSON Patch format (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document (PATCH)">JSON API</a>)'
             required: true
-            type: 'Permissions'
+            type: 'PatchOperations'
             paramType: 'body'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'Permissions'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
 models:
   Permissions:
     id: 'Permissions'
@@ -170,24 +169,3 @@ models:
         format: 'int64'
         description: 'The entity which this document is associated with'
         minimum: 1
-  Error:
-    id: 'Error'
-    description: 'The representation of a stori.es API error'
-    required:
-       - 'http_status_code'
-       - 'error_code'
-       - 'summary'
-    properties:
-      http_status_code:
-        type: 'integer'
-        format: 'int64'
-        description: 'The HTTP status code'
-      error_code:
-        type: 'string'
-        description: 'The stori.es internal error code'
-      summary:
-        type: 'string'
-        description: 'A brief summary of the error encountered'
-      detail_url:
-        type: 'string'
-        description: 'A URL for developers containing more detail about the error'

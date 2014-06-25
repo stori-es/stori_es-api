@@ -15,7 +15,7 @@ apis:
         method: 'POST'
         summary: 'Create a new content document'
         notes: 'Creates a new content document and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'create_content'
         parameters:
           -
@@ -28,19 +28,19 @@ apis:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
   -
     path: '/contents/{content_id}'
     operations:
@@ -48,7 +48,7 @@ apis:
         method: 'GET'
         summary: 'Retrieve a specific content document'
         notes: 'Returns a specific content document accessible to the current user'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'get_content'
         parameters:
           -
@@ -61,19 +61,19 @@ apis:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
       -
         method: 'DELETE'
         summary: 'Delete a content document'
@@ -94,20 +94,20 @@ apis:
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
       -
         method: 'PATCH'
         summary: 'Update a content document'
         notes: 'Updates a content document administered by the current user'
-        type: 'Response'
+        type: 'ApiResponse'
         nickname: 'update_content'
         consumes:
           - 'application/json-patch+json'
@@ -128,23 +128,23 @@ apis:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Response'
+            responseModel: 'ApiResponse'
 models:
   Sort:
     id: 'Sort'
@@ -249,23 +249,20 @@ models:
     id: 'Templates'
     description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
     required:
+      - 'contents.theme'
       - 'contents.blocks'
-      - 'contents.notes'
-      - 'contents.attachments'
       - 'contents.permissions'
+      - 'contents.responses'
     properties:
+      'contents.theme':
+        type: 'string'
+        description: 'URL Template for themes'
       'contents.blocks':
         type: 'string'
         description: 'URL Template for blocks'
-      'contents.notes':
-        type: 'string'
-        description: 'URL Template for content note documents'
-      'contents.attachments':
-        type: 'string'
-        description: 'URL Template for content attachment documents'
       'contents.permissions':
         type: 'string'
-        description: 'URL Template for content permission documents'
+        description: 'URL Template for permission documents'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata about a resource'
@@ -289,6 +286,7 @@ models:
     required:
       - 'creator'
       - 'owner'
+      - 'theme'
       - 'blocks'
       - 'permissions'
     properties:
@@ -313,31 +311,17 @@ models:
         description: 'Metadata about the readers of this entity'
         items:
           $ref: 'ResourceLink'
+      theme:
+        type: 'string'
+        description: 'The ID of the theme associated with this entity'
       blocks:
         type: 'array'
-        description: 'The IDs of blocks that compose this document'
+        description: 'The ordered IDs of blocks that compose this document'
         items:
-          type: 'string'
-      entities:
-        type: 'array'
-        description: 'Metadata about entities which this document is associated with'          
-        items:
-          $ref: 'ResourceLink'
-      notes:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachments:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
           type: 'string'
       permissions:
-        type: 'array'
-        description: 'The IDs of permissions documents associated with this entity'
-        items: 
-          type: 'string'
+        type: 'string'
+        description: 'The ID of the permissions document associated with this entity'
   Content:
     id: 'Content'
     description: 'The representation of a content document on the stori.es platform'
@@ -379,8 +363,8 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'      
-  Response:
-    id: 'Response'
+  ApiResponse:
+    id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
@@ -403,6 +387,7 @@ models:
     description: 'The representation of a new content document to be added to the stori.es platform'
     required:
       - 'path'
+      - 'theme_id'
     properties:
       title:
         type: 'string'
@@ -410,26 +395,17 @@ models:
       path:
         type: 'string'
         description: 'The URL path fragment associated with this entity; its namespace'      
+      theme_id:
+        type: 'string'
+        description: 'The ID of the theme associated with this entity'
       block_ids:
         type: 'array'
-        description: 'The IDs of blocks that compose this document'
+        description: 'The ordered IDs of blocks that compose this document'
         items: 
           type: 'string'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
-      permission_ids:
-        type: 'array'
-        description: 'The IDs of permissions documents associated with this entity'
-        items: 
-          type: 'string'
+      permission_id:
+        type: 'string'
+        description: 'The ID of the permissions document associated with this entity'
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'

@@ -5,10 +5,10 @@
   "description": "Operations for profiles",
   "resourcePath": "/profiles",
   "produces": [
-    "application/json"
+    "application/vnd.api+json"
   ],
   "consumes": [
-    "application/json"
+    "application/vnd.api+json"
   ],
   "apis": [
     {
@@ -17,15 +17,15 @@
         {
           "method": "POST",
           "summary": "Create a new profile",
-          "notes": "Creates a new profile and returns it. Declares the resource URL in the Location header.",
-          "type": "Profile",
+          "notes": "Creates a new profile and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
+          "type": "ApiResponse",
           "nickname": "create_profile",
           "parameters": [
             {
               "name": "body",
               "description": "The new profile to be created",
               "required": true,
-              "type": "Profile",
+              "type": "ProfilePost",
               "paramType": "body"
             }
           ],
@@ -33,22 +33,22 @@
             {
               "code": 201,
               "message": "Resource successfully created",
-              "responseModel": "Profile"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to create the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -61,15 +61,14 @@
           "method": "GET",
           "summary": "Retrieve a specific profile",
           "notes": "Returns a specific profile accessible to the current user",
-          "type": "Profile",
+          "type": "ApiResponse",
           "nickname": "get_profile",
           "parameters": [
             {
               "name": "profile_id",
               "description": "The ID of the profile to retrieve",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             }
           ],
@@ -77,22 +76,22 @@
             {
               "code": 200,
               "message": "Resource successfully retrieved",
-              "responseModel": "Profile"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to access the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -107,8 +106,7 @@
               "name": "profile_id",
               "description": "The ID of the profile to delete",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             }
           ],
@@ -120,22 +118,22 @@
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to delete the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -143,22 +141,24 @@
           "method": "PATCH",
           "summary": "Update a profile",
           "notes": "Updates a profile administered by the current user",
-          "type": "Profile",
+          "type": "ApiResponse",
           "nickname": "update_profile",
+          "consumes": [
+            "application/json-patch+json"
+          ],
           "parameters": [
             {
               "name": "profile_id",
               "description": "The ID of the profile to update",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             },
             {
               "name": "body",
-              "description": "The updated profile",
+              "description": "Requested modifications in JSON Patch format (see <a href=\"http://tools.ietf.org/html/rfc6902\" title=\"RFC6902 - JSON Patch\">RFC6902</a> and <a href=\"http://jsonapi.org/format/#updating-a-document\" title=\"JSON API - Updating a Document (PATCH)\">JSON API</a>)",
               "required": true,
-              "type": "Profile",
+              "type": "PatchOperations",
               "paramType": "body"
             }
           ],
@@ -166,22 +166,22 @@
             {
               "code": 200,
               "message": "Resource successfully updated",
-              "responseModel": "Profile"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to update the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -240,8 +240,8 @@
         }
       }
     },
-    "Error": {
-      "id": "Error",
+    "ApiResponse": {
+      "id": "ApiResponse",
       "description": "The representation of a stori.es API error",
       "required": [
         "http_status_code",

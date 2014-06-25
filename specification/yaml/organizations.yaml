@@ -4,9 +4,9 @@ basePath: 'http://www.stori.es/api/website/listings'
 description: 'Operations for organizations'
 resourcePath: '/organizations'
 produces:
-  - 'application/json'
+  - 'application/vnd.api+json'
 consumes:
-  - 'application/json'
+  - 'application/vnd.api+json'
 apis:
   -
     path: '/organizations'
@@ -14,33 +14,33 @@ apis:
       -
         method: 'POST'
         summary: 'Create a new organization'
-        notes: 'Creates a new organization and returns it. Declares the resource URL in the Location header.'
-        type: 'Organization'
+        notes: 'Creates a new organization and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        type: 'ApiResponse'
         nickname: 'create_organization'
         parameters:
           -
             name: 'body'
             description: 'The new organization to be created'
             required: true
-            type: 'Organization'
+            type: 'OrganizationPost'
             paramType: 'body'
         responseMessages:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'Organization'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
   -
     path: '/organizations/{organization_id}'
     operations:
@@ -48,33 +48,32 @@ apis:
         method: 'GET'
         summary: 'Retrieve a specific organization'
         notes: 'Returns a specific organization accessible to the current user'
-        type: 'Organization'
+        type: 'ApiResponse'
         nickname: 'get_organization'
         parameters:
           -
             name: 'organization_id'
             description: 'The ID of the organization to retrieve'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'Organization'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'DELETE'
         summary: 'Deletes an organization'
@@ -86,8 +85,7 @@ apis:
             name: 'organization_id'
             description: 'The ID of the organization to delete'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
@@ -96,56 +94,57 @@ apis:
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'PATCH'
         summary: 'Updates an organization'
         notes: 'Updates an organization administered by the current user'
-        type: 'Organization'
+        type: 'ApiResponse'
         nickname: 'update_organization'
+        consumes:
+          - 'application/json-patch+json'
         parameters:
           -
             name: 'organization_id'
             description: 'The ID of the organization to update'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
           -
             name: 'body'
-            description: 'The updated organization'
+            description: 'Requested modifications in JSON Patch format (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document (PATCH)">JSON API</a>)'
             required: true
-            type: 'Organization'
+            type: 'PatchOperations'
             paramType: 'body'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'Organization'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
 models:
   Organization:
     id: 'Organization'
@@ -190,8 +189,8 @@ models:
         items: 
           type: 'integer'
           format: 'int64'
-  Error:
-    id: 'Error'
+  ApiResponse:
+    id: 'ApiResponse'
     description: 'The representation of a stori.es API error'
     required:
        - 'http_status_code'

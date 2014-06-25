@@ -2,13 +2,13 @@
   "apiVersion": 1,
   "swaggerVersion": 1.2,
   "basePath": "http://www.stori.es/api/website/listings",
-  "description": "Operations for link documents",
-  "resourcePath": "/links",
+  "description": "Operations for attachment documents",
+  "resourcePath": "/attachments",
   "produces": [
-    "application/json"
+    "application/vnd.api+json"
   ],
   "consumes": [
-    "application/json"
+    "application/vnd.api+json"
   ],
   "apis": [
     {
@@ -17,15 +17,15 @@
         {
           "method": "POST",
           "summary": "Create a new link",
-          "notes": "Creates a new link and returns it. Declares the resource URL in the Location header.",
-          "type": "Link",
+          "notes": "Creates a new attachment document and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
+          "type": "ApiResponse",
           "nickname": "create_link",
           "parameters": [
             {
               "name": "body",
               "description": "The new link to be created",
               "required": true,
-              "type": "Link",
+              "type": "LinkPost",
               "paramType": "body"
             }
           ],
@@ -33,22 +33,22 @@
             {
               "code": 201,
               "message": "Resource successfully created",
-              "responseModel": "Link"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to create the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -61,15 +61,14 @@
           "method": "GET",
           "summary": "Retrieve a specific link",
           "notes": "Returns a specific link accessible to the current user",
-          "type": "Link",
+          "type": "ApiResponse",
           "nickname": "get_link",
           "parameters": [
             {
               "name": "link_id",
               "description": "The ID of the link to retrieve",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             }
           ],
@@ -77,22 +76,22 @@
             {
               "code": 200,
               "message": "Resource successfully retrieved",
-              "responseModel": "Link"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to access the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -107,8 +106,7 @@
               "name": "link_id",
               "description": "The ID of the link to delete",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             }
           ],
@@ -120,17 +118,17 @@
             {
               "code": 403,
               "message": "Not authorized to delete the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         },
@@ -138,22 +136,24 @@
           "method": "PATCH",
           "summary": "Updates a link",
           "notes": "Updates a link administered by the current user",
-          "type": "Link",
+          "type": "ApiResponse",
           "nickname": "update_link",
+          "consumes": [
+            "application/json-patch+json"
+          ],
           "parameters": [
             {
               "name": "link_id",
               "description": "The ID of the link to update",
               "required": true,
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
               "paramType": "path"
             },
             {
               "name": "body",
-              "description": "The updated link",
+              "description": "Requested modifications in JSON Patch format (see <a href=\"http://tools.ietf.org/html/rfc6902\" title=\"RFC6902 - JSON Patch\">RFC6902</a> and <a href=\"http://jsonapi.org/format/#updating-a-document\" title=\"JSON API - Updating a Document (PATCH)\">JSON API</a>)",
               "required": true,
-              "type": "Link",
+              "type": "PatchOperations",
               "paramType": "body"
             }
           ],
@@ -161,27 +161,27 @@
             {
               "code": 200,
               "message": "Resource successfully updated",
-              "responseModel": "Link"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 400,
               "message": "Invalid input",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
               "message": "Not authorized to update the requested resource",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 404,
               "message": "Resource not found",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             },
             {
               "code": 503,
               "message": "Service is currently unavailable",
-              "responseModel": "Error"
+              "responseModel": "ApiResponse"
             }
           ]
         }
@@ -216,34 +216,6 @@
           "format": "int64",
           "description": "The entity which this document is associated with",
           "minimum": 1
-        }
-      }
-    },
-    "Error": {
-      "id": "Error",
-      "description": "The representation of a stori.es API error",
-      "required": [
-        "http_status_code",
-        "error_code",
-        "summary"
-      ],
-      "properties": {
-        "http_status_code": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The HTTP status code"
-        },
-        "error_code": {
-          "type": "string",
-          "description": "The stori.es internal error code"
-        },
-        "summary": {
-          "type": "string",
-          "description": "A brief summary of the error encountered"
-        },
-        "detail_url": {
-          "type": "string",
-          "description": "A URL for developers containing more detail about the error"
         }
       }
     }

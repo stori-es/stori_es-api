@@ -4,9 +4,9 @@ basePath: 'http://www.stori.es/api/website/listings'
 description: 'Operations for collections'
 resourcePath: '/collections'
 produces:
-  - 'application/json'
+  - 'application/vnd.api+json'
 consumes:
-  - 'application/json'
+  - 'application/vnd.api+json'
 apis:
   -
     path: '/collections'
@@ -14,33 +14,33 @@ apis:
       -
         method: 'POST'
         summary: 'Create a new collection'
-        notes: 'Creates a new collection and returns it. Declares the resource URL in the Location header.'
-        type: 'Collection'
+        notes: 'Creates a new collection and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        type: 'ApiResponse'
         nickname: 'create_collection'
         parameters:
           -
             name: 'body'
             description: 'The new collection to be created'
             required: true
-            type: 'Collection'
+            type: 'CollectionPost'
             paramType: 'body'
         responseMessages:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'Collection'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
   -
     path: '/collections/{collection_id}'
     operations:
@@ -48,33 +48,32 @@ apis:
         method: 'GET'
         summary: 'Retrieve a specific collection'
         notes: 'Returns a specific collection accessible to the current user'
-        type: 'Collection'
+        type: 'ApiResponse'
         nickname: 'get_collection'
         parameters:
           -
             name: 'collection_id'
             description: 'The ID of the collection to retrieve'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'Collection'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'DELETE'
         summary: 'Deletes a collection'
@@ -86,8 +85,7 @@ apis:
             name: 'collection_id'
             description: 'The ID of the collection to delete'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
         responseMessages:
           -
@@ -96,62 +94,267 @@ apis:
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
       -
         method: 'PATCH'
         summary: 'Updates a collection'
         notes: 'Updates a collection administered by the current user'
-        type: 'Collection'
+        type: 'ApiResponse'
         nickname: 'update_collection'
+        consumes:
+          - 'application/json-patch+json'
         parameters:
           -
             name: 'collection_id'
             description: 'The ID of the collection to update'
             required: true
-            type: 'integer'
-            format: 'int64'
+            type: 'string'
             paramType: 'path'
           -
             name: 'body'
-            description: 'The updated collection'
+            description: 'Requested modifications in JSON Patch format (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document (PATCH)">JSON API</a>)'
             required: true
-            type: 'Collection'
+            type: 'PatchOperations'
             paramType: 'body'
         responseMessages:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'Collection'
+            responseModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'Error'
+            responseModel: 'ApiResponse'
 models:
+  Sort:
+    id: 'Sort'
+    description: 'Sort order details indexed by resource name'
+    required:
+      - 'collections'
+    properties:
+      collections:
+        type: 'array'
+        description: 'Sort order for collection resources'
+        uniqueItems: true
+        items:
+          type: 'string'
+  Navigation:
+    id: 'Navigation'
+    description: 'Navigation details for this response'
+    properties:
+      first:
+        type: 'string'
+        description: 'URL for first set of results'
+      prev:
+        type: 'string'
+        description: 'URL for previous set of results'
+      next:
+        type: 'string'
+        description: 'URL for next set of results'
+      last:
+        type: 'string'
+        description: 'URL for last set of results'
+  Pagination:
+    id: 'Pagination'
+    description: 'Pagination details for this response'
+    properties:
+      limit:
+        type: 'integer'
+        format: 'int32'
+        description: 'Maximum number of results to return (default = 8, maximum = 50)'
+        minimum: 1
+        maximum: 50
+        defaultValue: 8
+      offset:
+        type: 'integer'
+        format: 'int32'
+        description: 'Starting index, 0-based (default = 0)'
+        minimum: 0
+        defaultValue: 0
+      sort:
+        $ref: 'Sort'
+        description: 'Sort order, indexed by resource'
+      navigation:
+        $ref: 'Navigation'
+        description: 'Navigation details for this response'
+  Message:
+    id: 'Message'
+    description: 'A message generated by a request'
+    required:
+      - 'summary'
+      - 'message_code'
+    properties:
+      target:
+        type: 'string'
+        description: 'Target of this message (field, object, etc.)'
+      summary:
+        type: 'string'
+        description: 'Message summary'
+      message_code:
+        type: 'string'
+        description: 'stori.es internal message code'
+      detail_url:
+        type: 'string'
+        description: 'URL for message details'
+  Metadata:
+    id: 'Metadata'
+    description: 'Metadata about this response'
+    required:
+      - 'self'
+      - 'http_code'
+      - 'status'
+    properties:
+      self:
+        type: 'string'
+        description: 'Full request URL'
+      status:
+        type: 'string'
+        description: 'High-level status of response'
+        enum:
+          - 'success'
+          - 'fail'
+          - 'error'
+      http_code:
+        type: 'string'
+        description: 'HTTP response status code'
+      messages:
+        type: 'array'
+        description: 'Array of messages generated by request'
+        items:
+          $ref: 'Message'
+      pagination:
+        $ref: 'Pagination'
+        description: 'Pagination details for this response'
+  Templates:
+    id: 'Templates'
+    description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
+    required:
+      - 'collections.stories'
+      - 'collections.contents'
+      - 'collections.default_content'
+      - 'collections.questionnaires'
+      - 'collections.notes'
+      - 'collections.attachments'
+    properties:
+      'collections.stories':
+        type: 'string'
+        description: 'URL Template for stories'
+      'collections.contents':
+        type: 'string'
+        description: 'URL Template for content documents'
+      'collections.default_content':
+        type: 'string'
+        description: 'URL Template for content documents'
+      'collections.questionnaires':
+        type: 'string'
+        description: 'URL Template for questionnaires'
+      'collections.notes':
+        type: 'string'
+        description: 'URL Template for note documents'
+      'collections.attachments':
+        type: 'string'
+        description: 'URL Template for attachment documents'
+  ResourceLink:
+    id: 'ResourceLink'
+    description: 'Metadata about a resource'
+    required:
+      - 'type'
+      - 'id'
+      - 'href'
+    properties:
+      type:
+        type: 'string'
+        description: 'The type of the resource'
+      id:
+        type: 'string'
+        description: 'The ID of the resource'
+      href:
+        type: 'string'
+        description: 'The URL of the resource'
+  ResourceLinks:
+    id: 'ResourceLinks'
+    description: 'The IDs and metadata of associated resources'
+    required:
+      - 'creator'
+      - 'owner'
+    properties:
+      creator:
+        $ref: 'ResourceLink'
+        description: 'Metadata about the creator of this entity'
+      owner:
+        $ref: 'ResourceLink'
+        description: 'Metadata about the owner of this entity'
+      administrators:
+        type: 'array'
+        description: 'Metadata about the administrators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      curators:
+        type: 'array'
+        description: 'Metadata about the curators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      readers:
+        type: 'array'
+        description: 'Metadata about the readers of this entity'
+        items:
+          $ref: 'ResourceLink'
+      stories:
+        type: 'array'
+        description: 'The IDs of stories associated with this entity'
+        items:
+          type: 'string'
+      contents:
+        type: 'array'
+        description: 'The IDs of content documents associated with this entity'
+        items: 
+          type: 'string'
+      default_content:
+        type: 'string'
+        description: 'The ID of the default content document associated with this entity'
+      questionnaires:
+        type: 'array'
+        description: 'The IDs of questionnaires associated with this entity'
+        items: 
+          type: 'string'
+      notes:
+        type: 'array'
+        description: 'The IDs of note documents associated with this entity'
+        items: 
+          type: 'string'
+      attachments:
+        type: 'array'
+        description: 'The IDs of attachment documents associated with this entity'
+        items: 
+          type: 'string'
   Collection:
     id: 'Collection'
     description: 'The representation of a collection on the stori.es platform'
     required:
        - 'id'
+       - 'title'
+       - 'created_on'
+       - 'updated_on'
     properties:
       id:
         type: 'string'
@@ -159,54 +362,107 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
-      path:
+      links:
+        $ref: 'ResourceLinks'
+        description: 'The IDs and metadata about resources associated with this entity'
+      created_on:
         type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
-      permalink:
+        format: 'date-time'
+        description: 'The creation date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      updated_on:
         type: 'string'
-        description: 'The URL of this entity on the stori.es platform'
-      theme_id:
-        type: 'integer'
-        format: 'int64'
-        description: 'The ID of the theme for this entity'
-        minimum: 1
-        defaultValue: 1
+        format: 'date-time'
+        description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+  ApiResponse:
+    id: 'ApiResponse'
+    description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
+    required:
+      - 'meta'
+      - 'links'
+      - 'collections'
+    properties:
+      meta:
+        $ref: 'Metadata'
+        description: 'Metadata about this response'
+      links:
+        $ref: 'Templates'
+        description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
+      collections:
+        type: 'array'
+        description: 'Array of requested collection resources'
+        items:
+          $ref: 'Collection'
+  CollectionPost:
+    id: 'CollectionPost'
+    description: 'The representation of a new collection to be added to the stori.es platform'
+    required:
+       - 'title'
+    properties:
+      title:
+        type: 'string'
+        description: 'The title of this entity'
       story_ids:
         type: 'array'
-        description: 'The IDs of stories associated with this collection'
+        description: 'The IDs of stories associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'        
+      content_ids:
+        type: 'array'
+        description: 'The IDs of content documents associated with this entity'
+        items: 
+          type: 'string'
+      default_content_id:
+        type: 'string'
+        description: 'The ID of the default content document associated with this entity'
+      questionnaire_ids:
+        type: 'array'
+        description: 'The IDs of questionnaires associated with this entity'
+        items: 
+          type: 'string'
       note_ids:
         type: 'array'
-        description: 'The IDs of notes associated with this entity'
+        description: 'The IDs of note documents associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
-      link_ids:
+          type: 'string'
+      attachment_ids:
         type: 'array'
-        description: 'The IDs of links associated with this entity'
+        description: 'The IDs of attachment documents associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
-  Error:
-    id: 'Error'
-    description: 'The representation of a stori.es API error'
+          type: 'string'
+  PatchOperation:
+    id: 'PatchOperation'
+    description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'
     required:
-       - 'http_status_code'
-       - 'error_code'
-       - 'summary'
+      - 'op'
+      - 'path'
     properties:
-      http_status_code:
-        type: 'integer'
-        format: 'int64'
-        description: 'The HTTP status code'
-      error_code:
+      op:
         type: 'string'
-        description: 'The stori.es internal error code'
-      summary:
+        description: 'The operation to perform'
+        enum:
+          - 'add'
+          - 'remove'
+          - 'replace'
+          - 'move'
+          - 'copy'
+          - 'test'
+      path:
         type: 'string'
-        description: 'A brief summary of the error encountered'
-      detail_url:
+        description: 'A JSON Pointer value (see <a href="http://tools.ietf.org/html/rfc6901" title="RFC6901 - JSON Pointer">RFC6901</a>) referencing a location within the target document where the operation is to be performed'
+      value:
         type: 'string'
-        description: 'A URL for developers containing more detail about the error'
+        description: 'The value to patch'
+      from:
+        type: 'string'
+        description: 'A JSON Pointer value (see <a href="http://tools.ietf.org/html/rfc6901" title="RFC6901 - JSON Pointer">RFC6901</a>) referencing a location within the target document to move or copy'
+  PatchOperations:
+    id: 'PatchOperations'
+    description: 'The representation of requested modifications to an entity on the stori.es platform'
+    required:
+      - 'operations'
+    properties:
+      operations:
+        type: 'array'
+        description: 'The set of operations composing requested modifications to a target entity'
+        items:
+          $ref: 'PatchOperation'
