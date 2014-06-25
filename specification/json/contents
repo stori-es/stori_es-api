@@ -373,13 +373,28 @@
       "id": "ResourceLinks",
       "description": "The IDs and metadata of associated resources",
       "required": [
-        "creator",
-        "owner",
         "theme",
         "blocks",
-        "permissions"
+        "permissions",
+        "creator",
+        "owner"
       ],
       "properties": {
+        "theme": {
+          "type": "string",
+          "description": "The ID of the theme associated with this entity"
+        },
+        "blocks": {
+          "type": "array",
+          "description": "The ordered IDs of blocks that compose this document",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "string",
+          "description": "The ID of the permissions document associated with this entity"
+        },
         "creator": {
           "$ref": "ResourceLink",
           "description": "Metadata about the creator of this entity"
@@ -408,21 +423,6 @@
           "items": {
             "$ref": "ResourceLink"
           }
-        },
-        "theme": {
-          "type": "string",
-          "description": "The ID of the theme associated with this entity"
-        },
-        "blocks": {
-          "type": "array",
-          "description": "The ordered IDs of blocks that compose this document",
-          "items": {
-            "type": "string"
-          }
-        },
-        "permissions": {
-          "type": "string",
-          "description": "The ID of the permissions document associated with this entity"
         }
       }
     },
@@ -509,8 +509,7 @@
       "id": "ContentPost",
       "description": "The representation of a new content document to be added to the stori.es platform",
       "required": [
-        "path",
-        "theme_id"
+        "path"
       ],
       "properties": {
         "title": {

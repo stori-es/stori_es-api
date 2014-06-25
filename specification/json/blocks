@@ -366,6 +366,13 @@
         "owner"
       ],
       "properties": {
+        "contents": {
+          "type": "array",
+          "description": "The IDs of content documents associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
         "creator": {
           "$ref": "ResourceLink",
           "description": "Metadata about the creator of this entity"
@@ -393,13 +400,6 @@
           "description": "Metadata about the readers of this entity",
           "items": {
             "$ref": "ResourceLink"
-          }
-        },
-        "contents": {
-          "type": "array",
-          "description": "The IDs of content documents associated with this entity",
-          "items": {
-            "type": "string"
           }
         }
       }

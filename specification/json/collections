@@ -391,35 +391,6 @@
         "owner"
       ],
       "properties": {
-        "creator": {
-          "$ref": "ResourceLink",
-          "description": "Metadata about the creator of this entity"
-        },
-        "owner": {
-          "$ref": "ResourceLink",
-          "description": "Metadata about the owner of this entity"
-        },
-        "administrators": {
-          "type": "array",
-          "description": "Metadata about the administrators of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "curators": {
-          "type": "array",
-          "description": "Metadata about the curators of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "readers": {
-          "type": "array",
-          "description": "Metadata about the readers of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
         "stories": {
           "type": "array",
           "description": "The IDs of stories associated with this entity",
@@ -457,6 +428,35 @@
           "description": "The IDs of attachment documents associated with this entity",
           "items": {
             "type": "string"
+          }
+        },
+        "creator": {
+          "$ref": "ResourceLink",
+          "description": "Metadata about the creator of this entity"
+        },
+        "owner": {
+          "$ref": "ResourceLink",
+          "description": "Metadata about the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata about the administrators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "curators": {
+          "type": "array",
+          "description": "Metadata about the curators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "readers": {
+          "type": "array",
+          "description": "Metadata about the readers of this entity",
+          "items": {
+            "$ref": "ResourceLink"
           }
         }
       }

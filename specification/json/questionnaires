@@ -327,6 +327,7 @@
       "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
       "required": [
         "questionnaires.theme",
+        "questionnaires.blocks",
         "questionnaires.collections",
         "questionnaires.notes",
         "questionnaires.attachments",
@@ -336,6 +337,10 @@
         "questionnaires.theme": {
           "type": "string",
           "description": "URL Template for themes"
+        },
+        "questionnaires.blocks": {
+          "type": "string",
+          "description": "URL Template for blocks"
         },
         "questionnaires.collections": {
           "type": "string",
@@ -382,44 +387,15 @@
       "id": "ResourceLinks",
       "description": "The IDs and metadata of associated resources",
       "required": [
-        "creator",
-        "owner",
         "theme",
         "blocks",
         "collections",
         "permissions",
-        "next"
+        "next",
+        "creator",
+        "owner"
       ],
       "properties": {
-        "creator": {
-          "$ref": "ResourceLink",
-          "description": "Metadata about the creator of this entity"
-        },
-        "owner": {
-          "$ref": "ResourceLink",
-          "description": "Metadata about the owner of this entity"
-        },
-        "administrators": {
-          "type": "array",
-          "description": "Metadata about the administrators of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "curators": {
-          "type": "array",
-          "description": "Metadata about the curators of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "readers": {
-          "type": "array",
-          "description": "Metadata about the readers of this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
         "theme": {
           "type": "string",
           "description": "The ID of the theme associated with this entity"
@@ -459,6 +435,35 @@
         "next": {
           "$ref": "ResourceLink",
           "description": "Metadata about the next object in the clickstream; e.g. a confirmation content document"
+        },
+        "creator": {
+          "$ref": "ResourceLink",
+          "description": "Metadata about the creator of this entity"
+        },
+        "owner": {
+          "$ref": "ResourceLink",
+          "description": "Metadata about the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata about the administrators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "curators": {
+          "type": "array",
+          "description": "Metadata about the curators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "readers": {
+          "type": "array",
+          "description": "Metadata about the readers of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
         }
       }
     },
