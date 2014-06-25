@@ -385,7 +385,7 @@
     },
     "ResourceLinks": {
       "id": "ResourceLinks",
-      "description": "The IDs and metadata of resources associated with a story",
+      "description": "The IDs and metadata of associated resources",
       "required": [
         "creator",
         "owner"

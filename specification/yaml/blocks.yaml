@@ -1,28 +1,28 @@
 apiVersion: 1
 swaggerVersion: 1.2
 basePath: 'http://www.stori.es/api/website/listings'
-description: 'Operations for text blocks'
-resourcePath: '/text_blocks'
+description: 'Operations for blocks'
+resourcePath: '/blocks'
 produces:
   - 'application/vnd.api+json'
 consumes:
   - 'application/vnd.api+json'
 apis:
   -
-    path: '/text_blocks'
+    path: '/blocks'
     operations:          
       -
         method: 'POST'
-        summary: 'Create a new text block'
-        notes: 'Creates a new text block and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        summary: 'Create a new block'
+        notes: 'Creates a new block and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
         type: 'Response'
-        nickname: 'create_text_block'
+        nickname: 'create_block'
         parameters:
           -
             name: 'body'
-            description: 'The new text block to be created'
+            description: 'The new block to be created'
             required: true
-            type: 'TextBlockPost'
+            type: 'BlockPost'
             paramType: 'body'
         responseMessages:
           -
@@ -42,18 +42,18 @@ apis:
             message: 'Service is currently unavailable'
             responseModel: 'Response'
   -
-    path: '/text_blocks/{text_block_id}'
+    path: '/blocks/{block_id}'
     operations:
       -
         method: 'GET'
-        summary: 'Retrieve a specific text block'
-        notes: 'Returns a specific text block accessible to the current user'
+        summary: 'Retrieve a specific block'
+        notes: 'Returns a specific block accessible to the current user'
         type: 'Response'
-        nickname: 'get_text_block'
+        nickname: 'get_block'
         parameters:
           -
-            name: 'text_block_id'
-            description: 'The ID of the text block to retrieve'
+            name: 'block_id'
+            description: 'The ID of the block to retrieve'
             required: true
             type: 'string'
             paramType: 'path'
@@ -76,14 +76,14 @@ apis:
             responseModel: 'Response'
       -
         method: 'DELETE'
-        summary: 'Delete a text block'
-        notes: 'Deletes a text block owned by the current user'
+        summary: 'Delete a block'
+        notes: 'Deletes a block owned by the current user'
         type: 'void'
-        nickname: 'delete_text_block'
+        nickname: 'delete_block'
         parameters:
           -
-            name: 'text_block_id'
-            description: 'The ID of the text block to delete'
+            name: 'block_id'
+            description: 'The ID of the block to delete'
             required: true
             type: 'string'
             paramType: 'path'
@@ -105,16 +105,16 @@ apis:
             responseModel: 'Response'
       -
         method: 'PATCH'
-        summary: 'Update a text block'
-        notes: 'Updates a text block administered by the current user'
+        summary: 'Update a block'
+        notes: 'Updates a block administered by the current user'
         type: 'Response'
-        nickname: 'update_text_block'
+        nickname: 'update_block'
         consumes:
           - 'application/json-patch+json'
         parameters:
           -
-            name: 'text_block_id'
-            description: 'The ID of the text block to update'
+            name: 'block_id'
+            description: 'The ID of the block to update'
             required: true
             type: 'string'
             paramType: 'path'
@@ -150,11 +150,11 @@ models:
     id: 'Sort'
     description: 'Sort order details indexed by resource name'
     required:
-      - 'text_blocks'
+      - 'blocks'
     properties:
-      text_blocks:
+      blocks:
         type: 'array'
-        description: 'Sort order for text block resources'
+        description: 'Sort order for block resources'
         uniqueItems: true
         items:
           type: 'string'
@@ -181,10 +181,10 @@ models:
       limit:
         type: 'integer'
         format: 'int32'
-        description: 'Maximum number of results to return (default = 8, maximum = 50)'
+        description: 'Maximum number of results to return (default = 25, maximum = 50)'
         minimum: 1
         maximum: 50
-        defaultValue: 8
+        defaultValue: 25
       offset:
         type: 'integer'
         format: 'int32'
@@ -249,31 +249,11 @@ models:
     id: 'Templates'
     description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
     required:
-      - 'text_blocks.contents'
-      - 'text_blocks.default_content'
-      - 'text_blocks.responses'
-      - 'text_blocks.notes'
-      - 'text_blocks.attachments'
-      - 'text_blocks.permissions'
+      - 'blocks.contents'
     properties:
-      'text_blocks.contents':
+      'blocks.contents':
         type: 'string'
-        description: 'URL Template for text_block content documents'
-      'text_blocks.default_content':
-        type: 'string'
-        description: 'URL Template for text_block content documents'
-      'text_blocks.responses':
-        type: 'string'
-        description: 'URL Template for text_block response documents'
-      'text_blocks.notes':
-        type: 'string'
-        description: 'URL Template for text_block note documents'
-      'text_blocks.attachments':
-        type: 'string'
-        description: 'URL Template for text_block attachment documents'
-      'text_blocks.permissions':
-        type: 'string'
-        description: 'URL Template for text_block permission documents'
+        description: 'URL Template for block content documents'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata about a resource'
@@ -293,7 +273,7 @@ models:
         description: 'The URL of the resource'
   ResourceLinks:
     id: 'ResourceLinks'
-    description: 'The IDs and metadata of resources associated with a text_block'
+    description: 'The IDs and metadata of associated resources'
     required:
       - 'creator'
       - 'owner'
@@ -324,32 +304,9 @@ models:
         description: 'The IDs of content documents associated with this entity'
         items: 
           type: 'string'
-      default_content:
-        type: 'string'
-        description: 'The ID of the default content document associated with this entity'
-      responses:
-        type: 'array'
-        description: 'The IDs of response documents associated with this entity'
-        items: 
-          type: 'string'
-      notes:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachments:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
-      permissions:
-        type: 'array'
-        description: 'The IDs of permissions documents associated with this entity'
-        items: 
-          type: 'string'
-  TextBlock:
-    id: 'TextBlock'
-    description: 'The representation of a text_block on the stori.es platform'
+  Block:
+    id: 'Block'
+    description: 'The representation of a block on the stori.es platform'
     required:
        - 'id'
        - 'title'
@@ -363,12 +320,6 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this text_block'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
       links:
         $ref: 'ResourceLinks'
         description: 'The IDs and metadata about resources associated with this entity'
@@ -380,23 +331,13 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      publication_status:
-        type: 'string'
-        description: 'The current publication status of this entity'
-        enum:
-          - 'draft'
-          - 'published'
-      published_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   Response:
     id: 'Response'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
       - 'links'
-      - 'text_blocks'
+      - 'blocks'
     properties:
       meta:
         $ref: 'Metadata'
@@ -404,52 +345,23 @@ models:
       links:
         $ref: 'Templates'
         description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
-      text_blocks:
+      blocks:
         type: 'array'
-        description: 'Array of requested text_block resources'
+        description: 'Array of requested block resources'
         items:
-          $ref: 'TextBlock'
-  TextBlockPost:
-    id: 'TextBlockPost'
-    description: 'The representation of a new text_block to be added to the stori.es platform'
+          $ref: 'Block'
+  BlockPost:
+    id: 'BlockPost'
+    description: 'The representation of a new block to be added to the stori.es platform'
     required:
        - 'title'
     properties:
       title:
         type: 'string'
         description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this text_block'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
       content_ids:
         type: 'array'
         description: 'The IDs of content documents associated with this entity'
-        items: 
-          type: 'string'
-      default_content_id:
-        type: 'string'
-        description: 'The ID of the default content document associated with this entity'
-      response_ids:
-        type: 'array'
-        description: 'The IDs of response documents associated with this entity'
-        items: 
-          type: 'string'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
-      permission_ids:
-        type: 'array'
-        description: 'The IDs of permissions documents associated with this entity'
         items: 
           type: 'string'
   PatchOperation:

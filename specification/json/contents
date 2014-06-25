@@ -326,11 +326,16 @@
       "id": "Templates",
       "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
       "required": [
+        "contents.blocks",
         "contents.notes",
         "contents.attachments",
         "contents.permissions"
       ],
       "properties": {
+        "contents.blocks": {
+          "type": "string",
+          "description": "URL Template for blocks"
+        },
         "contents.notes": {
           "type": "string",
           "description": "URL Template for content note documents"
@@ -370,10 +375,12 @@
     },
     "ResourceLinks": {
       "id": "ResourceLinks",
-      "description": "The IDs and metadata of resources associated with a content document",
+      "description": "The IDs and metadata of associated resources",
       "required": [
         "creator",
-        "owner"
+        "owner",
+        "blocks",
+        "permissions"
       ],
       "properties": {
         "creator": {
@@ -403,6 +410,13 @@
           "description": "Metadata about the readers of this entity",
           "items": {
             "$ref": "ResourceLink"
+          }
+        },
+        "blocks": {
+          "type": "array",
+          "description": "The IDs of blocks that compose this document",
+          "items": {
+            "type": "string"
           }
         },
         "entities": {
@@ -435,12 +449,18 @@
         }
       }
     },
-    "Content": {
-      "id": "Content",
-      "description": "The representation of a content document on the stori.es platform",
+    "Document": {
+      "id": "Document",
+      "description": "The representation of a document on the stori.es platform",
+      "subTypes": [
+        "Content"
+      ],
+      "discriminator": "document_type",
       "required": [
         "id",
-        "title",
+        "document_type",
+        "path",
+        "links",
         "created_on",
         "updated_on",
         "publication_status"
@@ -449,6 +469,13 @@
         "id": {
           "type": "string",
           "description": "The unique ID for this entity"
+        },
+        "document_type": {
+          "type": "string",
+          "description": "The document type",
+          "enum": [
+            "Content"
+          ]
         },
         "title": {
           "type": "string",
@@ -487,6 +514,10 @@
         }
       }
     },
+    "Content": {
+      "id": "Content",
+      "description": "The representation of a content document on the stori.es platform"
+    },
     "Response": {
       "id": "Response",
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
@@ -513,13 +544,25 @@
         }
       }
     },
-    "ContentPost": {
-      "id": "ContentPost",
-      "description": "The representation of a new content document to be added to the stori.es platform",
+    "DocumentPost": {
+      "id": "DocumentPost",
+      "description": "The representation of a new document to be added to the stori.es platform",
+      "subTypes": [
+        "ContentPost"
+      ],
+      "discriminator": "document_type",
       "required": [
-        "title"
+        "document_type",
+        "path"
       ],
       "properties": {
+        "document_type": {
+          "type": "string",
+          "description": "The document type",
+          "enum": [
+            "Content"
+          ]
+        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
@@ -528,6 +571,27 @@
           "type": "string",
           "description": "The URL path fragment associated with this entity; its namespace"
         },
+        "block_ids": {
+          "type": "array",
+          "description": "The IDs of blocks that compose this document",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permission_ids": {
+          "type": "array",
+          "description": "The IDs of permissions documents associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ContentPost": {
+      "id": "ContentPost",
+      "description": "The representation of a new content document to be added to the stori.es platform",
+      "required": null,
+      "properties": {
         "note_ids": {
           "type": "array",
           "description": "The IDs of note documents associated with this entity",
@@ -538,13 +602,6 @@
         "attachment_ids": {
           "type": "array",
           "description": "The IDs of attachment documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "permission_ids": {
-          "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
           "items": {
             "type": "string"
           }
