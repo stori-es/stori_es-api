@@ -449,16 +449,11 @@
         }
       }
     },
-    "Document": {
-      "id": "Document",
-      "description": "The representation of a document on the stori.es platform",
-      "subTypes": [
-        "Content"
-      ],
-      "discriminator": "document_type",
+    "Content": {
+      "id": "Content",
+      "description": "The representation of a content document on the stori.es platform",
       "required": [
         "id",
-        "document_type",
         "path",
         "links",
         "created_on",
@@ -469,13 +464,6 @@
         "id": {
           "type": "string",
           "description": "The unique ID for this entity"
-        },
-        "document_type": {
-          "type": "string",
-          "description": "The document type",
-          "enum": [
-            "Content"
-          ]
         },
         "title": {
           "type": "string",
@@ -514,10 +502,6 @@
         }
       }
     },
-    "Content": {
-      "id": "Content",
-      "description": "The representation of a content document on the stori.es platform"
-    },
     "Response": {
       "id": "Response",
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
@@ -544,25 +528,13 @@
         }
       }
     },
-    "DocumentPost": {
-      "id": "DocumentPost",
-      "description": "The representation of a new document to be added to the stori.es platform",
-      "subTypes": [
-        "ContentPost"
-      ],
-      "discriminator": "document_type",
+    "ContentPost": {
+      "id": "ContentPost",
+      "description": "The representation of a new content document to be added to the stori.es platform",
       "required": [
-        "document_type",
         "path"
       ],
       "properties": {
-        "document_type": {
-          "type": "string",
-          "description": "The document type",
-          "enum": [
-            "Content"
-          ]
-        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
@@ -578,20 +550,6 @@
             "type": "string"
           }
         },
-        "permission_ids": {
-          "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ContentPost": {
-      "id": "ContentPost",
-      "description": "The representation of a new content document to be added to the stori.es platform",
-      "required": null,
-      "properties": {
         "note_ids": {
           "type": "array",
           "description": "The IDs of note documents associated with this entity",
@@ -602,6 +560,13 @@
         "attachment_ids": {
           "type": "array",
           "description": "The IDs of attachment documents associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permission_ids": {
+          "type": "array",
+          "description": "The IDs of permissions documents associated with this entity",
           "items": {
             "type": "string"
           }

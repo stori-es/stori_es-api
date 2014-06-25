@@ -338,29 +338,20 @@ models:
         description: 'The IDs of permissions documents associated with this entity'
         items: 
           type: 'string'
-  Document:
-    id: 'Document'
-    description: 'The representation of a document on the stori.es platform'
-    subTypes:
-      - 'Content'
-    discriminator: 'document_type'
+  Content:
+    id: 'Content'
+    description: 'The representation of a content document on the stori.es platform'
     required:
-       - 'id'
-       - 'document_type'
-       - 'path'
-       - 'links'
-       - 'created_on'
-       - 'updated_on'
-       - 'publication_status'
+      - 'id'
+      - 'path'
+      - 'links'
+      - 'created_on'
+      - 'updated_on'
+      - 'publication_status'
     properties:
       id:
         type: 'string'
         description: 'The unique ID for this entity'
-      document_type:
-        type: 'string'
-        description: 'The document type'
-        enum:
-          - 'Content'
       title:
         type: 'string'
         description: 'The title of this entity'
@@ -387,10 +378,7 @@ models:
       published_on:
         type: 'string'
         format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-  Content:
-    id: 'Content'
-    description: 'The representation of a content document on the stori.es platform'
+        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'      
   Response:
     id: 'Response'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -410,21 +398,12 @@ models:
         description: 'Array of requested content document resources'
         items:
           $ref: 'Content'
-  DocumentPost:
-    id: 'DocumentPost'
-    description: 'The representation of a new document to be added to the stori.es platform'
-    subTypes:
-      - 'ContentPost'
-    discriminator: 'document_type'
+  ContentPost:
+    id: 'ContentPost'
+    description: 'The representation of a new content document to be added to the stori.es platform'
     required:
-      - 'document_type'
       - 'path'
     properties:
-      document_type:
-        type: 'string'
-        description: 'The document type'
-        enum:
-          - 'Content'
       title:
         type: 'string'
         description: 'The title of this entity'
@@ -436,16 +415,6 @@ models:
         description: 'The IDs of blocks that compose this document'
         items: 
           type: 'string'
-      permission_ids:
-        type: 'array'
-        description: 'The IDs of permissions documents associated with this entity'
-        items: 
-          type: 'string'
-  ContentPost:
-    id: 'ContentPost'
-    description: 'The representation of a new content document to be added to the stori.es platform'
-    required:
-    properties:
       note_ids:
         type: 'array'
         description: 'The IDs of note documents associated with this entity'
@@ -454,6 +423,11 @@ models:
       attachment_ids:
         type: 'array'
         description: 'The IDs of attachment documents associated with this entity'
+        items: 
+          type: 'string'
+      permission_ids:
+        type: 'array'
+        description: 'The IDs of permissions documents associated with this entity'
         items: 
           type: 'string'
   PatchOperation:
