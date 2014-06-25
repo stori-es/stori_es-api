@@ -7,16 +7,20 @@
       "description": "Operations for accounts"
     },
     {
+      "path": "http://www.stori.es/api/website/listings/attachments",
+      "description": "Operations for attachment documents"
+    },
+    {
+      "path": "http://www.stori.es/api/website/listings/blocks",
+      "description": "Operations for document blocks"
+    },
+    {
       "path": "http://www.stori.es/api/website/listings/collections",
       "description": "Operations for collections"
     },
     {
       "path": "http://www.stori.es/api/website/listings/contents",
       "description": "Operations for content documents"
-    },
-    {
-      "path": "http://www.stori.es/api/website/listings/links",
-      "description": "Operations for link documents"
     },
     {
       "path": "http://www.stori.es/api/website/listings/notes",
