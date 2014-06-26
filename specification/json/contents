@@ -328,7 +328,6 @@
       "required": [
         "contents.theme",
         "contents.blocks",
-        "contents.permission",
         "contents.responses"
       ],
       "properties": {
@@ -339,10 +338,6 @@
         "contents.blocks": {
           "type": "string",
           "description": "URL Template for blocks"
-        },
-        "contents.permission": {
-          "type": "string",
-          "description": "URL Template for permission documents"
         }
       }
     },
@@ -375,7 +370,6 @@
       "required": [
         "theme",
         "blocks",
-        "permission",
         "creator",
         "owner"
       ],
@@ -390,10 +384,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "permission": {
-          "type": "string",
-          "description": "The ID of the permission document associated with this entity"
         },
         "creator": {
           "$ref": "ResourceLink",
@@ -530,10 +520,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "permission_id": {
-          "type": "string",
-          "description": "The ID of the permission document associated with this entity"
         }
       }
     },
