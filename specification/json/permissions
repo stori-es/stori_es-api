@@ -2,7 +2,7 @@
   "apiVersion": 1,
   "swaggerVersion": 1.2,
   "basePath": "http://www.stori.es/api/website/listings",
-  "description": "Operations for permissions documents",
+  "description": "Operations for permission documents",
   "resourcePath": "/permissions",
   "produces": [
     "application/vnd.api+json"
@@ -16,16 +16,16 @@
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a new permissions document",
-          "notes": "Creates a new permissions document and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
+          "summary": "Create a new permission document",
+          "notes": "Creates a new permission document and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
           "type": "ApiResponse",
-          "nickname": "create_permissions",
+          "nickname": "create_permission",
           "parameters": [
             {
               "name": "body",
-              "description": "The new permissions document to be created",
+              "description": "The new permission document to be created",
               "required": true,
-              "type": "PermissionsPost",
+              "type": "PermissionPost",
               "paramType": "body"
             }
           ],
@@ -55,18 +55,18 @@
       ]
     },
     {
-      "path": "/permissions/{permissions_id}",
+      "path": "/permissions/{permission_id}",
       "operations": [
         {
           "method": "GET",
-          "summary": "Retrieve a specific permissions document",
-          "notes": "Returns a specific permissions document accessible to the current user",
+          "summary": "Retrieve a specific permission document",
+          "notes": "Returns a specific permission document accessible to the current user",
           "type": "ApiResponse",
-          "nickname": "get_permissions",
+          "nickname": "get_permission",
           "parameters": [
             {
-              "name": "permissions_id",
-              "description": "The ID of the permissions document to retrieve",
+              "name": "permission_id",
+              "description": "The ID of the permission document to retrieve",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -97,14 +97,14 @@
         },
         {
           "method": "DELETE",
-          "summary": "Deletes a permissions document",
-          "notes": "Deletes a permissions document owned by the current user",
+          "summary": "Deletes a permission document",
+          "notes": "Deletes a permission document owned by the current user",
           "type": "void",
-          "nickname": "delete_permissions",
+          "nickname": "delete_permission",
           "parameters": [
             {
-              "name": "permissions_id",
-              "description": "The ID of the permissions document to delete",
+              "name": "permission_id",
+              "description": "The ID of the permission document to delete",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -134,17 +134,17 @@
         },
         {
           "method": "PATCH",
-          "summary": "Updates a permissions document",
-          "notes": "Updates a permissions document administered by the current user",
+          "summary": "Updates a permission document",
+          "notes": "Updates a permission document administered by the current user",
           "type": "ApiResponse",
-          "nickname": "update_permissions",
+          "nickname": "update_permission",
           "consumes": [
             "application/json-patch+json"
           ],
           "parameters": [
             {
-              "name": "permissions_id",
-              "description": "The ID of the permissions document to update",
+              "name": "permission_id",
+              "description": "The ID of the permission document to update",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -189,9 +189,9 @@
     }
   ],
   "models": {
-    "Permissions": {
-      "id": "Permissions",
-      "description": "The representation of a permissions document on the stori.es platform",
+    "Permission": {
+      "id": "Permission",
+      "description": "The representation of a permission document on the stori.es platform",
       "required": [
         "id",
         "title",

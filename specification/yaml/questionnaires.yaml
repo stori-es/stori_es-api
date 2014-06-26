@@ -245,8 +245,8 @@ models:
       pagination:
         $ref: 'Pagination'
         description: 'Pagination details for this response'
-  Templates:
-    id: 'Templates'
+  UrlTemplates:
+    id: 'UrlTemplates'
     description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
     required:
       - 'questionnaires.theme'
@@ -254,7 +254,7 @@ models:
       - 'questionnaires.collections'
       - 'questionnaires.notes'
       - 'questionnaires.attachments'
-      - 'questionnaires.permissions'
+      - 'questionnaires.permission'
     properties:
       'questionnaires.theme':
         type: 'string'
@@ -271,9 +271,9 @@ models:
       'questionnaires.attachments':
         type: 'string'
         description: 'URL Template for attachment documents'
-      'questionnaires.permissions':
+      'questionnaires.permission':
         type: 'string'
-        description: 'URL Template for permissions documents'
+        description: 'URL Template for permission documents'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata about a resource'
@@ -298,7 +298,7 @@ models:
       - 'theme'
       - 'blocks'
       - 'collections'
-      - 'permissions'
+      - 'permission'
       - 'next'
       - 'creator'
       - 'owner'
@@ -326,9 +326,9 @@ models:
         description: 'The IDs of attachment documents associated with this entity'
         items: 
           type: 'string'
-      permissions:
+      permission:
         type: 'string'
-        description: 'The ID of the permissions document associated with this entity'
+        description: 'The ID of the permission document associated with this entity'
       next:
         $ref: 'ResourceLink'
         description: 'Metadata about the next object in the clickstream; e.g. a confirmation content document'
@@ -407,7 +407,7 @@ models:
         $ref: 'Metadata'
         description: 'Metadata about this response'
       links:
-        $ref: 'Templates'
+        $ref: 'UrlTemplates'
         description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
       questionnaires:
         type: 'array'
@@ -452,7 +452,7 @@ models:
           type: 'string'
       permission_id:
         type: 'string'
-        description: 'The ID of the permissions document associated with this entity'
+        description: 'The ID of the permission document associated with this entity'
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'

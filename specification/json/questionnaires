@@ -322,8 +322,8 @@
         }
       }
     },
-    "Templates": {
-      "id": "Templates",
+    "UrlTemplates": {
+      "id": "UrlTemplates",
       "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
       "required": [
         "questionnaires.theme",
@@ -331,7 +331,7 @@
         "questionnaires.collections",
         "questionnaires.notes",
         "questionnaires.attachments",
-        "questionnaires.permissions"
+        "questionnaires.permission"
       ],
       "properties": {
         "questionnaires.theme": {
@@ -354,9 +354,9 @@
           "type": "string",
           "description": "URL Template for attachment documents"
         },
-        "questionnaires.permissions": {
+        "questionnaires.permission": {
           "type": "string",
-          "description": "URL Template for permissions documents"
+          "description": "URL Template for permission documents"
         }
       }
     },
@@ -390,7 +390,7 @@
         "theme",
         "blocks",
         "collections",
-        "permissions",
+        "permission",
         "next",
         "creator",
         "owner"
@@ -428,9 +428,9 @@
             "type": "string"
           }
         },
-        "permissions": {
+        "permission": {
           "type": "string",
-          "description": "The ID of the permissions document associated with this entity"
+          "description": "The ID of the permission document associated with this entity"
         },
         "next": {
           "$ref": "ResourceLink",
@@ -535,7 +535,7 @@
           "description": "Metadata about this response"
         },
         "links": {
-          "$ref": "Templates",
+          "$ref": "UrlTemplates",
           "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs"
         },
         "questionnaires": {
@@ -597,7 +597,7 @@
         },
         "permission_id": {
           "type": "string",
-          "description": "The ID of the permissions document associated with this entity"
+          "description": "The ID of the permission document associated with this entity"
         }
       }
     },

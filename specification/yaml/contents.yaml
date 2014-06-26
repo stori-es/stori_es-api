@@ -245,13 +245,13 @@ models:
       pagination:
         $ref: 'Pagination'
         description: 'Pagination details for this response'
-  Templates:
-    id: 'Templates'
+  UrlTemplates:
+    id: 'UrlTemplates'
     description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
     required:
       - 'contents.theme'
       - 'contents.blocks'
-      - 'contents.permissions'
+      - 'contents.permission'
       - 'contents.responses'
     properties:
       'contents.theme':
@@ -260,7 +260,7 @@ models:
       'contents.blocks':
         type: 'string'
         description: 'URL Template for blocks'
-      'contents.permissions':
+      'contents.permission':
         type: 'string'
         description: 'URL Template for permission documents'
   ResourceLink:
@@ -286,7 +286,7 @@ models:
     required:
       - 'theme'
       - 'blocks'
-      - 'permissions'
+      - 'permission'
       - 'creator'
       - 'owner'
     properties:
@@ -298,9 +298,9 @@ models:
         description: 'The ordered IDs of blocks that compose this document'
         items:
           type: 'string'
-      permissions:
+      permission:
         type: 'string'
-        description: 'The ID of the permissions document associated with this entity'
+        description: 'The ID of the permission document associated with this entity'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata about the creator of this entity'
@@ -375,7 +375,7 @@ models:
         $ref: 'Metadata'
         description: 'Metadata about this response'
       links:
-        $ref: 'Templates'
+        $ref: 'UrlTemplates'
         description: 'URL Templates (see <a href="https://tools.ietf.org/html/rfc6570" title="RFC6570 - URI Templates">RFC6570</a>) for expanding resource URLs'
       contents:
         type: 'array'
@@ -404,7 +404,7 @@ models:
           type: 'string'
       permission_id:
         type: 'string'
-        description: 'The ID of the permissions document associated with this entity'
+        description: 'The ID of the permission document associated with this entity'
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'

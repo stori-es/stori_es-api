@@ -322,8 +322,8 @@
         }
       }
     },
-    "Templates": {
-      "id": "Templates",
+    "UrlTemplates": {
+      "id": "UrlTemplates",
       "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
       "required": [
         "stories.contents",
@@ -425,7 +425,7 @@
         },
         "permissions": {
           "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
+          "description": "The IDs of permission documents associated with this entity",
           "items": {
             "type": "string"
           }
@@ -531,7 +531,7 @@
           "description": "Metadata about this response"
         },
         "links": {
-          "$ref": "Templates",
+          "$ref": "UrlTemplates",
           "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs"
         },
         "stories": {
@@ -596,7 +596,7 @@
         },
         "permission_ids": {
           "type": "array",
-          "description": "The IDs of permissions documents associated with this entity",
+          "description": "The IDs of permission documents associated with this entity",
           "items": {
             "type": "string"
           }

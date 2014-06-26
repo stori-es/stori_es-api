@@ -166,8 +166,7 @@ models:
         type: 'string'
         description: 'The URL of this entity on the stori.es platform'
       default_theme_id:
-        type: 'integer'
-        format: 'int64'
+        type: 'string'
         description: 'The ID of the default theme for this entity'
         minimum: 1
         defaultValue: 1
@@ -175,20 +174,17 @@ models:
         type: 'array'
         description: 'The IDs of notes associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'
       link_ids:
         type: 'array'
         description: 'The IDs of links associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'
       permission_ids:
         type: 'array'
         description: 'The IDs of permission documents associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The representation of a stori.es API error'
