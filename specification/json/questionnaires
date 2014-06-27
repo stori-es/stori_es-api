@@ -446,7 +446,7 @@
         },
         "links": {
           "$ref": "ResourceLinks",
-          "description": "The IDs and metadata about resources associated with this entity"
+          "description": "Metadata describing resources associated with this entity"
         },
         "created_on": {
           "type": "string",
@@ -483,7 +483,7 @@
       "properties": {
         "meta": {
           "$ref": "Metadata",
-          "description": "Metadata about this response"
+          "description": "Metadata describing this response"
         },
         "questionnaires": {
           "type": "array",

@@ -316,6 +316,7 @@ models:
     required:
        - 'id'
        - 'title'
+       - 'links'
        - 'created_on'
        - 'updated_on'
        - 'publication_status'
@@ -334,7 +335,7 @@ models:
         description: 'The URL path fragment associated with this entity; its namespace'
       links:
         $ref: 'ResourceLinks'
-        description: 'The IDs and metadata about resources associated with this entity'
+        description: 'Metadata describing resources associated with this entity'
       created_on:
         type: 'string'
         format: 'date-time'
@@ -362,7 +363,7 @@ models:
     properties:
       meta:
         $ref: 'Metadata'
-        description: 'Metadata about this response'
+        description: 'Metadata describing this response'
       stories:
         type: 'array'
         description: 'Array of requested story resources'

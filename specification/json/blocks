@@ -387,6 +387,7 @@
       "required": [
         "id",
         "title",
+        "links",
         "created_on",
         "updated_on",
         "publication_status"
@@ -426,7 +427,7 @@
       "properties": {
         "meta": {
           "$ref": "Metadata",
-          "description": "Metadata about this response"
+          "description": "Metadata describing this response"
         },
         "blocks": {
           "type": "array",
