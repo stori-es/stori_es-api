@@ -322,61 +322,13 @@
         }
       }
     },
-    "UrlTemplates": {
-      "id": "UrlTemplates",
-      "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs",
-      "required": [
-        "collections.stories",
-        "collections.contents",
-        "collections.default_content",
-        "collections.questionnaires",
-        "collections.notes",
-        "collections.attachments"
-      ],
-      "properties": {
-        "collections.stories": {
-          "type": "string",
-          "description": "URL Template for stories"
-        },
-        "collections.contents": {
-          "type": "string",
-          "description": "URL Template for content documents"
-        },
-        "collections.default_content": {
-          "type": "string",
-          "description": "URL Template for content documents"
-        },
-        "collections.questionnaires": {
-          "type": "string",
-          "description": "URL Template for questionnaires"
-        },
-        "collections.notes": {
-          "type": "string",
-          "description": "URL Template for note documents"
-        },
-        "collections.attachments": {
-          "type": "string",
-          "description": "URL Template for attachment documents"
-        }
-      }
-    },
     "ResourceLink": {
       "id": "ResourceLink",
-      "description": "Metadata about a resource",
+      "description": "Metadata describing a resource",
       "required": [
-        "type",
-        "id",
         "href"
       ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the resource"
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource"
-        },
         "href": {
           "type": "string",
           "description": "The URL of the resource"
@@ -385,7 +337,7 @@
     },
     "ResourceLinks": {
       "id": "ResourceLinks",
-      "description": "The IDs and metadata of associated resources",
+      "description": "Metadata describing associated resources",
       "required": [
         "creator",
         "owner"
@@ -393,68 +345,68 @@
       "properties": {
         "stories": {
           "type": "array",
-          "description": "The IDs of stories associated with this entity",
+          "description": "Metadata describing stories associated with this entity",
           "items": {
-            "type": "string"
+            "$ref": "ResourceLink"
           }
         },
         "contents": {
           "type": "array",
-          "description": "The IDs of content documents associated with this entity",
+          "description": "Metadata describing content documents associated with this entity",
           "items": {
-            "type": "string"
+            "$ref": "ResourceLink"
           }
         },
         "default_content": {
-          "type": "string",
-          "description": "The ID of the default content document associated with this entity"
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the default content document associated with this entity"
         },
         "questionnaires": {
           "type": "array",
-          "description": "The IDs of questionnaires associated with this entity",
+          "description": "Metadata describing questionnaires associated with this entity",
           "items": {
-            "type": "string"
+            "$ref": "ResourceLink"
           }
         },
         "notes": {
           "type": "array",
-          "description": "The IDs of note documents associated with this entity",
+          "description": "Metadata describing note documents associated with this entity",
           "items": {
-            "type": "string"
+            "$ref": "ResourceLink"
           }
         },
         "attachments": {
           "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
+          "description": "Metadata describing attachment documents associated with this entity",
           "items": {
-            "type": "string"
+            "$ref": "ResourceLink"
           }
         },
         "creator": {
           "$ref": "ResourceLink",
-          "description": "Metadata about the creator of this entity"
+          "description": "Metadata describing the creator of this entity"
         },
         "owner": {
           "$ref": "ResourceLink",
-          "description": "Metadata about the owner of this entity"
+          "description": "Metadata describing the owner of this entity"
         },
         "administrators": {
           "type": "array",
-          "description": "Metadata about the administrators of this entity",
+          "description": "Metadata describing the administrators of this entity",
           "items": {
             "$ref": "ResourceLink"
           }
         },
         "curators": {
           "type": "array",
-          "description": "Metadata about the curators of this entity",
+          "description": "Metadata describing the curators of this entity",
           "items": {
             "$ref": "ResourceLink"
           }
         },
         "readers": {
           "type": "array",
-          "description": "Metadata about the readers of this entity",
+          "description": "Metadata describing the readers of this entity",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -500,17 +452,12 @@
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
       "required": [
         "meta",
-        "links",
         "collections"
       ],
       "properties": {
         "meta": {
           "$ref": "Metadata",
           "description": "Metadata about this response"
-        },
-        "links": {
-          "$ref": "UrlTemplates",
-          "description": "URL Templates (see <a href=\"https://tools.ietf.org/html/rfc6570\" title=\"RFC6570 - URI Templates\">RFC6570</a>) for expanding resource URLs"
         },
         "collections": {
           "type": "array",

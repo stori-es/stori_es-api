@@ -176,14 +176,12 @@ models:
         type: 'array'
         description: 'The IDs of notes associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'
       link_ids:
         type: 'array'
         description: 'The IDs of links associated with this entity'
         items: 
-          type: 'integer'
-          format: 'int64'
+          type: 'string'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The representation of a stori.es API error'
