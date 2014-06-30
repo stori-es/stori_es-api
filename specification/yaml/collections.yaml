@@ -289,6 +289,11 @@ models:
         description: 'Metadata describing attachment documents associated with this entity'
         items: 
           $ref: 'ResourceLink'
+      tags:
+        type: 'array'
+        description: 'Metadata describing tags associated with this entity'
+        items:
+          $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata describing the creator of this entity'
@@ -388,6 +393,11 @@ models:
         type: 'array'
         description: 'The IDs of attachment documents associated with this entity'
         items: 
+          type: 'string'
+      tag_ids:
+        type: 'array'
+        description: 'The IDs of tags associated with this entity'
+        items:
           type: 'string'
       owner_id:
         type: 'string'

@@ -382,6 +382,13 @@
             "$ref": "ResourceLink"
           }
         },
+        "tags": {
+          "type": "array",
+          "description": "Metadata describing tags associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
         "creator": {
           "$ref": "ResourceLink",
           "description": "Metadata describing the creator of this entity"
@@ -545,6 +552,13 @@
         "permission_ids": {
           "type": "array",
           "description": "The IDs of permission documents associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tag_ids": {
+          "type": "array",
+          "description": "The IDs of tags associated with this entity",
           "items": {
             "type": "string"
           }

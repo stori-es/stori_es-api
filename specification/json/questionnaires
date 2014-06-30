@@ -388,6 +388,13 @@
           "$ref": "ResourceLink",
           "description": "Metadata describing the next object in the clickstream; e.g. a confirmation content document"
         },
+        "tags": {
+          "type": "array",
+          "description": "Metadata describing tags associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
         "creator": {
           "$ref": "ResourceLink",
           "description": "Metadata describing the creator of this entity"
@@ -545,6 +552,13 @@
         "permission_id": {
           "type": "string",
           "description": "The ID of the permission document associated with this entity"
+        },
+        "tag_ids": {
+          "type": "array",
+          "description": "The IDs of tags associated with this entity",
+          "items": {
+            "type": "string"
+          }
         },
         "owner_id": {
           "type": "string",
