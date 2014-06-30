@@ -260,6 +260,7 @@ models:
     required:
       - 'creator'
       - 'owner'
+      - 'content'
     properties:
       questionnaires:
         type: 'array'
@@ -271,14 +272,9 @@ models:
         description: 'Metadata describing stories associated with this entity'
         items:
           $ref: 'ResourceLink'
-      contents:
-        type: 'array'
-        description: 'Metadata describing content documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      default_content:
+      content:
         $ref: 'ResourceLink'
-        description: 'Metadata describing the default content document associated with this entity'
+        description: 'Metadata describing the content document associated with this entity'
       notes:
         type: 'array'
         description: 'Metadata describing note documents associated with this entity'
@@ -376,14 +372,9 @@ models:
         description: 'The IDs of stories associated with this entity'
         items: 
           type: 'string'        
-      content_ids:
-        type: 'array'
-        description: 'The IDs of content documents associated with this entity'
-        items: 
-          type: 'string'
-      default_content_id:
+      content_id:
         type: 'string'
-        description: 'The ID of the default content document associated with this entity'
+        description: 'The ID of the content document associated with this entity'
       note_ids:
         type: 'array'
         description: 'The IDs of note documents associated with this entity'
