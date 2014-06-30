@@ -304,11 +304,11 @@ models:
     id: 'User'
     description: 'The representation of a user on the stori.es platform'
     required:
-       - 'id'
-       - 'is_active'
-       - 'links'
-       - 'created_on'
-       - 'updated_on'
+      - 'id'
+      - 'is_active'
+      - 'links'
+      - 'created_on'
+      - 'updated_on'
     properties:
       id:
         type: 'string'

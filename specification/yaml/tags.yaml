@@ -277,8 +277,8 @@ models:
     id: 'Tag'
     description: 'The representation of a tag on the stori.es platform'
     required:
-       - 'value'
-       - 'links'
+      - 'value'
+      - 'links'
     properties:
       value:
         type: 'string'
@@ -305,7 +305,7 @@ models:
     id: 'TagPost'
     description: 'The representation of a new tag to be added to the stori.es platform'
     required:
-       - 'value'
+      - 'value'
     properties:
       value:
         type: 'string'

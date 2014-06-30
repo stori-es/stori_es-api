@@ -329,10 +329,10 @@ models:
     id: 'Organization'
     description: 'The representation of an organization on the stori.es platform'
     required:
-       - 'id'
-       - 'links'
-       - 'created_on'
-       - 'updated_on'
+      - 'id'
+      - 'links'
+      - 'created_on'
+      - 'updated_on'
     properties:
       id:
         type: 'string'

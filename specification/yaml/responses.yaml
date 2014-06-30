@@ -150,10 +150,10 @@ models:
     id: 'Response'
     description: 'The representation of a response document on the stori.es platform'
     required:
-       - 'id'
-       - 'title'
-       - 'permalink'
-       - 'entity_id'
+      - 'id'
+      - 'title'
+      - 'permalink'
+      - 'entity_id'
     properties:
       id:
         type: 'string'

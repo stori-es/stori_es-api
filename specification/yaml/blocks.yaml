@@ -291,12 +291,12 @@ models:
     id: 'Block'
     description: 'The representation of a block on the stori.es platform'
     required:
-       - 'id'
-       - 'title'
-       - 'links'
-       - 'created_on'
-       - 'updated_on'
-       - 'publication_status'
+      - 'id'
+      - 'title'
+      - 'links'
+      - 'created_on'
+      - 'updated_on'
+      - 'publication_status'
     properties:
       id:
         type: 'string'
