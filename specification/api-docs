@@ -16,7 +16,7 @@
     },
     {
       "path": "http://www.stori.es/api/website/listings/collections",
-      "description": "Operations for collections"
+      "description": "sets of stories"
     },
     {
       "path": "http://www.stori.es/api/website/listings/contents",
@@ -49,6 +49,10 @@
     {
       "path": "http://www.stori.es/api/website/listings/stories",
       "description": "Operations for stories"
+    },
+    {
+      "path": "http://www.stori.es/api/website/listings/tags",
+      "description": "Operations for tags"
     }
   ],
   "info": {

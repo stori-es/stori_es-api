@@ -1,28 +1,28 @@
 apiVersion: 1
 swaggerVersion: 1.2
 basePath: 'http://www.stori.es/api/website/listings'
-description: 'sets of stories'
-resourcePath: '/collections'
+description: 'Operations for tags'
+resourcePath: '/tags'
 produces:
   - 'application/vnd.api+json'
 consumes:
   - 'application/vnd.api+json'
 apis:
   -
-    path: '/collections'
+    path: '/tags'
     operations:          
       -
         method: 'POST'
-        summary: 'Create a new collection'
-        notes: 'Creates a new collection and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        summary: 'Create a new tag'
+        notes: 'Creates a new tag and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
         type: 'ApiResponse'
-        nickname: 'create_collection'
+        nickname: 'create_tag'
         parameters:
           -
             name: 'body'
-            description: 'The new collection to be created'
+            description: 'The new tag to be created'
             required: true
-            type: 'CollectionPost'
+            type: 'TagPost'
             paramType: 'body'
         responseMessages:
           -
@@ -42,18 +42,18 @@ apis:
             message: 'Service is currently unavailable'
             responseModel: 'ApiResponse'
   -
-    path: '/collections/{collection_id}'
+    path: '/tags/{tag_id}'
     operations:
       -
         method: 'GET'
-        summary: 'Retrieve a specific collection'
-        notes: 'Returns a specific collection accessible to the current user'
+        summary: 'Retrieve a specific tag'
+        notes: 'Returns a specific tag accessible to the current user'
         type: 'ApiResponse'
-        nickname: 'get_collection'
+        nickname: 'get_tag'
         parameters:
           -
-            name: 'collection_id'
-            description: 'The ID of the collection to retrieve'
+            name: 'tag_id'
+            description: 'The ID of the tag to retrieve'
             required: true
             type: 'string'
             paramType: 'path'
@@ -76,14 +76,14 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'DELETE'
-        summary: 'Deletes a collection'
-        notes: 'Deletes a collection owned by the current user'
+        summary: 'Deletes a tag'
+        notes: 'Deletes a tag owned by the current user'
         type: 'void'
-        nickname: 'delete_collection'
+        nickname: 'delete_tag'
         parameters:
           -
-            name: 'collection_id'
-            description: 'The ID of the collection to delete'
+            name: 'tag_id'
+            description: 'The ID of the tag to delete'
             required: true
             type: 'string'
             paramType: 'path'
@@ -105,16 +105,16 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'PATCH'
-        summary: 'Updates a collection'
-        notes: 'Updates a collection administered by the current user'
+        summary: 'Updates a tag'
+        notes: 'Updates a tag administered by the current user'
         type: 'ApiResponse'
-        nickname: 'update_collection'
+        nickname: 'update_tag'
         consumes:
           - 'application/json-patch+json'
         parameters:
           -
-            name: 'collection_id'
-            description: 'The ID of the collection to update'
+            name: 'tag_id'
+            description: 'The ID of the tag to update'
             required: true
             type: 'string'
             paramType: 'path'
@@ -150,11 +150,11 @@ models:
     id: 'Sort'
     description: 'Sort order details indexed by resource name'
     required:
-      - 'collections'
+      - 'tags'
     properties:
-      collections:
+      tags:
         type: 'array'
-        description: 'Sort order for collection resources'
+        description: 'Sort order for tag resources'
         uniqueItems: true
         items:
           type: 'string'
@@ -257,10 +257,12 @@ models:
   ResourceLinks:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
-    required:
-      - 'creator'
-      - 'owner'
     properties:
+      collections:
+        type: 'array'
+        description: 'Metadata describing collections associated with this entity'
+        items: 
+          $ref: 'ResourceLink'
       questionnaires:
         type: 'array'
         description: 'Metadata describing questionnaires associated with this entity'
@@ -271,96 +273,48 @@ models:
         description: 'Metadata describing stories associated with this entity'
         items:
           $ref: 'ResourceLink'
-      contents:
-        type: 'array'
-        description: 'Metadata describing content documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      default_content:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the default content document associated with this entity'
-      notes:
-        type: 'array'
-        description: 'Metadata describing note documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      attachments:
-        type: 'array'
-        description: 'Metadata describing attachment documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      creator:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the creator of this entity'
-      owner:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the owner of this entity'
-      administrators:
-        type: 'array'
-        description: 'Metadata describing the administrators of this entity'
-        items:
-          $ref: 'ResourceLink'
-      curators:
-        type: 'array'
-        description: 'Metadata describing the curators of this entity'
-        items:
-          $ref: 'ResourceLink'
-      readers:
-        type: 'array'
-        description: 'Metadata describing the readers of this entity'
-        items:
-          $ref: 'ResourceLink'
-  Collection:
-    id: 'Collection'
-    description: 'The representation of a collection on the stori.es platform'
+  Tag:
+    id: 'Tag'
+    description: 'The representation of a tag on the stori.es platform'
     required:
-       - 'id'
-       - 'title'
+       - 'value'
        - 'links'
-       - 'created_on'
-       - 'updated_on'
     properties:
-      id:
+      value:
         type: 'string'
-        description: 'The unique ID for this entity'
-      title:
-        type: 'string'
-        description: 'The title of this entity'
+        description: 'The value of this entity'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
-      created_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The creation date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      updated_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
-      - 'collections'
+      - 'tags'
     properties:
       meta:
         $ref: 'Metadata'
         description: 'Metadata describing this response'
-      collections:
+      tags:
         type: 'array'
-        description: 'Array of requested collection resources'
+        description: 'Array of requested tag resources'
         items:
-          $ref: 'Collection'
-  CollectionPost:
-    id: 'CollectionPost'
-    description: 'The representation of a new collection to be added to the stori.es platform'
+          $ref: 'Tag'
+  TagPost:
+    id: 'TagPost'
+    description: 'The representation of a new tag to be added to the stori.es platform'
     required:
-       - 'title'
+       - 'value'
     properties:
-      title:
+      value:
         type: 'string'
-        description: 'The title of this entity'
+        description: 'The value of this entity'
+      collection_ids:
+        type: 'array'
+        description: 'The IDs of collections associated with this entity'
+        items: 
+          type: 'string'
       questionnaire_ids:
         type: 'array'
         description: 'The IDs of questionnaires associated with this entity'
@@ -371,27 +325,6 @@ models:
         description: 'The IDs of stories associated with this entity'
         items: 
           type: 'string'        
-      content_ids:
-        type: 'array'
-        description: 'The IDs of content documents associated with this entity'
-        items: 
-          type: 'string'
-      default_content_id:
-        type: 'string'
-        description: 'The ID of the default content document associated with this entity'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
-      owner_id:
-        type: 'string'
-        description: 'The ID of the owner of this entity'        
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'
