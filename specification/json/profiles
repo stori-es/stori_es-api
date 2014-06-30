@@ -409,7 +409,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; defaults to \"[organization ID]/[user ID or email address]\""
+          "description": "The unique ID for this entity; defaults to [organization ID]/[user ID or email address]"
         },
         "given_name": {
           "type": "string",
