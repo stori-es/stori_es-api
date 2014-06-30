@@ -3,10 +3,6 @@
   "swaggerVersion": "1.2",
   "apis": [
     {
-      "path": "http://www.stori.es/api/website/listings/accounts",
-      "description": "Operations for accounts"
-    },
-    {
       "path": "http://www.stori.es/api/website/listings/attachments",
       "description": "Operations for attachment documents"
     },
@@ -36,7 +32,7 @@
     },
     {
       "path": "http://www.stori.es/api/website/listings/profiles",
-      "description": "Operations for profiles"
+      "description": "organization-specific user profiles"
     },
     {
       "path": "http://www.stori.es/api/website/listings/questionnaires",
@@ -53,6 +49,10 @@
     {
       "path": "http://www.stori.es/api/website/listings/tags",
       "description": "Operations for tags"
+    },
+    {
+      "path": "http://www.stori.es/api/website/listings/users",
+      "description": "authorized users with organization-specific profiles"
     }
   ],
   "info": {
