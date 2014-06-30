@@ -2,8 +2,8 @@
   "apiVersion": 1,
   "swaggerVersion": 1.2,
   "basePath": "http://www.stori.es/api/website/listings",
-  "description": "organization-specific user profiles",
-  "resourcePath": "/profiles",
+  "description": "authorized users with organization-specific profiles",
+  "resourcePath": "/users",
   "produces": [
     "application/vnd.api+json"
   ],
@@ -12,20 +12,20 @@
   ],
   "apis": [
     {
-      "path": "/profiles",
+      "path": "/users",
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a new profile",
-          "notes": "Creates a new profile and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
+          "summary": "Create a new user",
+          "notes": "Creates a new user and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
           "type": "ApiResponse",
-          "nickname": "create_profile",
+          "nickname": "create_user",
           "parameters": [
             {
               "name": "body",
-              "description": "The new profile to be created",
+              "description": "The new user to be created",
               "required": true,
-              "type": "ProfilePost",
+              "type": "UserPost",
               "paramType": "body"
             }
           ],
@@ -55,18 +55,18 @@
       ]
     },
     {
-      "path": "/profiles/{profile_id}",
+      "path": "/users/{user_id}",
       "operations": [
         {
           "method": "GET",
-          "summary": "Retrieve a specific profile",
-          "notes": "Returns a specific profile accessible to the current user",
+          "summary": "Retrieve a specific user",
+          "notes": "Returns a specific user accessible to the current user",
           "type": "ApiResponse",
-          "nickname": "get_profile",
+          "nickname": "get_user",
           "parameters": [
             {
-              "name": "profile_id",
-              "description": "The ID of the profile to retrieve",
+              "name": "user_id",
+              "description": "The ID of the user to retrieve",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -97,14 +97,14 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete a profile",
-          "notes": "Deletes a profile owned by the current user",
+          "summary": "Delete a user",
+          "notes": "Deletes a user owned by the current user",
           "type": "void",
-          "nickname": "delete_profile",
+          "nickname": "delete_user",
           "parameters": [
             {
-              "name": "profile_id",
-              "description": "The ID of the profile to delete",
+              "name": "user_id",
+              "description": "The ID of the user to delete",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -114,11 +114,6 @@
             {
               "code": 204,
               "message": "Resource successfully deleted"
-            },
-            {
-              "code": 400,
-              "message": "Invalid input",
-              "responseModel": "ApiResponse"
             },
             {
               "code": 403,
@@ -139,17 +134,17 @@
         },
         {
           "method": "PATCH",
-          "summary": "Update a profile",
-          "notes": "Updates a profile administered by the current user",
+          "summary": "Update a user",
+          "notes": "Updates a user administered by the current user",
           "type": "ApiResponse",
-          "nickname": "update_profile",
+          "nickname": "update_user",
           "consumes": [
             "application/json-patch+json"
           ],
           "parameters": [
             {
-              "name": "profile_id",
-              "description": "The ID of the profile to update",
+              "name": "user_id",
+              "description": "The ID of the user to update",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -166,6 +161,11 @@
             {
               "code": 200,
               "message": "Resource successfully updated",
+              "responseModel": "ApiResponse"
+            },
+            {
+              "code": 400,
+              "message": "Invalid input",
               "responseModel": "ApiResponse"
             },
             {
@@ -193,12 +193,12 @@
       "id": "Sort",
       "description": "Sort order details indexed by resource name",
       "required": [
-        "profiles"
+        "users"
       ],
       "properties": {
-        "profiles": {
+        "users": {
           "type": "array",
-          "description": "Sort order for profile resources",
+          "description": "Sort order for user resources",
           "uniqueItems": true,
           "items": {
             "type": "string"
@@ -339,18 +339,20 @@
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
       "required": [
-        "organization",
         "creator",
         "owner"
       ],
       "properties": {
-        "organization": {
-          "$ref": "ResourceLink",
-          "description": "The organization this user profile is associated with"
+        "profiles": {
+          "type": "array",
+          "description": "Metadata describing organization-specific profiles associated with this user",
+          "items": {
+            "$ref": "ResourceLink"
+          }
         },
-        "user": {
+        "default_profile": {
           "$ref": "ResourceLink",
-          "description": "The user this organization-specific profile is associated with"
+          "description": "The default profile associated with this user"
         },
         "stories": {
           "type": "array",
@@ -397,11 +399,12 @@
         }
       }
     },
-    "Profile": {
-      "id": "Profile",
-      "description": "The representation of a profile on the stori.es platform",
+    "User": {
+      "id": "User",
+      "description": "The representation of a user on the stori.es platform",
       "required": [
         "id",
+        "is_active",
         "links",
         "created_on",
         "updated_on"
@@ -409,17 +412,12 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; defaults to \"[organization ID]/[user ID or email address]\""
+          "description": "The unique ID for this entity; the user handle",
+          "maximum": 64
         },
-        "given_name": {
-          "type": "string",
-          "description": "The first name associated with this profile",
-          "maximum": 255
-        },
-        "surname": {
-          "type": "string",
-          "description": "The last name associated with this profile",
-          "maximum": 255
+        "is_active": {
+          "type": "boolean",
+          "description": "User status (true == active/enabled; false == inactive/archived)"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -442,50 +440,48 @@
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
       "required": [
         "meta",
-        "profiles"
+        "users"
       ],
       "properties": {
         "meta": {
           "$ref": "Metadata",
           "description": "Metadata describing this response"
         },
-        "profiles": {
+        "users": {
           "type": "array",
-          "description": "Array of requested profile resources",
+          "description": "Array of requested user resources",
           "items": {
-            "$ref": "Profile"
+            "$ref": "User"
           }
         }
       }
     },
-    "ProfilePost": {
-      "id": "ProfilePost",
-      "description": "The representation of a new profile to be added to the stori.es platform",
+    "UserPost": {
+      "id": "UserPost",
+      "description": "The representation of a new user to be added to the stori.es platform",
       "required": [
-        "organization_id"
+        "id"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; defaults to \"[organization ID]/[user ID or email address]\""
+          "description": "The unique ID for this entity; the user handle",
+          "maximum": 64
         },
-        "organization_id": {
-          "type": "string",
-          "description": "The ID of the organization associated with this entity"
+        "is_active": {
+          "type": "boolean",
+          "description": "User status (true == active/enabled; false == inactive/archived); defaults to true"
         },
-        "user_id": {
-          "type": "string",
-          "description": "The ID of the user associated with this entity"
+        "profile_ids": {
+          "type": "array",
+          "description": "The IDs of organization-specific profiles associated with this user",
+          "items": {
+            "type": "string"
+          }
         },
-        "given_name": {
+        "default_profile_id": {
           "type": "string",
-          "description": "The first name associated with this profile",
-          "maximum": 255
-        },
-        "surname": {
-          "type": "string",
-          "description": "The last name associated with this profile",
-          "maximum": 255
+          "description": "The ID of the default profile associated with this user"
         },
         "story_ids": {
           "type": "array",

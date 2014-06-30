@@ -1,28 +1,28 @@
 apiVersion: 1
 swaggerVersion: 1.2
 basePath: 'http://www.stori.es/api/website/listings'
-description: 'Operations for stories'
-resourcePath: '/stories'
+description: 'authorized users with organization-specific profiles'
+resourcePath: '/users'
 produces:
   - 'application/vnd.api+json'
 consumes:
   - 'application/vnd.api+json'
 apis:
   -
-    path: '/stories'
+    path: '/users'
     operations:          
       -
         method: 'POST'
-        summary: 'Create a new story'
-        notes: 'Creates a new story and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        summary: 'Create a new user'
+        notes: 'Creates a new user and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
         type: 'ApiResponse'
-        nickname: 'create_story'
+        nickname: 'create_user'
         parameters:
           -
             name: 'body'
-            description: 'The new story to be created'
+            description: 'The new user to be created'
             required: true
-            type: 'StoryPost'
+            type: 'UserPost'
             paramType: 'body'
         responseMessages:
           -
@@ -42,18 +42,18 @@ apis:
             message: 'Service is currently unavailable'
             responseModel: 'ApiResponse'
   -
-    path: '/stories/{story_id}'
+    path: '/users/{user_id}'
     operations:
       -
         method: 'GET'
-        summary: 'Retrieve a specific story'
-        notes: 'Returns a specific story accessible to the current user'
+        summary: 'Retrieve a specific user'
+        notes: 'Returns a specific user accessible to the current user'
         type: 'ApiResponse'
-        nickname: 'get_story'
+        nickname: 'get_user'
         parameters:
           -
-            name: 'story_id'
-            description: 'The ID of the story to retrieve'
+            name: 'user_id'
+            description: 'The ID of the user to retrieve'
             required: true
             type: 'string'
             paramType: 'path'
@@ -76,14 +76,14 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'DELETE'
-        summary: 'Delete a story'
-        notes: 'Deletes a story owned by the current user'
+        summary: 'Delete a user'
+        notes: 'Deletes a user owned by the current user'
         type: 'void'
-        nickname: 'delete_story'
+        nickname: 'delete_user'
         parameters:
           -
-            name: 'story_id'
-            description: 'The ID of the story to delete'
+            name: 'user_id'
+            description: 'The ID of the user to delete'
             required: true
             type: 'string'
             paramType: 'path'
@@ -105,16 +105,16 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'PATCH'
-        summary: 'Update a story'
-        notes: 'Updates a story administered by the current user'
+        summary: 'Update a user'
+        notes: 'Updates a user administered by the current user'
         type: 'ApiResponse'
-        nickname: 'update_story'
+        nickname: 'update_user'
         consumes:
           - 'application/json-patch+json'
         parameters:
           -
-            name: 'story_id'
-            description: 'The ID of the story to update'
+            name: 'user_id'
+            description: 'The ID of the user to update'
             required: true
             type: 'string'
             paramType: 'path'
@@ -150,11 +150,11 @@ models:
     id: 'Sort'
     description: 'Sort order details indexed by resource name'
     required:
-      - 'stories'
+      - 'users'
     properties:
-      stories:
+      users:
         type: 'array'
-        description: 'Sort order for story resources'
+        description: 'Sort order for user resources'
         uniqueItems: true
         items:
           type: 'string'
@@ -261,38 +261,23 @@ models:
       - 'creator'
       - 'owner'
     properties:
-      contents:
+      profiles:
         type: 'array'
-        description: 'Metadata describing content documents associated with this entity'
-        items: 
+        description: 'Metadata describing organization-specific profiles associated with this user'
+        items:
           $ref: 'ResourceLink'
-      default_content:
+      default_profile:
         $ref: 'ResourceLink'
-        description: 'Metadata describing the default content document associated with this entity'
-      responses:
+        description: 'The default profile associated with this user'
+      stories:
         type: 'array'
-        description: 'Metadata describing response documents associated with this entity'
+        description: 'Metadata describing stories associated with this entity'
         items: 
           $ref: 'ResourceLink'
       notes:
         type: 'array'
         description: 'Metadata describing note documents associated with this entity'
         items: 
-          $ref: 'ResourceLink'
-      attachments:
-        type: 'array'
-        description: 'Metadata describing attachment documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      permissions:
-        type: 'array'
-        description: 'Metadata describing permission documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      tags:
-        type: 'array'
-        description: 'Metadata describing tags associated with this entity'
-        items:
           $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
@@ -315,29 +300,23 @@ models:
         description: 'Metadata describing the readers of this entity'
         items:
           $ref: 'ResourceLink'
-  Story:
-    id: 'Story'
-    description: 'The representation of a story on the stori.es platform'
+  User:
+    id: 'User'
+    description: 'The representation of a user on the stori.es platform'
     required:
        - 'id'
-       - 'title'
+       - 'is_active'
        - 'links'
        - 'created_on'
        - 'updated_on'
-       - 'publication_status'
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity'
-      title:
-        type: 'string'
-        description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this story'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
+        description: 'The unique ID for this entity; the user handle'
+        maximum: 64
+      is_active:
+        type: 'boolean'
+        description: 'User status (true == active/enabled; false == inactive/archived)'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -349,78 +328,51 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      publication_status:
-        type: 'string'
-        description: 'The current publication status of this entity'
-        enum:
-          - 'draft'
-          - 'published'
-      published_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
-      - 'stories'
+      - 'users'
     properties:
       meta:
         $ref: 'Metadata'
         description: 'Metadata describing this response'
-      stories:
+      users:
         type: 'array'
-        description: 'Array of requested story resources'
+        description: 'Array of requested user resources'
         items:
-          $ref: 'Story'
-  StoryPost:
-    id: 'StoryPost'
-    description: 'The representation of a new story to be added to the stori.es platform'
+          $ref: 'User'
+  UserPost:
+    id: 'UserPost'
+    description: 'The representation of a new user to be added to the stori.es platform'
     required:
-      - 'title'
+      - 'id'
     properties:
-      title:
+      id:
         type: 'string'
-        description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this story'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
-      content_ids:
+        description: 'The unique ID for this entity; the user handle'
+        maximum: 64
+      is_active:
+        type: 'boolean'
+        description: 'User status (true == active/enabled; false == inactive/archived); defaults to true'
+      profile_ids:
         type: 'array'
-        description: 'The IDs of content documents associated with this entity'
+        description: 'The IDs of organization-specific profiles associated with this user'
         items: 
           type: 'string'
-      default_content_id:
+      default_profile_id:
         type: 'string'
-        description: 'The ID of the default content document associated with this entity'
-      response_ids:
+        description: 'The ID of the default profile associated with this user'
+      story_ids:
         type: 'array'
-        description: 'The IDs of response documents associated with this entity'
+        description: 'The IDs of stories associated with this entity'
         items: 
           type: 'string'
       note_ids:
         type: 'array'
         description: 'The IDs of note documents associated with this entity'
         items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
-      permission_ids:
-        type: 'array'
-        description: 'The IDs of permission documents associated with this entity'
-        items: 
-          type: 'string'
-      tag_ids:
-        type: 'array'
-        description: 'The IDs of tags associated with this entity'
-        items:
           type: 'string'
       owner_id:
         type: 'string'
