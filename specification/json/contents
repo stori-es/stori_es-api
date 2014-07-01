@@ -392,7 +392,7 @@
       "description": "The representation of a content document on the stori.es platform",
       "required": [
         "id",
-        "path",
+        "path_segment",
         "links",
         "created_on",
         "updated_on",
@@ -401,15 +401,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity"
+          "description": "The unique ID for this entity; format: /contents/[content path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this content document; defaults to URL-encoded content title; generated if undefined"
         },
         "title": {
           "type": "string",
           "description": "The title of this entity"
-        },
-        "path": {
-          "type": "string",
-          "description": "The URL path fragment associated with this entity; its namespace"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -464,17 +464,14 @@
     "ContentPost": {
       "id": "ContentPost",
       "description": "The representation of a new content document to be added to the stori.es platform",
-      "required": [
-        "path"
-      ],
       "properties": {
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this content document; defaults to URL-encoded content title; generated if undefined"
+        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
-        },
-        "path": {
-          "type": "string",
-          "description": "The URL path fragment associated with this entity; its namespace"
         },
         "theme_id": {
           "type": "string",

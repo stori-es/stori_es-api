@@ -320,6 +320,7 @@ models:
     description: 'The representation of a story on the stori.es platform'
     required:
       - 'id'
+      - 'path_segment'
       - 'title'
       - 'links'
       - 'created_on'
@@ -328,16 +329,16 @@ models:
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity'
+        description: 'The unique ID for this entity; format: /stories/[story path segment]'
+      path_segment:
+        type: 'string'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined'
       title:
         type: 'string'
         description: 'The title of this entity'
       byline:
         type: 'string'
         description: 'The byline of this story'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -380,15 +381,15 @@ models:
     required:
       - 'title'
     properties:
+      path_segment:
+        type: 'string'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined'
       title:
         type: 'string'
         description: 'The title of this entity'
       byline:
         type: 'string'
         description: 'The byline of this story'
-      path:
-        type: 'string'
-        description: 'The URL path fragment associated with this entity; its namespace'
       content_ids:
         type: 'array'
         description: 'The IDs of content documents associated with this entity'
