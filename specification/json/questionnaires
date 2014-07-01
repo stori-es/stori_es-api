@@ -436,7 +436,8 @@
         "links",
         "created_on",
         "updated_on",
-        "publication_status"
+        "publication_status",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -477,6 +478,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },

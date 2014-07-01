@@ -305,18 +305,15 @@ models:
     description: 'The representation of a user on the stori.es platform'
     required:
       - 'id'
-      - 'is_active'
       - 'links'
       - 'created_on'
       - 'updated_on'
+      - 'is_archived'
     properties:
       id:
         type: 'string'
         description: 'The unique ID for this entity; the user handle'
         maximum: 64
-      is_active:
-        type: 'boolean'
-        description: 'User status (true == active/enabled; false == inactive/archived)'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -328,6 +325,9 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      is_archived:
+        type: 'boolean'
+        description: 'Status (true == archived; false == enabled)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -353,9 +353,6 @@ models:
         type: 'string'
         description: 'The unique ID for this entity; the user handle'
         maximum: 64
-      is_active:
-        type: 'boolean'
-        description: 'User status (true == active/enabled; false == inactive/archived); defaults to true'
       profile_ids:
         type: 'array'
         description: 'The IDs of organization-specific profiles associated with this user'
