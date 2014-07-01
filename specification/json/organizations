@@ -438,6 +438,8 @@
       "description": "The representation of an organization on the stori.es platform",
       "required": [
         "id",
+        "path_segment",
+        "name",
         "links",
         "created_on",
         "updated_on"
@@ -445,7 +447,20 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; the organization short name",
+          "description": "The unique ID for this entity; format: /organizations/[organization path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this organization; defaults to URL-encoded organization short name; generated if undefined"
+        },
+        "name": {
+          "type": "string",
+          "description": "The organization name (maximum 128 characters)",
+          "maximum": 128
+        },
+        "short_name": {
+          "type": "string",
+          "description": "The short form of the organization name (maximum 15 characters)",
           "maximum": 15
         },
         "links": {
@@ -489,12 +504,21 @@
       "id": "OrganizationPost",
       "description": "The representation of a new organization to be added to the stori.es platform",
       "required": [
-        "id"
+        "name"
       ],
       "properties": {
-        "id": {
+        "path_segment": {
           "type": "string",
-          "description": "The unique ID for this entity; the organization short name",
+          "description": "The URL path segment uniquely identifying this organization; defaults to URL-encoded organization short name; generated if undefined"
+        },
+        "name": {
+          "type": "string",
+          "description": "The organization name (maximum 128 characters)",
+          "maximum": 128
+        },
+        "short_name": {
+          "type": "string",
+          "description": "The short form of the organization name (maximum 15 characters)",
           "maximum": 15
         },
         "profile_ids": {

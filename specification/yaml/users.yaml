@@ -305,6 +305,7 @@ models:
     description: 'The representation of a user on the stori.es platform'
     required:
       - 'id'
+      - 'handle'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -312,7 +313,10 @@ models:
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity; the user handle'
+        description: 'The unique ID for this entity; format: /users/[handle]'
+      handle:
+        type: 'string'
+        description: 'The user handle'
         maximum: 64
       links:
         $ref: 'ResourceLinks'
@@ -347,11 +351,11 @@ models:
     id: 'UserPost'
     description: 'The representation of a new user to be added to the stori.es platform'
     required:
-      - 'id'
+      - 'handle'
     properties:
-      id:
+      handle:
         type: 'string'
-        description: 'The unique ID for this entity; the user handle'
+        description: 'The user handle'
         maximum: 64
       profile_ids:
         type: 'array'

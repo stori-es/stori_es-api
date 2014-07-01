@@ -402,6 +402,7 @@
       "description": "The representation of a profile on the stori.es platform",
       "required": [
         "id",
+        "path_segment",
         "links",
         "created_on",
         "updated_on"
@@ -409,7 +410,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; defaults to [organization ID]/[user ID or email address]"
+          "description": "The unique ID for this entity; format: /profiles/[organization path segment]/[profile path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this profile within an organization; defaults to user handle; generated if undefined"
         },
         "given_name": {
           "type": "string",
@@ -465,10 +470,6 @@
         "organization_id"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID for this entity; defaults to \"[organization ID]/[user ID or email address]\""
-        },
         "organization_id": {
           "type": "string",
           "description": "The ID of the organization associated with this entity"
@@ -476,6 +477,10 @@
         "user_id": {
           "type": "string",
           "description": "The ID of the user associated with this entity"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this profile within an organization; defaults to user handle; generated if undefined"
         },
         "given_name": {
           "type": "string",
