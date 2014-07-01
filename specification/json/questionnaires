@@ -431,8 +431,8 @@
       "description": "The representation of a questionnaire on the stori.es platform",
       "required": [
         "id",
+        "path_segment",
         "title",
-        "path",
         "links",
         "created_on",
         "updated_on",
@@ -442,15 +442,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity"
+          "description": "The unique ID for this entity; format: /questionnaires/[organization path segment]/[questionnaire path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this questionnaire within an organization; defaults to URL-encoded questionnaire title"
         },
         "title": {
           "type": "string",
           "description": "The title of this entity"
-        },
-        "path": {
-          "type": "string",
-          "description": "The URL path fragment associated with this entity; its namespace"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -510,17 +510,16 @@
       "id": "QuestionnairePost",
       "description": "The representation of a new questionnaire to be added to the stori.es platform",
       "required": [
-        "title",
-        "path"
+        "title"
       ],
       "properties": {
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this questionnaire within an organization; defaults to URL-encoded questionnaire title"
+        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
-        },
-        "path": {
-          "type": "string",
-          "description": "The URL path fragment associated with this entity; its namespace"
         },
         "theme_id": {
           "type": "string",
