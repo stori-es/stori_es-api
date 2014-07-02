@@ -271,6 +271,9 @@ models:
         description: 'Metadata describing blocks that compose this document'
         items:
           $ref: 'ResourceLink'
+      permission:
+        $ref: 'ResourceLink'
+        description: 'Metadata describing the permission document associated with this entity'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata describing the creator of this entity'
@@ -302,6 +305,7 @@ models:
       - 'created_on'
       - 'updated_on'
       - 'publication_status'
+      - 'permalink'
     properties:
       id:
         type: 'string'
@@ -329,6 +333,9 @@ models:
         enum:
           - 'draft'
           - 'published'
+      permalink:
+        type: 'string'
+        description: 'The fully-qualified URL of the published document; incorporates the path segment'
       published_on:
         type: 'string'
         format: 'date-time'
@@ -351,6 +358,8 @@ models:
   ContentPost:
     id: 'ContentPost'
     description: 'The representation of a new content document to be added to the stori.es platform'
+    required:
+      - 'title'
     properties:
       path_segment:
         type: 'string'
@@ -363,9 +372,12 @@ models:
         description: 'The ID of the theme associated with this entity'
       block_ids:
         type: 'array'
-        description: 'The ordered IDs of blocks that compose this document'
-        items: 
+        description: 'The IDs of the blocks that compose this document'
+        items:
           type: 'string'
+      permission_id:
+        type: 'string'
+        description: 'The ID of the permission document associated with this entity'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

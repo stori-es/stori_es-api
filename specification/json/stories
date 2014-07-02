@@ -361,20 +361,6 @@
             "$ref": "ResourceLink"
           }
         },
-        "notes": {
-          "type": "array",
-          "description": "Metadata describing note documents associated with this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "attachments": {
-          "type": "array",
-          "description": "Metadata describing attachment documents associated with this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
         "permissions": {
           "type": "array",
           "description": "Metadata describing permission documents associated with this entity",
@@ -385,6 +371,20 @@
         "tags": {
           "type": "array",
           "description": "Metadata describing tags associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Metadata describing attachment documents associated with this entity",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -427,6 +427,7 @@
         "id",
         "path_segment",
         "title",
+        "byline",
         "links",
         "created_on",
         "updated_on",
@@ -447,7 +448,7 @@
         },
         "byline": {
           "type": "string",
-          "description": "The byline of this story"
+          "description": "The byline of this story; defaults to [Given Name] of [City], [State]"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -516,7 +517,7 @@
         },
         "byline": {
           "type": "string",
-          "description": "The byline of this story"
+          "description": "The byline of this story; defaults to [Given Name] of [City], [State]"
         },
         "content_ids": {
           "type": "array",
@@ -536,20 +537,6 @@
             "type": "string"
           }
         },
-        "note_ids": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachment_ids": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
         "permission_ids": {
           "type": "array",
           "description": "The IDs of permission documents associated with this entity",
@@ -560,6 +547,20 @@
         "tag_ids": {
           "type": "array",
           "description": "The IDs of tags associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note_ids": {
+          "type": "array",
+          "description": "The IDs of note documents associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachment_ids": {
+          "type": "array",
+          "description": "The IDs of attachment documents associated with this entity",
           "items": {
             "type": "string"
           }

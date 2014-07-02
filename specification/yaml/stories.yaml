@@ -274,16 +274,6 @@ models:
         description: 'Metadata describing response documents associated with this entity'
         items: 
           $ref: 'ResourceLink'
-      notes:
-        type: 'array'
-        description: 'Metadata describing note documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      attachments:
-        type: 'array'
-        description: 'Metadata describing attachment documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
       permissions:
         type: 'array'
         description: 'Metadata describing permission documents associated with this entity'
@@ -293,6 +283,16 @@ models:
         type: 'array'
         description: 'Metadata describing tags associated with this entity'
         items:
+          $ref: 'ResourceLink'
+      notes:
+        type: 'array'
+        description: 'Metadata describing note documents associated with this entity'
+        items: 
+          $ref: 'ResourceLink'
+      attachments:
+        type: 'array'
+        description: 'Metadata describing attachment documents associated with this entity'
+        items: 
           $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
@@ -322,6 +322,7 @@ models:
       - 'id'
       - 'path_segment'
       - 'title'
+      - 'byline'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -338,7 +339,7 @@ models:
         description: 'The title of this entity'
       byline:
         type: 'string'
-        description: 'The byline of this story'
+        description: 'The byline of this story; defaults to [Given Name] of [City], [State]'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -389,7 +390,7 @@ models:
         description: 'The title of this entity'
       byline:
         type: 'string'
-        description: 'The byline of this story'
+        description: 'The byline of this story; defaults to [Given Name] of [City], [State]'
       content_ids:
         type: 'array'
         description: 'The IDs of content documents associated with this entity'
@@ -403,16 +404,6 @@ models:
         description: 'The IDs of response documents associated with this entity'
         items: 
           type: 'string'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
       permission_ids:
         type: 'array'
         description: 'The IDs of permission documents associated with this entity'
@@ -422,6 +413,16 @@ models:
         type: 'array'
         description: 'The IDs of tags associated with this entity'
         items:
+          type: 'string'
+      note_ids:
+        type: 'array'
+        description: 'The IDs of note documents associated with this entity'
+        items: 
+          type: 'string'
+      attachment_ids:
+        type: 'array'
+        description: 'The IDs of attachment documents associated with this entity'
+        items: 
           type: 'string'
       owner_id:
         type: 'string'

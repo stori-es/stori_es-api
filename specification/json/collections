@@ -339,18 +339,12 @@
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
       "required": [
+        "stories",
+        "content",
         "creator",
-        "owner",
-        "content"
+        "owner"
       ],
       "properties": {
-        "questionnaires": {
-          "type": "array",
-          "description": "Metadata describing questionnaires associated with this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
         "stories": {
           "type": "array",
           "description": "Metadata describing stories associated with this entity",
@@ -362,6 +356,20 @@
           "$ref": "ResourceLink",
           "description": "Metadata describing the content document associated with this entity"
         },
+        "questionnaires": {
+          "type": "array",
+          "description": "Metadata describing source questionnaires associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Metadata describing tags associated with this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
         "notes": {
           "type": "array",
           "description": "Metadata describing note documents associated with this entity",
@@ -372,13 +380,6 @@
         "attachments": {
           "type": "array",
           "description": "Metadata describing attachment documents associated with this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "Metadata describing tags associated with this entity",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -495,13 +496,6 @@
           "type": "string",
           "description": "The title of this entity"
         },
-        "questionnaire_ids": {
-          "type": "array",
-          "description": "The IDs of questionnaires associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
         "story_ids": {
           "type": "array",
           "description": "The IDs of stories associated with this entity",
@@ -512,6 +506,13 @@
         "content_id": {
           "type": "string",
           "description": "The ID of the content document associated with this entity"
+        },
+        "questionnaire_ids": {
+          "type": "array",
+          "description": "The IDs of source questionnaires associated with this entity",
+          "items": {
+            "type": "string"
+          }
         },
         "note_ids": {
           "type": "array",

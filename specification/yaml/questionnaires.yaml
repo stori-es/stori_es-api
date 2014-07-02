@@ -258,26 +258,32 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
-      - 'theme'
-      - 'blocks'
-      - 'collections'
-      - 'permission'
+      - 'content'
       - 'next'
+      - 'stories'
       - 'creator'
       - 'owner'
     properties:
-      theme:
+      content:
         $ref: 'ResourceLink'
-        description: 'Metadata describing the theme associated with this entity'
-      blocks:
+        description: 'Metadata describing the content document associated with this entity'
+      next:
+        $ref: 'ResourceLink'
+        description: 'Metadata describing the next object in the clickstream; e.g. a confirmation content document'
+      stories:
         type: 'array'
-        description: 'Metadata describing blocks that compose this document'
+        description: 'Metadata describing stories associated with this entity'
         items:
           $ref: 'ResourceLink'
       collections:
         type: 'array'
-        description: 'Metadata describing collections associated with this entity'
+        description: 'Metadata describing target collections associated with this entity'
         items: 
+          $ref: 'ResourceLink'
+      tags:
+        type: 'array'
+        description: 'Metadata describing tags associated with this entity'
+        items:
           $ref: 'ResourceLink'
       notes:
         type: 'array'
@@ -288,17 +294,6 @@ models:
         type: 'array'
         description: 'Metadata describing attachment documents associated with this entity'
         items: 
-          $ref: 'ResourceLink'
-      permission:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the permission document associated with this entity'
-      next:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the next object in the clickstream; e.g. a confirmation content document'
-      tags:
-        type: 'array'
-        description: 'Metadata describing tags associated with this entity'
-        items:
           $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
@@ -394,18 +389,26 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
-      theme_id:
+      content_id:
         type: 'string'
-        description: 'The ID of the theme associated with this entity'
-      block_ids:
+        description: 'The ID of the content document associated with this entity'
+      next_id:
+        type: 'string'
+        description: 'The ID of the next object in the clickstream; e.g. a confirmation content document'
+      story_ids:
         type: 'array'
-        description: 'The ordered IDs of blocks that compose this document'
-        items: 
+        description: 'The IDs of stories associated with this entity'
+        items:
           type: 'string'
       collection_ids:
         type: 'array'
-        description: 'The IDs of collections associated with this entity'
+        description: 'The IDs of target collections associated with this entity'
         items: 
+          type: 'string'
+      tag_ids:
+        type: 'array'
+        description: 'The IDs of tags associated with this entity'
+        items:
           type: 'string'
       note_ids:
         type: 'array'
@@ -416,14 +419,6 @@ models:
         type: 'array'
         description: 'The IDs of attachment documents associated with this entity'
         items: 
-          type: 'string'
-      permission_id:
-        type: 'string'
-        description: 'The ID of the permission document associated with this entity'
-      tag_ids:
-        type: 'array'
-        description: 'The IDs of tags associated with this entity'
-        items:
           type: 'string'
       owner_id:
         type: 'string'
