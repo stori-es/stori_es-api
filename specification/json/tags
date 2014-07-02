@@ -366,10 +366,20 @@
       "id": "Tag",
       "description": "The representation of a tag on the stori.es platform",
       "required": [
+        "id",
+        "path_segment",
         "value",
         "links"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID for this entity; format: /tags/[tag path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this tag; defaults to URL-encoded value"
+        },
         "value": {
           "type": "string",
           "description": "The value of this entity"
@@ -408,6 +418,10 @@
         "value"
       ],
       "properties": {
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this tag; defaults to URL-encoded value"
+        },
         "value": {
           "type": "string",
           "description": "The value of this entity"
