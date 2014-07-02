@@ -51,6 +51,10 @@
       "description": "Operations for tags"
     },
     {
+      "path": "http://www.stori.es/api/website/listings/themes",
+      "description": "layout and styling specifications"
+    },
+    {
       "path": "http://www.stori.es/api/website/listings/users",
       "description": "authorized users with organization-specific profiles"
     }
