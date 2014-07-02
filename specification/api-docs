@@ -40,7 +40,7 @@
     },
     {
       "path": "http://www.stori.es/api/website/listings/responses",
-      "description": "to questionnaires"
+      "description": "answers to questionnaires"
     },
     {
       "path": "http://www.stori.es/api/website/listings/stories",
