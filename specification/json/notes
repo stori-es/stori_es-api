@@ -448,31 +448,25 @@
       "id": "NotePost",
       "description": "The representation of a new note document to be added to the stori.es platform",
       "required": [
-        "title"
+        "entity_id",
+        "summary"
       ],
       "properties": {
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this content document; defaults to URL-encoded content title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this note document; defaults to URL-encoded note title; generated if undefined"
         },
         "title": {
           "type": "string",
-          "description": "The title of this entity"
+          "description": "The title of this note"
         },
-        "theme_id": {
+        "entity_id": {
           "type": "string",
-          "description": "The ID of the theme associated with this entity"
+          "description": "The ID of the entity this note is associated with"
         },
-        "block_ids": {
-          "type": "array",
-          "description": "The IDs of the blocks that compose this document",
-          "items": {
-            "type": "string"
-          }
-        },
-        "permission_id": {
+        "summary": {
           "type": "string",
-          "description": "The ID of the permission document associated with this entity"
+          "description": "The plaintext summary of this note; its value"
         },
         "owner_id": {
           "type": "string",
