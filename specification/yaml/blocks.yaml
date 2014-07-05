@@ -258,12 +258,13 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
+      - 'entities'
       - 'creator'
       - 'owner'
     properties:
-      contents:
+      entities:
         type: 'array'
-        description: 'Metadata describing content documents associated with this entity'
+        description: 'Metadata describing entities this Block is associated with'
         items: 
           $ref: 'ResourceLink'
       creator:
@@ -292,7 +293,7 @@ models:
     description: 'The representation of a block on the stori.es platform'
     required:
       - 'id'
-      - 'title'
+      - 'path_segment'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -300,7 +301,10 @@ models:
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity'
+        description: 'The unique ID for this entity; format: /blocks/[block path segment]'
+      path_segment:
+        type: 'string'
+        description: 'The URL path segment uniquely identifying this block; defaults to URL-encoded title; generated if undefined'
       title:
         type: 'string'
         description: 'The title of this entity'
@@ -315,6 +319,16 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      publication_status:
+        type: 'string'
+        description: 'The current publication status of this entity'
+        enum:
+          - 'draft'
+          - 'published'
+      published_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'      
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -333,15 +347,16 @@ models:
   BlockPost:
     id: 'BlockPost'
     description: 'The representation of a new block to be added to the stori.es platform'
-    required:
-       - 'title'
     properties:
+      path_segment:
+        type: 'string'
+        description: 'The URL path segment uniquely identifying this block; defaults to URL-encoded title; generated if undefined'
       title:
         type: 'string'
         description: 'The title of this entity'
-      content_ids:
+      entity_ids:
         type: 'array'
-        description: 'The IDs of content documents associated with this entity'
+        description: 'The IDs of entities this Block is associated with'
         items: 
           type: 'string'
       owner_id:
