@@ -1,120 +1,120 @@
 apiVersion: 1
 swaggerVersion: 1.2
 basePath: 'http://www.stori.es/api/website/listings'
-description: 'surveys and their associated stories'
-resourcePath: '/questionnaires'
+description: 'answers to question blocks'
+resourcePath: '/answers'
 produces:
   - 'application/vnd.api+json'
 consumes:
   - 'application/vnd.api+json'
 apis:
   -
-    path: '/questionnaires'
-    operations:          
+    path: '/answers'
+    operations:
       -
         method: 'POST'
-        summary: 'Create a new questionnaire'
-        notes: 'Creates a new questionnaire and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        summary: 'Create a new answer'
+        notes: 'Creates a new answer and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
         type: 'ApiResponse'
-        nickname: 'create_questionnaire'
+        nickname: 'create_answer'
         parameters:
           -
             name: 'body'
-            description: 'The new questionnaire to be created'
+            description: 'The new answer to be created'
             required: true
-            type: 'QuestionnairePost'
+            type: 'AnswerPost'
             paramType: 'body'
-        responseMessages:
+        answerMessages:
           -
             code: 201
             message: 'Resource successfully created'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to create the requested resource'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
   -
-    path: '/questionnaires/{questionnaire_id}'
+    path: '/answers/{answer_id}'
     operations:
       -
         method: 'GET'
-        summary: 'Retrieve a specific questionnaire'
-        notes: 'Returns a specific questionnaire accessible to the current user'
+        summary: 'Retrieve a specific answer'
+        answers: 'Returns a specific answer accessible to the current user'
         type: 'ApiResponse'
-        nickname: 'get_questionnaire'
+        nickname: 'get_answer'
         parameters:
           -
-            name: 'questionnaire_id'
-            description: 'The ID of the questionnaire to retrieve'
+            name: 'answer_id'
+            description: 'The ID of the answer to retrieve'
             required: true
             type: 'string'
             paramType: 'path'
-        responseMessages:
+        answerMessages:
           -
             code: 200
             message: 'Resource successfully retrieved'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to access the requested resource'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
       -
         method: 'DELETE'
-        summary: 'Deletes a questionnaire'
-        notes: 'Deletes a questionnaire owned by the current user'
+        summary: 'Deletes a answer'
+        answers: 'Deletes a answer owned by the current user'
         type: 'void'
-        nickname: 'delete_questionnaire'
+        nickname: 'delete_answer'
         parameters:
           -
-            name: 'questionnaire_id'
-            description: 'The ID of the questionnaire to delete'
+            name: 'answer_id'
+            description: 'The ID of the answer to delete'
             required: true
             type: 'string'
             paramType: 'path'
-        responseMessages:
+        answerMessages:
           -
             code: 204
             message: 'Resource successfully deleted'
           -
             code: 403
             message: 'Not authorized to delete the requested resource'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
       -
         method: 'PATCH'
-        summary: 'Updates a questionnaire'
-        notes: 'Updates a questionnaire administered by the current user'
+        summary: 'Updates an answer'
+        answers: 'Updates an answer administered by the current user'
         type: 'ApiResponse'
-        nickname: 'update_questionnaire'
+        nickname: 'update_answer'
         consumes:
           - 'application/json-patch+json'
         parameters:
           -
-            name: 'questionnaire_id'
-            description: 'The ID of the questionnaire to update'
+            name: 'answer_id'
+            description: 'The ID of the answer to update'
             required: true
             type: 'string'
             paramType: 'path'
@@ -124,43 +124,43 @@ apis:
             required: true
             type: 'PatchOperations'
             paramType: 'body'
-        responseMessages:
+        answerMessages:
           -
             code: 200
             message: 'Resource successfully updated'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 400
             message: 'Invalid input'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 403
             message: 'Not authorized to update the requested resource'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 404
             message: 'Resource not found'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
           -
             code: 503
             message: 'Service is currently unavailable'
-            responseModel: 'ApiResponse'
+            answerModel: 'ApiResponse'
 models:
   Sort:
     id: 'Sort'
     description: 'Sort order details indexed by resource name'
     required:
-      - 'questionnaires'
+      - 'answers'
     properties:
-      questionnaires:
+      answers:
         type: 'array'
-        description: 'Sort order for questionnaire resources'
+        description: 'Sort order for answer resources'
         uniqueItems: true
         items:
           type: 'string'
   Navigation:
     id: 'Navigation'
-    description: 'Navigation details for this response'
+    description: 'Navigation details for this answer'
     properties:
       first:
         type: 'string'
@@ -176,7 +176,7 @@ models:
         description: 'URL for last set of results'
   Pagination:
     id: 'Pagination'
-    description: 'Pagination details for this response'
+    description: 'Pagination details for this answer'
     properties:
       limit:
         type: 'integer'
@@ -196,7 +196,7 @@ models:
         description: 'Sort order, indexed by resource'
       navigation:
         $ref: 'Navigation'
-        description: 'Navigation details for this response'
+        description: 'Navigation details for this answer'
   Message:
     id: 'Message'
     description: 'A message generated by a request'
@@ -218,7 +218,7 @@ models:
         description: 'URL for message details'
   Metadata:
     id: 'Metadata'
-    description: 'Metadata about this response'
+    description: 'Metadata about this answer'
     required:
       - 'self'
       - 'http_code'
@@ -229,14 +229,14 @@ models:
         description: 'Full request URL'
       status:
         type: 'string'
-        description: 'High-level status of response'
+        description: 'High-level status of answer'
         enum:
           - 'success'
           - 'fail'
           - 'error'
       http_code:
         type: 'string'
-        description: 'HTTP response status code'
+        description: 'HTTP answer status code'
       messages:
         type: 'array'
         description: 'Array of messages generated by request'
@@ -244,7 +244,7 @@ models:
           $ref: 'Message'
       pagination:
         $ref: 'Pagination'
-        description: 'Pagination details for this response'
+        description: 'Pagination details for this answer'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata describing a resource'
@@ -258,48 +258,17 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
-      - 'content'
-      - 'next'
-      - 'responses'
+      - 'response'
+      - 'block'
       - 'creator'
       - 'owner'
     properties:
-      content:
+      response:
         $ref: 'ResourceLink'
-        description: 'Metadata describing the content document associated with this entity'
-      next:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the next object in the clickstream; e.g. a confirmation content document'
-      responses:
-        type: 'array'
-        description: 'Metadata describing responses associated with this entity'
-        items:
-          $ref: 'ResourceLink'
-      collections:
-        type: 'array'
-        description: 'Metadata describing target collections associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      autotags:
-        type: 'array'
-        description: 'Metadata describing autotags associated with this entity'
-        items:
-          type: 'ResourceLink'
-      tags:
-        type: 'array'
-        description: 'Metadata describing tags associated with this entity'
-        items:
-          $ref: 'ResourceLink'
-      notes:
-        type: 'array'
-        description: 'Metadata describing note documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      attachments:
-        type: 'array'
-        description: 'Metadata describing attachment documents associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
+        description: 'Metadata describing the response document containing this answer'
+      block:
+        type: 'ResourceLink'
+        description: 'Metadata describing the block this entity is an answer to'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata describing the creator of this entity'
@@ -321,27 +290,26 @@ models:
         description: 'Metadata describing the readers of this entity'
         items:
           $ref: 'ResourceLink'
-  Questionnaire:
-    id: 'Questionnaire'
-    description: 'The representation of a questionnaire on the stori.es platform'
+  Answer:
+    id: 'Answer'
+    description: 'The representation of an answer on the stori.es platform'
     required:
       - 'id'
       - 'path_segment'
-      - 'title'
+      - 'value'
       - 'links'
       - 'created_on'
       - 'updated_on'
-      - 'is_archived'
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity; format: /questionnaires/[organization path segment]/[questionnaire path segment]'
+        description: 'The unique ID for this entity; format: /answers/[answer path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this questionnaire within an organization; defaults to URL-encoded questionnaire title'
-      title:
+        description: 'The URL path segment uniquely identifying this answer; generated if undefined'
+      value:
         type: 'string'
-        description: 'The title of this entity'
+        description: 'The current value of this answer'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -353,72 +321,41 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      is_archived:
-        type: 'boolean'
-        description: 'Status (true == archived; false == enabled)'
   ApiResponse:
     id: 'ApiResponse'
-    description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
+    description: 'The standard API answer format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
-      - 'questionnaires'
+      - 'answers'
     properties:
       meta:
         $ref: 'Metadata'
-        description: 'Metadata describing this response'
-      questionnaires:
+        description: 'Metadata describing this answer'
+      answers:
         type: 'array'
-        description: 'Array of requested questionnaire resources'
+        description: 'Array of requested answer resources'
         items:
-          $ref: 'Questionnaire'
-  QuestionnairePost:
-    id: 'QuestionnairePost'
-    description: 'The representation of a new questionnaire to be added to the stori.es platform'
+          $ref: 'Answer'
+  AnswerPost:
+    id: 'AnswerPost'
+    description: 'The representation of a new answer to be added to the stori.es platform'
     required:
-      - 'title'
+      - 'response_id'
+      - 'block_id'
+      - 'value'
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this questionnaire within an organization; defaults to URL-encoded questionnaire title'
-      title:
+        description: 'The URL path segment uniquely identifying this answer; generated if undefined'
+      response_id:
         type: 'string'
-        description: 'The title of this entity'
-      content_id:
+        description: 'The ID of the response containing this answer'
+      block_id:
         type: 'string'
-        description: 'The ID of the content document associated with this entity'
-      next_id:
+        description: 'The ID of the block this entity is an answer to'
+      value:
         type: 'string'
-        description: 'The ID of the next object in the clickstream; e.g. a confirmation content document'
-      response_ids:
-        type: 'array'
-        description: 'The IDs of responses associated with this entity'
-        items:
-          type: 'string'
-      collection_ids:
-        type: 'array'
-        description: 'The IDs of target collections associated with this entity'
-        items: 
-          type: 'string'
-      autotag_ids:
-        type: 'array'
-        description: 'The IDs of autotags associated with this entity'
-        items:
-          type: 'string'
-      tag_ids:
-        type: 'array'
-        description: 'The IDs of tags associated with this entity'
-        items:
-          type: 'string'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
-      attachment_ids:
-        type: 'array'
-        description: 'The IDs of attachment documents associated with this entity'
-        items: 
-          type: 'string'
+        description: 'The current value of this answer'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

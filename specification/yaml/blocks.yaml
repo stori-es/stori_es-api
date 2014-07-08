@@ -267,9 +267,9 @@ models:
         description: 'Metadata describing entities this block is associated with'
         items: 
           $ref: 'ResourceLink'
-      responses:
+      answers:
         type: 'array'
-        description: 'Metadata describing responses to this block'
+        description: 'Metadata describing answers to this block'
         items:
           $ref: 'ResourceLink'
       creator:
@@ -299,12 +299,11 @@ models:
     required:
       - 'id'
       - 'path_segment'
-      - 'is_question'
       - 'block_type'
+      - 'is_question'
       - 'links'
       - 'created_on'
       - 'updated_on'
-      - 'publication_status'
     properties:
       id:
         type: 'string'
@@ -315,18 +314,41 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
-      is_question:
-        type: 'boolean'
-        description: 'Boolean flag indicating this block solicits responses'
       block_type:
         type: 'string'
         description: 'The type of block this entity represents'
         enum:
+          - '/block_types/text'
+          - '/block_types/document'
+          - '/block_types/image'
+          - '/block_types/audio'
+          - '/block_types/video'
+          - '/block_types/collection'
+          - '/block_types/permission'
+          - '/block_types/story_title'
+          - '/block_types/story_ask'
+          - '/block_types/first_name'
+          - '/block_types/last_name'
+          - '/block_types/email'
+          - '/block_types/phone'
+          - '/block_types/street_address'
+          - '/block_types/city'
+          - '/block_types/state'
+          - '/block_types/zip_code'
+          - '/block_types/updates_opt_in'
+          - '/block_types/preferred_email_format'
           - '/block_types/text_field'
           - '/block_types/text_area'
+          - '/block_types/single_choice'
+          - '/block_types/multiple_choice'
+          - '/block_types/date'
+          - '/block_types/attachments'
       value:
         type: 'string'
-        description: 'The current value of this Block'
+        description: 'The current value of this block'
+      is_question:
+        type: 'boolean'
+        description: 'Boolean flag indicating this block solicits responses'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -338,16 +360,6 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      publication_status:
-        type: 'string'
-        description: 'The current publication status of this entity'
-        enum:
-          - 'draft'
-          - 'published'
-      published_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'      
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -367,6 +379,7 @@ models:
     id: 'BlockPost'
     description: 'The representation of a new block to be added to the stori.es platform'
     required:
+      - 'block_type'
       - 'entity_ids'
     properties:
       path_segment:
@@ -379,8 +392,31 @@ models:
         type: 'string'
         description: 'The type of block this entity represents'
         enum:
+          - '/block_types/text'
+          - '/block_types/document'
+          - '/block_types/image'
+          - '/block_types/audio'
+          - '/block_types/video'
+          - '/block_types/collection'
+          - '/block_types/permission'
+          - '/block_types/story_title'
+          - '/block_types/story_ask'
+          - '/block_types/first_name'
+          - '/block_types/last_name'
+          - '/block_types/email'
+          - '/block_types/phone'
+          - '/block_types/street_address'
+          - '/block_types/city'
+          - '/block_types/state'
+          - '/block_types/zip_code'
+          - '/block_types/updates_opt_in'
+          - '/block_types/preferred_email_format'
           - '/block_types/text_field'
           - '/block_types/text_area'
+          - '/block_types/single_choice'
+          - '/block_types/multiple_choice'
+          - '/block_types/date'
+          - '/block_types/attachments'
       value:
         type: 'string'
         description: 'The current value of this block'

@@ -341,7 +341,7 @@
       "required": [
         "content",
         "next",
-        "stories",
+        "responses",
         "creator",
         "owner"
       ],
@@ -354,9 +354,9 @@
           "$ref": "ResourceLink",
           "description": "Metadata describing the next object in the clickstream; e.g. a confirmation content document"
         },
-        "stories": {
+        "responses": {
           "type": "array",
-          "description": "Metadata describing stories associated with this entity",
+          "description": "Metadata describing responses associated with this entity",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -516,9 +516,9 @@
           "type": "string",
           "description": "The ID of the next object in the clickstream; e.g. a confirmation content document"
         },
-        "story_ids": {
+        "response_ids": {
           "type": "array",
-          "description": "The IDs of stories associated with this entity",
+          "description": "The IDs of responses associated with this entity",
           "items": {
             "type": "string"
           }

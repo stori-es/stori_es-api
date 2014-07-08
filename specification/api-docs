@@ -3,6 +3,10 @@
   "swaggerVersion": "1.2",
   "apis": [
     {
+      "path": "http://www.stori.es/api/website/listings/answers",
+      "description": "component elements of responses"
+    },
+    {
       "path": "http://www.stori.es/api/website/listings/attachments",
       "description": "links to resources"
     },
@@ -44,7 +48,7 @@
     },
     {
       "path": "http://www.stori.es/api/website/listings/responses",
-      "description": "answers to questionnaires"
+      "description": "sets of answers to questionnaires"
     },
     {
       "path": "http://www.stori.es/api/website/listings/stories",
