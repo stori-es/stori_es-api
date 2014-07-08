@@ -258,20 +258,10 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     properties:
-      collections:
+      entities:
         type: 'array'
-        description: 'Metadata describing collections associated with this entity'
+        description: 'Metadata describing entities associated with this tag'
         items: 
-          $ref: 'ResourceLink'
-      questionnaires:
-        type: 'array'
-        description: 'Metadata describing questionnaires associated with this entity'
-        items: 
-          $ref: 'ResourceLink'
-      stories:
-        type: 'array'
-        description: 'Metadata describing stories associated with this entity'
-        items:
           $ref: 'ResourceLink'
   Tag:
     id: 'Tag'
@@ -281,19 +271,30 @@ models:
       - 'path_segment'
       - 'value'
       - 'links'
+      - 'created_on'
+      - 'updated_on'
     properties:
       id:
         type: 'string'
         description: 'The unique ID for this entity; format: /tags/[tag path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this tag; defaults to URL-encoded value'
+        description: 'The URL path segment uniquely identifying this tag; defaults to URL-encoded value; generated if undefined'
       value:
         type: 'string'
         description: 'The value of this entity'
+        maximum: 45
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
+      created_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The creation date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      updated_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -314,28 +315,20 @@ models:
     description: 'The representation of a new tag to be added to the stori.es platform'
     required:
       - 'value'
+      - 'entity_ids'
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this tag; defaults to URL-encoded value'
+        description: 'The URL path segment uniquely identifying this tag; defaults to URL-encoded value; generated if undefined'
       value:
         type: 'string'
         description: 'The value of this entity'
-      collection_ids:
+        maximum: 45
+      entity_ids:
         type: 'array'
-        description: 'The IDs of collections associated with this entity'
+        description: 'The IDs of entities associated with this tag'
         items: 
           type: 'string'
-      questionnaire_ids:
-        type: 'array'
-        description: 'The IDs of questionnaires associated with this entity'
-        items: 
-          type: 'string'
-      story_ids:
-        type: 'array'
-        description: 'The IDs of stories associated with this entity'
-        items: 
-          type: 'string'        
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'
