@@ -430,8 +430,7 @@
         "byline",
         "links",
         "created_on",
-        "updated_on",
-        "publication_status"
+        "updated_on"
       ],
       "properties": {
         "id": {
@@ -440,7 +439,7 @@
         },
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this story; defaults to URL-encoded story title"
         },
         "title": {
           "type": "string",
@@ -448,7 +447,7 @@
         },
         "byline": {
           "type": "string",
-          "description": "The byline of this story; defaults to [Given Name] of [City], [State]"
+          "description": "The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -463,19 +462,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
-        },
-        "publication_status": {
-          "type": "string",
-          "description": "The current publication status of this entity",
-          "enum": [
-            "draft",
-            "published"
-          ]
-        },
-        "published_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
         }
       }
     },
@@ -509,7 +495,7 @@
       "properties": {
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this story; defaults to URL-encoded story title"
         },
         "title": {
           "type": "string",
@@ -517,7 +503,7 @@
         },
         "byline": {
           "type": "string",
-          "description": "The byline of this story; defaults to [Given Name] of [City], [State]"
+          "description": "The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]"
         },
         "content_ids": {
           "type": "array",

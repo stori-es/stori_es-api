@@ -326,20 +326,19 @@ models:
       - 'links'
       - 'created_on'
       - 'updated_on'
-      - 'publication_status'
     properties:
       id:
         type: 'string'
         description: 'The unique ID for this entity; format: /stories/[story path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title'
       title:
         type: 'string'
         description: 'The title of this entity'
       byline:
         type: 'string'
-        description: 'The byline of this story; defaults to [Given Name] of [City], [State]'
+        description: 'The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -351,16 +350,6 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      publication_status:
-        type: 'string'
-        description: 'The current publication status of this entity'
-        enum:
-          - 'draft'
-          - 'published'
-      published_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -384,13 +373,13 @@ models:
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title; generated if undefined'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title'
       title:
         type: 'string'
         description: 'The title of this entity'
       byline:
         type: 'string'
-        description: 'The byline of this story; defaults to [Given Name] of [City], [State]'
+        description: 'The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]'
       content_ids:
         type: 'array'
         description: 'The IDs of content documents associated with this entity'

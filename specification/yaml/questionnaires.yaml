@@ -280,6 +280,11 @@ models:
         description: 'Metadata describing target collections associated with this entity'
         items: 
           $ref: 'ResourceLink'
+      autotags:
+        type: 'array'
+        description: 'Metadata describing autotags associated with this entity'
+        items:
+          type: 'ResourceLink'
       tags:
         type: 'array'
         description: 'Metadata describing tags associated with this entity'
@@ -326,7 +331,6 @@ models:
       - 'links'
       - 'created_on'
       - 'updated_on'
-      - 'publication_status'
       - 'is_archived'
     properties:
       id:
@@ -349,16 +353,6 @@ models:
         type: 'string'
         format: 'date-time'
         description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
-      publication_status:
-        type: 'string'
-        description: 'The current publication status of this entity'
-        enum:
-          - 'draft'
-          - 'published'
-      published_on:
-        type: 'string'
-        format: 'date-time'
-        description: 'The initial publication date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
       is_archived:
         type: 'boolean'
         description: 'Status (true == archived; false == enabled)'
@@ -404,6 +398,11 @@ models:
         type: 'array'
         description: 'The IDs of target collections associated with this entity'
         items: 
+          type: 'string'
+      autotag_ids:
+        type: 'array'
+        description: 'The IDs of autotags associated with this entity'
+        items:
           type: 'string'
       tag_ids:
         type: 'array'

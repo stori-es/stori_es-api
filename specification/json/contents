@@ -397,11 +397,11 @@
       "required": [
         "id",
         "path_segment",
+        "permalink",
         "links",
         "created_on",
         "updated_on",
-        "publication_status",
-        "permalink"
+        "publication_status"
       ],
       "properties": {
         "id": {
@@ -411,6 +411,10 @@
         "path_segment": {
           "type": "string",
           "description": "The URL path segment uniquely identifying this content document; defaults to URL-encoded content title; generated if undefined"
+        },
+        "permalink": {
+          "type": "string",
+          "description": "The fully-qualified URL of the published document; incorporates the path segment"
         },
         "title": {
           "type": "string",
@@ -437,10 +441,6 @@
             "draft",
             "published"
           ]
-        },
-        "permalink": {
-          "type": "string",
-          "description": "The fully-qualified URL of the published document; incorporates the path segment"
         },
         "published_on": {
           "type": "string",
@@ -473,9 +473,6 @@
     "ContentPost": {
       "id": "ContentPost",
       "description": "The representation of a new content document to be added to the stori.es platform",
-      "required": [
-        "title"
-      ],
       "properties": {
         "path_segment": {
           "type": "string",

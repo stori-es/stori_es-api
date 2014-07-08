@@ -339,22 +339,22 @@
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
       "required": [
-        "stories",
         "content",
+        "stories",
         "creator",
         "owner"
       ],
       "properties": {
+        "content": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the content document associated with this entity"
+        },
         "stories": {
           "type": "array",
           "description": "Metadata describing stories associated with this entity",
           "items": {
             "$ref": "ResourceLink"
           }
-        },
-        "content": {
-          "$ref": "ResourceLink",
-          "description": "Metadata describing the content document associated with this entity"
         },
         "questionnaires": {
           "type": "array",
@@ -496,6 +496,10 @@
           "type": "string",
           "description": "The title of this entity"
         },
+        "content_id": {
+          "type": "string",
+          "description": "The ID of the content document associated with this entity"
+        },
         "story_ids": {
           "type": "array",
           "description": "The IDs of stories associated with this entity",
@@ -503,13 +507,16 @@
             "type": "string"
           }
         },
-        "content_id": {
-          "type": "string",
-          "description": "The ID of the content document associated with this entity"
-        },
         "questionnaire_ids": {
           "type": "array",
           "description": "The IDs of source questionnaires associated with this entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tag_ids": {
+          "type": "array",
+          "description": "The IDs of tags associated with this entity",
           "items": {
             "type": "string"
           }
@@ -524,13 +531,6 @@
         "attachment_ids": {
           "type": "array",
           "description": "The IDs of attachment documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tag_ids": {
-          "type": "array",
-          "description": "The IDs of tags associated with this entity",
           "items": {
             "type": "string"
           }
