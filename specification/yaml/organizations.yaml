@@ -258,11 +258,16 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
-      - 'creator'
-      - 'owner'
       - 'themes'
       - 'default_theme'
+      - 'creator'
+      - 'owner'
     properties:
+      contacts:
+        type: 'array'
+        description: 'Metatdata describing contacts associated with this entity'
+        items:
+          $ref: 'ResourceLink'
       profiles:
         type: 'array'
         description: 'Metadata describing user profiles associated with this entity'
@@ -393,6 +398,11 @@ models:
         type: 'string'
         description: 'The short form of the organization name (maximum 15 characters)'
         maximum: 15
+      contact_ids:
+        type: 'array'
+        description: 'The IDs of contacts associated with this entity'
+        items: 
+          type: 'string'
       profile_ids:
         type: 'array'
         description: 'The IDs of user profiles associated with this entity'

@@ -268,6 +268,11 @@ models:
       user:
         $ref: 'ResourceLink'
         description: 'The user this organization-specific profile is associated with'
+      contacts:
+        type: 'array'
+        description: 'Metatdata describing contacts associated with this entity'
+        items:
+          $ref: 'ResourceLink'
       stories:
         type: 'array'
         description: 'Metadata describing stories associated with this entity'
@@ -355,15 +360,15 @@ models:
     required:
       - 'organization_id'
     properties:
+      path_segment:
+        type: 'string'
+        description: 'The URL path segment uniquely identifying this profile within an organization; defaults to user handle; generated if undefined'
       organization_id:
         type: 'string'
         description: 'The ID of the organization associated with this entity'
       user_id:
         type: 'string'
         description: 'The ID of the user associated with this entity'
-      path_segment:
-        type: 'string'
-        description: 'The URL path segment uniquely identifying this profile within an organization; defaults to user handle; generated if undefined'
       given_name:
         type: 'string'
         description: 'The first name associated with this profile'
@@ -372,6 +377,11 @@ models:
         type: 'string'
         description: 'The last name associated with this profile'
         maximum: 255        
+      contact_ids:
+        type: 'array'
+        description: 'The IDs of contacts associated with this entity'
+        items: 
+          type: 'string'
       story_ids:
         type: 'array'
         description: 'The IDs of stories associated with this entity'
