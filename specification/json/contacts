@@ -2,8 +2,8 @@
   "apiVersion": 1,
   "swaggerVersion": 1.2,
   "basePath": "http://www.stori.es/api/website/listings",
-  "description": "component elements of documents",
-  "resourcePath": "/blocks",
+  "description": "email, phone, geolocation, social media, etc.",
+  "resourcePath": "/contacts",
   "produces": [
     "application/vnd.api+json"
   ],
@@ -12,20 +12,20 @@
   ],
   "apis": [
     {
-      "path": "/blocks",
+      "path": "/contacts",
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a new block",
-          "notes": "Creates a new block and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
+          "summary": "Create a new contact",
+          "notes": "Creates a new contact and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
           "type": "ApiResponse",
-          "nickname": "create_block",
+          "nickname": "create_contact",
           "parameters": [
             {
               "name": "body",
-              "description": "The new block to be created",
+              "description": "The new contact to be created",
               "required": true,
-              "type": "BlockPost",
+              "type": "ContactPost",
               "paramType": "body"
             }
           ],
@@ -55,18 +55,18 @@
       ]
     },
     {
-      "path": "/blocks/{block_id}",
+      "path": "/contacts/{contact_id}",
       "operations": [
         {
           "method": "GET",
-          "summary": "Retrieve a specific block",
-          "notes": "Returns a specific block accessible to the current user",
+          "summary": "Retrieve a specific contact",
+          "notes": "Returns a specific contact accessible to the current user",
           "type": "ApiResponse",
-          "nickname": "get_block",
+          "nickname": "get_contact",
           "parameters": [
             {
-              "name": "block_id",
-              "description": "The ID of the block to retrieve",
+              "name": "contact_id",
+              "description": "The ID of the contact to retrieve",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -97,14 +97,14 @@
         },
         {
           "method": "DELETE",
-          "summary": "Delete a block",
-          "notes": "Deletes a block owned by the current user",
+          "summary": "Delete a contact",
+          "notes": "Deletes a contact owned by the current user",
           "type": "void",
-          "nickname": "delete_block",
+          "nickname": "delete_contact",
           "parameters": [
             {
-              "name": "block_id",
-              "description": "The ID of the block to delete",
+              "name": "contact_id",
+              "description": "The ID of the contact to delete",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -134,17 +134,17 @@
         },
         {
           "method": "PATCH",
-          "summary": "Update a block",
-          "notes": "Updates a block administered by the current user",
+          "summary": "Update a contact",
+          "notes": "Updates a contact administered by the current user",
           "type": "ApiResponse",
-          "nickname": "update_block",
+          "nickname": "update_contact",
           "consumes": [
             "application/json-patch+json"
           ],
           "parameters": [
             {
-              "name": "block_id",
-              "description": "The ID of the block to update",
+              "name": "contact_id",
+              "description": "The ID of the contact to update",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -193,12 +193,12 @@
       "id": "Sort",
       "description": "Sort order details indexed by resource name",
       "required": [
-        "blocks"
+        "contacts"
       ],
       "properties": {
-        "blocks": {
+        "contacts": {
           "type": "array",
-          "description": "Sort order for block resources",
+          "description": "Sort order for contact resources",
           "uniqueItems": true,
           "items": {
             "type": "string"
@@ -346,14 +346,7 @@
       "properties": {
         "entities": {
           "type": "array",
-          "description": "Metadata describing entities this block is associated with",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
-        "responses": {
-          "type": "array",
-          "description": "Metadata describing responses to this block",
+          "description": "Metadata describing entities this contact is associated with",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -389,47 +382,45 @@
         }
       }
     },
-    "Block": {
-      "id": "Block",
-      "description": "The representation of a block on the stori.es platform",
+    "Contact": {
+      "id": "Contact",
+      "description": "The representation of a contact on the stori.es platform",
       "required": [
         "id",
         "path_segment",
-        "is_question",
-        "block_type",
+        "contact_type",
+        "title",
+        "value",
         "links",
         "created_on",
-        "updated_on",
-        "publication_status"
+        "updated_on"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; format: /blocks/[block path segment]"
+          "description": "The unique ID for this entity; format: /contacts/[contact path segment]"
         },
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this block; defaults to URL-encoded title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this contact; generated if undefined"
+        },
+        "contact_type": {
+          "type": "string",
+          "description": "The type of contact this entity represents",
+          "enum": [
+            "/contact_types/email",
+            "/contact_types/phone",
+            "/contact_types/geolocation",
+            "/contact_types/social"
+          ]
         },
         "title": {
           "type": "string",
-          "description": "The title of this entity"
-        },
-        "is_question": {
-          "type": "boolean",
-          "description": "Boolean flag indicating this block solicits responses"
-        },
-        "block_type": {
-          "type": "string",
-          "description": "The type of block this entity represents",
-          "enum": [
-            "/block_types/text_field",
-            "/block_types/text_area"
-          ]
+          "description": "The title for this contact (e.g., \"Home\", \"Work\", etc.)"
         },
         "value": {
           "type": "string",
-          "description": "The current value of this Block"
+          "description": "The value of this contact"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -444,19 +435,6 @@
           "type": "string",
           "format": "date-time",
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
-        },
-        "publication_status": {
-          "type": "string",
-          "description": "The current publication status of this entity",
-          "enum": [
-            "draft",
-            "published"
-          ]
-        },
-        "published_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
         }
       }
     },
@@ -465,52 +443,57 @@
       "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
       "required": [
         "meta",
-        "blocks"
+        "contacts"
       ],
       "properties": {
         "meta": {
           "$ref": "Metadata",
           "description": "Metadata describing this response"
         },
-        "blocks": {
+        "contacts": {
           "type": "array",
-          "description": "Array of requested block resources",
+          "description": "Array of requested contact resources",
           "items": {
-            "$ref": "Block"
+            "$ref": "Contact"
           }
         }
       }
     },
-    "BlockPost": {
-      "id": "BlockPost",
-      "description": "The representation of a new block to be added to the stori.es platform",
+    "ContactPost": {
+      "id": "ContactPost",
+      "description": "The representation of a new contact to be added to the stori.es platform",
       "required": [
+        "contact_type",
+        "title",
+        "value",
         "entity_ids"
       ],
       "properties": {
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this block; defaults to URL-encoded title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this contact; generated if undefined"
+        },
+        "contact_type": {
+          "type": "string",
+          "description": "The type of contact this entity represents",
+          "enum": [
+            "/contact_types/email",
+            "/contact_types/phone",
+            "/contact_types/geolocation",
+            "/contact_types/social"
+          ]
         },
         "title": {
           "type": "string",
-          "description": "The title of this entity"
-        },
-        "block_type": {
-          "type": "string",
-          "description": "The type of block this entity represents",
-          "enum": [
-            "/block_types/text_field",
-            "/block_types/text_area"
-          ]
+          "description": "The title for this contact (e.g., \"Home\", \"Work\", etc.)"
         },
         "value": {
           "type": "string",
-          "description": "The current value of this block"
+          "description": "The value of this contact"
         },
         "entity_ids": {
           "type": "array",
-          "description": "The IDs of entities this block is associated with",
+          "description": "The IDs of entities this contact is associated with",
           "items": {
             "type": "string"
           }

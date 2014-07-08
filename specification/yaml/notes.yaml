@@ -264,7 +264,7 @@ models:
     properties:
       entity:
         $ref: 'ResourceLink'
-        description: 'Metadata describing the entity this note is associated with'
+        description: 'Metadata describing the entity this document is associated with'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata describing the creator of this entity'
@@ -344,16 +344,16 @@ models:
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this note document; defaults to URL-encoded note title; generated if undefined'
+        description: 'The URL path segment uniquely identifying this entity; defaults to URL-encoded title; generated if undefined'
       title:
         type: 'string'
-        description: 'The title of this note'
+        description: 'The title of this entity'
       entity_id:
         type: 'string'
-        description: 'The ID of the entity this note is associated with'
+        description: 'The ID of the entity this document is associated with'
       summary:
         type: 'string'
-        description: 'The plaintext summary of this note; its value'
+        description: 'The plaintext summary of this document; its value'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

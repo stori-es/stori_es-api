@@ -1,28 +1,28 @@
 apiVersion: 1
 swaggerVersion: 1.2
 basePath: 'http://www.stori.es/api/website/listings'
-description: 'links to resources'
-resourcePath: '/attachments'
+description: 'email, phone, geolocation, social media, etc.'
+resourcePath: '/contacts'
 produces:
   - 'application/vnd.api+json'
 consumes:
   - 'application/vnd.api+json'
 apis:
   -
-    path: '/attachments'
-    operations:
+    path: '/contacts'
+    operations:          
       -
         method: 'POST'
-        summary: 'Create a new attachment'
-        notes: 'Creates a new attachment document and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
+        summary: 'Create a new contact'
+        notes: 'Creates a new contact and returns it. Declares the resource URL in the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30" title="HTTP 1.1 Header Fields - Location">HTTP Location header</a>.'
         type: 'ApiResponse'
-        nickname: 'create_attachment'
+        nickname: 'create_contact'
         parameters:
           -
             name: 'body'
-            description: 'The new attachment to be created'
+            description: 'The new contact to be created'
             required: true
-            type: 'AttachmentPost'
+            type: 'ContactPost'
             paramType: 'body'
         responseMessages:
           -
@@ -42,18 +42,18 @@ apis:
             message: 'Service is currently unavailable'
             responseModel: 'ApiResponse'
   -
-    path: '/attachments/{attachment_id}'
+    path: '/contacts/{contact_id}'
     operations:
       -
         method: 'GET'
-        summary: 'Retrieve a specific attachment'
-        notes: 'Returns a specific attachment accessible to the current user'
+        summary: 'Retrieve a specific contact'
+        notes: 'Returns a specific contact accessible to the current user'
         type: 'ApiResponse'
-        nickname: 'get_attachment'
+        nickname: 'get_contact'
         parameters:
           -
-            name: 'attachment_id'
-            description: 'The ID of the attachment to retrieve'
+            name: 'contact_id'
+            description: 'The ID of the contact to retrieve'
             required: true
             type: 'string'
             paramType: 'path'
@@ -76,14 +76,14 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'DELETE'
-        summary: 'Deletes an attachment'
-        notes: 'Deletes an attachment owned by the current user'
+        summary: 'Delete a contact'
+        notes: 'Deletes a contact owned by the current user'
         type: 'void'
-        nickname: 'delete_attachment'
+        nickname: 'delete_contact'
         parameters:
           -
-            name: 'attachment_id'
-            description: 'The ID of the attachment to delete'
+            name: 'contact_id'
+            description: 'The ID of the contact to delete'
             required: true
             type: 'string'
             paramType: 'path'
@@ -105,16 +105,16 @@ apis:
             responseModel: 'ApiResponse'
       -
         method: 'PATCH'
-        summary: 'Updates an attachment'
-        notes: 'Updates an attachment administered by the current user'
+        summary: 'Update a contact'
+        notes: 'Updates a contact administered by the current user'
         type: 'ApiResponse'
-        nickname: 'update_attachment'
+        nickname: 'update_contact'
         consumes:
           - 'application/json-patch+json'
         parameters:
           -
-            name: 'attachment_id'
-            description: 'The ID of the attachment to update'
+            name: 'contact_id'
+            description: 'The ID of the contact to update'
             required: true
             type: 'string'
             paramType: 'path'
@@ -150,11 +150,11 @@ models:
     id: 'Sort'
     description: 'Sort order details indexed by resource name'
     required:
-      - 'attachments'
+      - 'contacts'
     properties:
-      attachments:
+      contacts:
         type: 'array'
-        description: 'Sort order for attachment document resources'
+        description: 'Sort order for contact resources'
         uniqueItems: true
         items:
           type: 'string'
@@ -181,10 +181,10 @@ models:
       limit:
         type: 'integer'
         format: 'int32'
-        description: 'Maximum number of results to return (default = 8, maximum = 50)'
+        description: 'Maximum number of results to return (default = 25, maximum = 50)'
         minimum: 1
         maximum: 50
-        defaultValue: 8
+        defaultValue: 25
       offset:
         type: 'integer'
         format: 'int32'
@@ -258,13 +258,15 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
-      - 'entity'
+      - 'entities'
       - 'creator'
       - 'owner'
     properties:
-      entity:
-        $ref: 'ResourceLink'
-        description: 'Metadata describing the entity this document is associated with'
+      entities:
+        type: 'array'
+        description: 'Metadata describing entities this contact is associated with'
+        items: 
+          $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
         description: 'Metadata describing the creator of this entity'
@@ -286,29 +288,39 @@ models:
         description: 'Metadata describing the readers of this entity'
         items:
           $ref: 'ResourceLink'
-  Attachment:
-    id: 'Attachment'
-    description: 'The representation of an attachment document on the stori.es platform'
+  Contact:
+    id: 'Contact'
+    description: 'The representation of a contact on the stori.es platform'
     required:
       - 'id'
       - 'path_segment'
-      - 'permalink'
+      - 'contact_type'
+      - 'title'
+      - 'value'
       - 'links'
       - 'created_on'
       - 'updated_on'
     properties:
       id:
         type: 'string'
-        description: 'The unique ID for this entity; format: /attachments/[attachment path segment]'
+        description: 'The unique ID for this entity; format: /contacts/[contact path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this entity; defaults to URL-encoded title; generated if undefined'
+        description: 'The URL path segment uniquely identifying this contact; generated if undefined'
+      contact_type:
+        type: 'string'
+        description: 'The type of contact this entity represents'
+        enum:
+          - '/contact_types/email'
+          - '/contact_types/phone'
+          - '/contact_types/geolocation'
+          - '/contact_types/social'
       title:
         type: 'string'
-        description: 'The title of this entity'
-      permalink:
+        description: 'The title for this contact (e.g., "Home", "Work", etc.)'
+      value:
         type: 'string'
-        description: 'The URL of this entity; its value'
+        description: 'The value of this contact'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -325,35 +337,47 @@ models:
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
     required:
       - 'meta'
-      - 'attachments'
+      - 'contacts'
     properties:
       meta:
         $ref: 'Metadata'
         description: 'Metadata describing this response'
-      attachments:
+      contacts:
         type: 'array'
-        description: 'Array of requested attachment document resources'
+        description: 'Array of requested contact resources'
         items:
-          $ref: 'Attachment'
-  AttachmentPost:
-    id: 'AttachmentPost'
-    description: 'The representation of a new attachment document to be added to the stori.es platform'
+          $ref: 'Contact'
+  ContactPost:
+    id: 'ContactPost'
+    description: 'The representation of a new contact to be added to the stori.es platform'
     required:
-      - 'entity_id'
-      - 'permalink'
+      - 'contact_type'
+      - 'title'
+      - 'value'
+      - 'entity_ids'
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this document; defaults to URL-encoded title; generated if undefined'
+        description: 'The URL path segment uniquely identifying this contact; generated if undefined'
+      contact_type:
+        type: 'string'
+        description: 'The type of contact this entity represents'
+        enum:
+          - '/contact_types/email'
+          - '/contact_types/phone'
+          - '/contact_types/geolocation'
+          - '/contact_types/social'
       title:
         type: 'string'
-        description: 'The title of this entity'
-      entity_id:
+        description: 'The title for this contact (e.g., "Home", "Work", etc.)'
+      value:
         type: 'string'
-        description: 'The ID of the entity this document is associated with'
-      permalink:
-        type: 'string'
-        description: 'The URL of this entity; its value'
+        description: 'The value of this contact'
+      entity_ids:
+        type: 'array'
+        description: 'The IDs of entities this contact is associated with'
+        items: 
+          type: 'string'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

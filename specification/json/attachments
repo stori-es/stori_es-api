@@ -12,20 +12,20 @@
   ],
   "apis": [
     {
-      "path": "/links",
+      "path": "/attachments",
       "operations": [
         {
           "method": "POST",
-          "summary": "Create a new link",
+          "summary": "Create a new attachment",
           "notes": "Creates a new attachment document and returns it. Declares the resource URL in the <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30\" title=\"HTTP 1.1 Header Fields - Location\">HTTP Location header</a>.",
           "type": "ApiResponse",
-          "nickname": "create_link",
+          "nickname": "create_attachment",
           "parameters": [
             {
               "name": "body",
-              "description": "The new link to be created",
+              "description": "The new attachment to be created",
               "required": true,
-              "type": "LinkPost",
+              "type": "AttachmentPost",
               "paramType": "body"
             }
           ],
@@ -55,18 +55,18 @@
       ]
     },
     {
-      "path": "/links/{link_id}",
+      "path": "/attachments/{attachment_id}",
       "operations": [
         {
           "method": "GET",
-          "summary": "Retrieve a specific link",
-          "notes": "Returns a specific link accessible to the current user",
+          "summary": "Retrieve a specific attachment",
+          "notes": "Returns a specific attachment accessible to the current user",
           "type": "ApiResponse",
-          "nickname": "get_link",
+          "nickname": "get_attachment",
           "parameters": [
             {
-              "name": "link_id",
-              "description": "The ID of the link to retrieve",
+              "name": "attachment_id",
+              "description": "The ID of the attachment to retrieve",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -97,14 +97,14 @@
         },
         {
           "method": "DELETE",
-          "summary": "Deletes a link",
-          "notes": "Deletes a link owned by the current user",
+          "summary": "Deletes an attachment",
+          "notes": "Deletes an attachment owned by the current user",
           "type": "void",
-          "nickname": "delete_link",
+          "nickname": "delete_attachment",
           "parameters": [
             {
-              "name": "link_id",
-              "description": "The ID of the link to delete",
+              "name": "attachment_id",
+              "description": "The ID of the attachment to delete",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -134,17 +134,17 @@
         },
         {
           "method": "PATCH",
-          "summary": "Updates a link",
-          "notes": "Updates a link administered by the current user",
+          "summary": "Updates an attachment",
+          "notes": "Updates an attachment administered by the current user",
           "type": "ApiResponse",
-          "nickname": "update_link",
+          "nickname": "update_attachment",
           "consumes": [
             "application/json-patch+json"
           ],
           "parameters": [
             {
-              "name": "link_id",
-              "description": "The ID of the link to update",
+              "name": "attachment_id",
+              "description": "The ID of the attachment to update",
               "required": true,
               "type": "string",
               "paramType": "path"
@@ -189,33 +189,338 @@
     }
   ],
   "models": {
-    "Link": {
-      "id": "Link",
-      "description": "The representation of a link on the stori.es platform",
+    "Sort": {
+      "id": "Sort",
+      "description": "Sort order details indexed by resource name",
+      "required": [
+        "attachments"
+      ],
+      "properties": {
+        "attachments": {
+          "type": "array",
+          "description": "Sort order for attachment document resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Navigation": {
+      "id": "Navigation",
+      "description": "Navigation details for this response",
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "URL for first set of results"
+        },
+        "prev": {
+          "type": "string",
+          "description": "URL for previous set of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "URL for next set of results"
+        },
+        "last": {
+          "type": "string",
+          "description": "URL for last set of results"
+        }
+      }
+    },
+    "Pagination": {
+      "id": "Pagination",
+      "description": "Pagination details for this response",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return (default = 8, maximum = 50)",
+          "minimum": 1,
+          "maximum": 50,
+          "defaultValue": 8
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting index, 0-based (default = 0)",
+          "minimum": 0,
+          "defaultValue": 0
+        },
+        "sort": {
+          "$ref": "Sort",
+          "description": "Sort order, indexed by resource"
+        },
+        "navigation": {
+          "$ref": "Navigation",
+          "description": "Navigation details for this response"
+        }
+      }
+    },
+    "Message": {
+      "id": "Message",
+      "description": "A message generated by a request",
+      "required": [
+        "summary",
+        "message_code"
+      ],
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Target of this message (field, object, etc.)"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Message summary"
+        },
+        "message_code": {
+          "type": "string",
+          "description": "stori.es internal message code"
+        },
+        "detail_url": {
+          "type": "string",
+          "description": "URL for message details"
+        }
+      }
+    },
+    "Metadata": {
+      "id": "Metadata",
+      "description": "Metadata about this response",
+      "required": [
+        "self",
+        "http_code",
+        "status"
+      ],
+      "properties": {
+        "self": {
+          "type": "string",
+          "description": "Full request URL"
+        },
+        "status": {
+          "type": "string",
+          "description": "High-level status of response",
+          "enum": [
+            "success",
+            "fail",
+            "error"
+          ]
+        },
+        "http_code": {
+          "type": "string",
+          "description": "HTTP response status code"
+        },
+        "messages": {
+          "type": "array",
+          "description": "Array of messages generated by request",
+          "items": {
+            "$ref": "Message"
+          }
+        },
+        "pagination": {
+          "$ref": "Pagination",
+          "description": "Pagination details for this response"
+        }
+      }
+    },
+    "ResourceLink": {
+      "id": "ResourceLink",
+      "description": "Metadata describing a resource",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "The URL of the resource"
+        }
+      }
+    },
+    "ResourceLinks": {
+      "id": "ResourceLinks",
+      "description": "Metadata describing associated resources",
+      "required": [
+        "entity",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "entity": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the entity this document is associated with"
+        },
+        "creator": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "curators": {
+          "type": "array",
+          "description": "Metadata describing the curators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "readers": {
+          "type": "array",
+          "description": "Metadata describing the readers of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        }
+      }
+    },
+    "Attachment": {
+      "id": "Attachment",
+      "description": "The representation of an attachment document on the stori.es platform",
       "required": [
         "id",
-        "title",
+        "path_segment",
         "permalink",
-        "entity_id"
+        "links",
+        "created_on",
+        "updated_on"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity"
+          "description": "The unique ID for this entity; format: /attachments/[attachment path segment]"
+        },
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this entity; defaults to URL-encoded title; generated if undefined"
         },
         "title": {
           "type": "string",
-          "description": "The title of this document"
+          "description": "The title of this entity"
         },
         "permalink": {
           "type": "string",
-          "description": "The URL of this document"
+          "description": "The URL of this entity; its value"
+        },
+        "links": {
+          "$ref": "ResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
+        }
+      }
+    },
+    "ApiResponse": {
+      "id": "ApiResponse",
+      "description": "The standard API response format for the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API - A standard for building APIs in JSON\">JSON API</a> standard",
+      "required": [
+        "meta",
+        "attachments"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "Metadata",
+          "description": "Metadata describing this response"
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Array of requested attachment document resources",
+          "items": {
+            "$ref": "Attachment"
+          }
+        }
+      }
+    },
+    "AttachmentPost": {
+      "id": "AttachmentPost",
+      "description": "The representation of a new attachment document to be added to the stori.es platform",
+      "required": [
+        "entity_id",
+        "permalink"
+      ],
+      "properties": {
+        "path_segment": {
+          "type": "string",
+          "description": "The URL path segment uniquely identifying this document; defaults to URL-encoded title; generated if undefined"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
         },
         "entity_id": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The entity which this document is associated with",
-          "minimum": 1
+          "type": "string",
+          "description": "The ID of the entity this document is associated with"
+        },
+        "permalink": {
+          "type": "string",
+          "description": "The URL of this entity; its value"
+        },
+        "owner_id": {
+          "type": "string",
+          "description": "The ID of the owner of this entity"
+        }
+      }
+    },
+    "PatchOperation": {
+      "id": "PatchOperation",
+      "description": "A JSON Patch operation (see <a href=\"http://tools.ietf.org/html/rfc6902\" title=\"RFC6902 - JSON Patch\">RFC6902</a> and <a href=\"http://jsonapi.org/format/#updating-a-document\" title=\"JSON API - Updating a Document\">JSON API</a>)",
+      "required": [
+        "op",
+        "path"
+      ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "description": "The operation to perform",
+          "enum": [
+            "add",
+            "remove",
+            "replace",
+            "move",
+            "copy",
+            "test"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "A JSON Pointer value (see <a href=\"http://tools.ietf.org/html/rfc6901\" title=\"RFC6901 - JSON Pointer\">RFC6901</a>) referencing a location within the target document where the operation is to be performed"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to patch"
+        },
+        "from": {
+          "type": "string",
+          "description": "A JSON Pointer value (see <a href=\"http://tools.ietf.org/html/rfc6901\" title=\"RFC6901 - JSON Pointer\">RFC6901</a>) referencing a location within the target document to move or copy"
+        }
+      }
+    },
+    "PatchOperations": {
+      "id": "PatchOperations",
+      "description": "The representation of requested modifications to an entity on the stori.es platform",
+      "required": [
+        "operations"
+      ],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "The set of operations composing requested modifications to a target entity",
+          "items": {
+            "$ref": "PatchOperation"
+          }
         }
       }
     }

@@ -264,8 +264,13 @@ models:
     properties:
       entities:
         type: 'array'
-        description: 'Metadata describing entities this Block is associated with'
+        description: 'Metadata describing entities this block is associated with'
         items: 
+          $ref: 'ResourceLink'
+      responses:
+        type: 'array'
+        description: 'Metadata describing responses to this block'
+        items:
           $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
@@ -294,6 +299,8 @@ models:
     required:
       - 'id'
       - 'path_segment'
+      - 'is_question'
+      - 'block_type'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -308,6 +315,18 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
+      is_question:
+        type: 'boolean'
+        description: 'Boolean flag indicating this block solicits responses'
+      block_type:
+        type: 'string'
+        description: 'The type of block this entity represents'
+        enum:
+          - '/block_types/text_field'
+          - '/block_types/text_area'
+      value:
+        type: 'string'
+        description: 'The current value of this Block'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -347,6 +366,8 @@ models:
   BlockPost:
     id: 'BlockPost'
     description: 'The representation of a new block to be added to the stori.es platform'
+    required:
+      - 'entity_ids'
     properties:
       path_segment:
         type: 'string'
@@ -354,9 +375,18 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
+      block_type:
+        type: 'string'
+        description: 'The type of block this entity represents'
+        enum:
+          - '/block_types/text_field'
+          - '/block_types/text_area'
+      value:
+        type: 'string'
+        description: 'The current value of this block'
       entity_ids:
         type: 'array'
-        description: 'The IDs of entities this Block is associated with'
+        description: 'The IDs of entities this block is associated with'
         items: 
           type: 'string'
       owner_id:
