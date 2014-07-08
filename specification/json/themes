@@ -258,24 +258,50 @@
     "ResourceLinks": {
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
+      "required": [
+        "creator",
+        "owner"
+      ],
       "properties": {
         "organizations": {
           "type": "array",
-          "description": "Metadata describing organizations associated with this entity",
+          "description": "Metadata describing organizations with access to this theme",
           "items": {
             "$ref": "ResourceLink"
           }
         },
-        "questionnaires": {
+        "entities": {
           "type": "array",
-          "description": "Metadata describing questionnaires associated with this entity",
+          "description": "Metadata describing entities utilizing this theme",
           "items": {
             "$ref": "ResourceLink"
           }
         },
-        "collections": {
+        "creator": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
           "type": "array",
-          "description": "Metadata describing collections associated with this entity",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "curators": {
+          "type": "array",
+          "description": "Metadata describing the curators of this entity",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "readers": {
+          "type": "array",
+          "description": "Metadata describing the readers of this entity",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -289,7 +315,9 @@
         "id",
         "path_segment",
         "name",
-        "links"
+        "links",
+        "created_on",
+        "updated_on"
       ],
       "properties": {
         "id": {
@@ -298,7 +326,7 @@
         },
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name"
+          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined"
         },
         "name": {
           "type": "string",
@@ -308,6 +336,16 @@
         "links": {
           "$ref": "ResourceLinks",
           "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
         }
       }
     },
@@ -341,7 +379,7 @@
       "properties": {
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name"
+          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined"
         },
         "name": {
           "type": "string",
@@ -350,24 +388,21 @@
         },
         "organization_ids": {
           "type": "array",
-          "description": "The IDs of organizations associated with this entity",
+          "description": "The IDs of organizations with access to this theme",
           "items": {
             "type": "string"
           }
         },
-        "questionnaire_ids": {
+        "entity_ids": {
           "type": "array",
-          "description": "The IDs of questionnaires associated with this entity",
+          "description": "The IDs of entities utilizing this theme",
           "items": {
             "type": "string"
           }
         },
-        "collection_ids": {
-          "type": "array",
-          "description": "The IDs of collections associated with this entity",
-          "items": {
-            "type": "string"
-          }
+        "owner_id": {
+          "type": "string",
+          "description": "The ID of the owner of this entity"
         }
       }
     },

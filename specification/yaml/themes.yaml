@@ -195,21 +195,40 @@ models:
   ResourceLinks:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
+    required:
+      - 'creator'
+      - 'owner'
     properties:
       organizations:
         type: 'array'
-        description: 'Metadata describing organizations associated with this entity'
+        description: 'Metadata describing organizations with access to this theme'
         items:
           $ref: 'ResourceLink'
-      questionnaires:
+      entities:
         type: 'array'
-        description: 'Metadata describing questionnaires associated with this entity'
+        description: 'Metadata describing entities utilizing this theme'
         items: 
           $ref: 'ResourceLink'
-      collections:
+      creator:
+        $ref: 'ResourceLink'
+        description: 'Metadata describing the creator of this entity'
+      owner:
+        $ref: 'ResourceLink'
+        description: 'Metadata describing the owner of this entity'
+      administrators:
         type: 'array'
-        description: 'Metadata describing collections associated with this entity'
-        items: 
+        description: 'Metadata describing the administrators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      curators:
+        type: 'array'
+        description: 'Metadata describing the curators of this entity'
+        items:
+          $ref: 'ResourceLink'
+      readers:
+        type: 'array'
+        description: 'Metadata describing the readers of this entity'
+        items:
           $ref: 'ResourceLink'
   Theme:
     id: 'Theme'
@@ -219,13 +238,15 @@ models:
       - 'path_segment'
       - 'name'
       - 'links'
+      - 'created_on'
+      - 'updated_on'
     properties:
       id:
         type: 'string'
         description: 'The unique ID for this entity; format: /themes/[theme path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name'
+        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined'
       name:
         type: 'string'
         description: 'The name of this entity'
@@ -233,6 +254,14 @@ models:
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
+      created_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The creation date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
+      updated_on:
+        type: 'string'
+        format: 'date-time'
+        description: 'The most recent modification date and time for this entity, normalized to UTC (see <a href="http://tools.ietf.org/html/rfc3339" title="RFC3339 - Date and Time on the Internet">RFC3339</a>)'
   ApiResponse:
     id: 'ApiResponse'
     description: 'The standard API response format for the stori.es platform; follows the <a href="http://jsonapi.org/" title="JSON API - A standard for building APIs in JSON">JSON API</a> standard'
@@ -256,26 +285,24 @@ models:
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name'
+        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined'
       name:
         type: 'string'
         description: 'The name of this entity'
         maximum: 256
       organization_ids:
         type: 'array'
-        description: 'The IDs of organizations associated with this entity'
+        description: 'The IDs of organizations with access to this theme'
         items: 
           type: 'string'
-      questionnaire_ids:
+      entity_ids:
         type: 'array'
-        description: 'The IDs of questionnaires associated with this entity'
+        description: 'The IDs of entities utilizing this theme'
         items: 
           type: 'string'
-      collection_ids:
-        type: 'array'
-        description: 'The IDs of collections associated with this entity'
-        items: 
-          type: 'string'
+      owner_id:
+        type: 'string'
+        description: 'The ID of the owner of this entity'        
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'

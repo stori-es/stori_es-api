@@ -354,13 +354,6 @@
           "$ref": "ResourceLink",
           "description": "The default profile associated with this user"
         },
-        "stories": {
-          "type": "array",
-          "description": "Metadata describing stories associated with this entity",
-          "items": {
-            "$ref": "ResourceLink"
-          }
-        },
         "notes": {
           "type": "array",
           "description": "Metadata describing note documents associated with this entity",
@@ -483,13 +476,6 @@
         "default_profile_id": {
           "type": "string",
           "description": "The ID of the default profile associated with this user"
-        },
-        "story_ids": {
-          "type": "array",
-          "description": "The IDs of stories associated with this entity",
-          "items": {
-            "type": "string"
-          }
         },
         "note_ids": {
           "type": "array",
