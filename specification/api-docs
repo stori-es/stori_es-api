@@ -19,10 +19,6 @@
       "description": "sets of stories"
     },
     {
-      "path": "http://www.stori.es/api/website/listings/contacts",
-      "description": "email, phone, geolocation, social media, etc."
-    },
-    {
       "path": "http://www.stori.es/api/website/listings/contents",
       "description": "general-purpose documents composed of blocks"
     },

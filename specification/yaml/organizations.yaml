@@ -245,6 +245,58 @@ models:
       pagination:
         $ref: 'Pagination'
         description: 'Pagination details for this response'
+  Geolocation:
+    id: 'Geolocation'
+    description: 'Properties for geolocation contacts'
+    properties:
+      street_address_1:
+        type: 'string'
+        description: 'Street address (first line)'
+      street_address_2:
+        type: 'string'
+        description: 'Street address (second line)'
+      city:
+        type: 'string'
+        description: 'City'
+      state:
+        type: 'string'
+        description: 'State'
+      country:
+        type: 'string'
+        description: 'Country'
+      postal_code:
+        type: 'string'
+        description: 'Postal Code'
+      latitude:
+        type: 'string'
+        description: 'Latitude'
+      longitude:
+        type: 'string'
+        description: 'Longitude'
+  Contact:
+    id: 'Contact'
+    description: 'The representation of a contact associated with this entity'
+    required:
+      - 'contact_type'
+      - 'title'
+    properties:
+      contact_type:
+        type: 'string'
+        description: 'The type of contact'
+        enum:
+          - '/contact_types/email'
+          - '/contact_types/phone'
+          - '/contact_types/geolocation'
+          - '/contact_types/social'
+      title:
+        type: 'string'
+        description: 'The title of this contact'
+      value:
+        type: 'string'
+        description: 'The value of this contact'
+      geolocation:
+        $ref: 'Geolocation'
+        description: 'Properties for geolocation contacts'
   ResourceLink:
     id: 'ResourceLink'
     description: 'Metadata describing a resource'
@@ -263,11 +315,6 @@ models:
       - 'creator'
       - 'owner'
     properties:
-      contacts:
-        type: 'array'
-        description: 'Metatdata describing contacts associated with this entity'
-        items:
-          $ref: 'ResourceLink'
       profiles:
         type: 'array'
         description: 'Metadata describing user profiles associated with this entity'
@@ -355,6 +402,11 @@ models:
         type: 'string'
         description: 'The short form of the organization name (maximum 15 characters)'
         maximum: 15
+      contacts:
+        type: 'array'
+        description: 'Contacts associated with this entity'
+        items:
+          $ref: 'Contact'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -398,11 +450,11 @@ models:
         type: 'string'
         description: 'The short form of the organization name (maximum 15 characters)'
         maximum: 15
-      contact_ids:
+      contacts:
         type: 'array'
-        description: 'The IDs of contacts associated with this entity'
-        items: 
-          type: 'string'
+        description: 'Contacts associated with this entity'
+        items:
+          $ref: 'Contact'
       profile_ids:
         type: 'array'
         description: 'The IDs of user profiles associated with this entity'
