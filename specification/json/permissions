@@ -339,26 +339,26 @@
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
       "required": [
-        "content",
-        "organizations",
+        "organization",
+        "blocks",
         "creator",
         "owner"
       ],
       "properties": {
-        "content": {
+        "organization": {
           "$ref": "ResourceLink",
-          "description": "Metadata describing the content document associated with this entity"
-        },
-        "organizations": {
-          "type": "array",
-          "description": "Metadata describing organizations utilizing this permission document",
-          "items": {
-            "$ref": "ResourceLink"
-          }
+          "description": "Metadata describing the organization using this permission document"
         },
         "entities": {
           "type": "array",
           "description": "Metadata describing entities associated with this permission document",
+          "items": {
+            "$ref": "ResourceLink"
+          }
+        },
+        "blocks": {
+          "type": "array",
+          "description": "Metadata describing blocks that compose this document",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -402,16 +402,17 @@
         "path_segment",
         "links",
         "created_on",
-        "updated_on"
+        "updated_on",
+        "publication_status"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique ID for this entity; format: /permissions/[permission path segment]"
+          "description": "The unique ID for this entity; format: /permissions/[organization path segment]/[permission path segment]"
         },
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this permission document; defaults to URL-encoded permission title; generated if undefined"
+          "description": "The URL path segment uniquely identifying this document; defaults to URL-encoded title; generated if undefined"
         },
         "title": {
           "type": "string",
@@ -430,6 +431,19 @@
           "type": "string",
           "format": "date-time",
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
+        },
+        "publication_status": {
+          "type": "string",
+          "description": "The current publication status of this entity",
+          "enum": [
+            "draft",
+            "published"
+          ]
+        },
+        "published_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339\" title=\"RFC3339 - Date and Time on the Internet\">RFC3339</a>)"
         }
       }
     },
@@ -458,7 +472,7 @@
       "id": "PermissionPost",
       "description": "The representation of a new permission document to be added to the stori.es platform",
       "required": [
-        "organization_ids"
+        "organization_id"
       ],
       "properties": {
         "path_segment": {
@@ -469,20 +483,20 @@
           "type": "string",
           "description": "The title of this entity"
         },
-        "content_id": {
+        "organization_id": {
           "type": "string",
-          "description": "The ID of the content document associated with this entity"
-        },
-        "organization_ids": {
-          "type": "array",
-          "description": "The IDs of organizations utilizing this permission document",
-          "items": {
-            "type": "string"
-          }
+          "description": "The ID of the organization using this permission document"
         },
         "entity_ids": {
           "type": "array",
           "description": "The IDs of entities associated with this permission document",
+          "items": {
+            "type": "string"
+          }
+        },
+        "block_ids": {
+          "type": "array",
+          "description": "The IDs of the blocks that compose this document",
           "items": {
             "type": "string"
           }
