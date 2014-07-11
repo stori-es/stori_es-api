@@ -2,7 +2,7 @@
   "apiVersion": 1,
   "swaggerVersion": 1.2,
   "basePath": "http://www.stori.es/api/website/listings",
-  "description": "sets of answers to questionnaires",
+  "description": "to questionnaires",
   "resourcePath": "/responses",
   "produces": [
     "application/vnd.api+json"
@@ -339,27 +339,37 @@
       "id": "ResourceLinks",
       "description": "Metadata describing associated resources",
       "required": [
+        "story",
         "questionnaire",
-        "answers",
+        "theme",
+        "blocks",
         "permission",
         "creator",
         "owner"
       ],
       "properties": {
+        "story": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the story containing this response document"
+        },
         "questionnaire": {
           "$ref": "ResourceLink",
-          "description": "Metadata describing the questionnaire this entity is a response to"
+          "description": "Metadata describing the questionnaire this document is a response to"
         },
-        "answers": {
+        "theme": {
+          "$ref": "ResourceLink",
+          "description": "Metadata describing the theme associated with this entity"
+        },
+        "blocks": {
           "type": "array",
-          "description": "Metadata describing the answers which compose this response",
+          "description": "Metadata describing blocks that compose this document",
           "items": {
             "$ref": "ResourceLink"
           }
         },
         "permission": {
           "$ref": "ResourceLink",
-          "description": "Metadata describing the permission associated with this entity"
+          "description": "Metadata describing the permission document associated with this entity"
         },
         "creator": {
           "$ref": "ResourceLink",
@@ -456,6 +466,7 @@
       "id": "ResponsePost",
       "description": "The representation of a new response document to be added to the stori.es platform",
       "required": [
+        "story_id",
         "questionnaire_id"
       ],
       "properties": {
@@ -467,16 +478,13 @@
           "type": "string",
           "description": "The title of this entity"
         },
+        "story_id": {
+          "type": "string",
+          "description": "The ID of the story containing this response document"
+        },
         "questionnaire_id": {
           "type": "string",
-          "description": "The ID of the questionnaire associated with this entity"
-        },
-        "answer_ids": {
-          "type": "array",
-          "description": "The IDs of the answers which compose this response",
-          "items": {
-            "type": "string"
-          }
+          "description": "The ID of the questionnaire this document is a response to"
         },
         "owner_id": {
           "type": "string",

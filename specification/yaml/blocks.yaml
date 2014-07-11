@@ -264,13 +264,8 @@ models:
     properties:
       entities:
         type: 'array'
-        description: 'Metadata describing entities this block is associated with'
+        description: 'Metadata describing entities this block is associated with description: (e.g., content documents)'
         items: 
-          $ref: 'ResourceLink'
-      answers:
-        type: 'array'
-        description: 'Metadata describing answers to this block'
-        items:
           $ref: 'ResourceLink'
       creator:
         $ref: 'ResourceLink'
@@ -345,7 +340,7 @@ models:
           - '/block_types/attachments'
       value:
         type: 'string'
-        description: 'The current value of this block'
+        description: 'The current value of this block, a JSON data structure unique to each block type (TBD)'
       is_question:
         type: 'boolean'
         description: 'Boolean flag indicating this block solicits responses'
@@ -419,10 +414,10 @@ models:
           - '/block_types/attachments'
       value:
         type: 'string'
-        description: 'The current value of this block'
+        description: 'The current value of this block, a JSON data structure unique to each block type (TBD)'
       entity_ids:
         type: 'array'
-        description: 'The IDs of entities this block is associated with'
+        description: 'The IDs of entities this block is associated with, (e.g., content documents)'
         items: 
           type: 'string'
       owner_id:

@@ -260,7 +260,6 @@ models:
     required:
       - 'content'
       - 'next'
-      - 'responses'
       - 'creator'
       - 'owner'
     properties:
@@ -273,6 +272,11 @@ models:
       responses:
         type: 'array'
         description: 'Metadata describing responses associated with this entity'
+        items:
+          $ref: 'ResourceLink'
+      stories:
+        type: 'array'
+        description: 'Metadata describing stories associated with this entity'
         items:
           $ref: 'ResourceLink'
       collections:
@@ -392,6 +396,11 @@ models:
       response_ids:
         type: 'array'
         description: 'The IDs of responses associated with this entity'
+        items:
+          type: 'string'
+      story_ids:
+        type: 'array'
+        description: 'The IDs of stories associated with this entity'
         items:
           type: 'string'
       collection_ids:
