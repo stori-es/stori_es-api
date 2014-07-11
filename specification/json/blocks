@@ -346,7 +346,7 @@
       "properties": {
         "entities": {
           "type": "array",
-          "description": "Metadata describing entities this block is associated with description: (e.g., content documents)",
+          "description": "Metadata describing entities this block is associated with description: (e.g., content documents, response documents)",
           "items": {
             "$ref": "ResourceLink"
           }
@@ -536,7 +536,7 @@
         },
         "entity_ids": {
           "type": "array",
-          "description": "The IDs of entities this block is associated with, (e.g., content documents)",
+          "description": "The IDs of entities this block is associated with, (e.g., content documents, response documents)",
           "items": {
             "type": "string"
           }

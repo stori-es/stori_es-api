@@ -264,7 +264,7 @@ models:
     properties:
       entities:
         type: 'array'
-        description: 'Metadata describing entities this block is associated with description: (e.g., content documents)'
+        description: 'Metadata describing entities this block is associated with description: (e.g., content documents, response documents)'
         items: 
           $ref: 'ResourceLink'
       creator:
@@ -417,7 +417,7 @@ models:
         description: 'The current value of this block, a JSON data structure unique to each block type (TBD)'
       entity_ids:
         type: 'array'
-        description: 'The IDs of entities this block is associated with, (e.g., content documents)'
+        description: 'The IDs of entities this block is associated with, (e.g., content documents, response documents)'
         items: 
           type: 'string'
       owner_id:

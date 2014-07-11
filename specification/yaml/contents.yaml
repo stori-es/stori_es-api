@@ -258,11 +258,15 @@ models:
     id: 'ResourceLinks'
     description: 'Metadata describing associated resources'
     required:
+      - 'entity'
       - 'theme'
       - 'blocks'
       - 'creator'
       - 'owner'
     properties:
+      entity:
+        $ref: 'ResourceLink'
+        description: 'Metadata describing the entity this document is associated with'
       theme:
         $ref: 'ResourceLink'
         description: 'Metadata describing the theme associated with this entity'
@@ -365,6 +369,9 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
+      entity_id:
+        type: 'string'
+        description: 'The ID of the entity this document is associated with'
       theme_id:
         type: 'string'
         description: 'The ID of the theme associated with this entity'
