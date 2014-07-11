@@ -292,6 +292,7 @@ models:
     required:
       - 'id'
       - 'path_segment'
+      - 'format'
       - 'summary'
       - 'links'
       - 'created_on'
@@ -306,6 +307,12 @@ models:
       title:
         type: 'string'
         description: 'The title of this entity'
+      format:
+        type: 'string'
+        description: 'The format of this document'
+        enum:
+          - 'plaintext'
+          - 'html'
       summary:
         type: 'string'
         description: 'The plaintext summary of this note; its value'
@@ -340,6 +347,7 @@ models:
     description: 'The representation of a new note document to be added to the stori.es platform'
     required:
       - 'entity_id'
+      - 'format'
       - 'summary'
     properties:
       path_segment:
@@ -351,6 +359,12 @@ models:
       entity_id:
         type: 'string'
         description: 'The ID of the entity this document is associated with'
+      format:
+        type: 'string'
+        description: 'The format of this document'
+        enum:
+          - 'plaintext'
+          - 'html'
       summary:
         type: 'string'
         description: 'The plaintext summary of this document; its value'
