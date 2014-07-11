@@ -315,7 +315,7 @@ models:
           - 'html'
       summary:
         type: 'string'
-        description: 'The plaintext summary of this note; its value'
+        description: 'The summary of this note; its value'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -367,7 +367,7 @@ models:
           - 'html'
       summary:
         type: 'string'
-        description: 'The plaintext summary of this document; its value'
+        description: 'The summary of this document; its value'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

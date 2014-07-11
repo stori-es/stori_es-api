@@ -414,7 +414,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "The plaintext summary of this note; its value"
+          "description": "The summary of this note; its value"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -484,7 +484,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "The plaintext summary of this document; its value"
+          "description": "The summary of this document; its value"
         },
         "owner_id": {
           "type": "string",

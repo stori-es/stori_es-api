@@ -236,7 +236,7 @@ models:
     required:
       - 'id'
       - 'path_segment'
-      - 'name'
+      - 'title'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -246,10 +246,10 @@ models:
         description: 'The unique ID for this entity; format: /themes/[theme path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined'
-      name:
+        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded title; generated if undefined'
+      title:
         type: 'string'
-        description: 'The name of this entity'
+        description: 'The title of this entity'
         maximum: 256
       links:
         $ref: 'ResourceLinks'
@@ -281,14 +281,14 @@ models:
     id: 'ThemePost'
     description: 'The representation of a new theme to be added to the stori.es platform'
     required:
-      - 'name'
+      - 'title'
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined'
-      name:
+        description: 'The URL path segment uniquely identifying this theme; defaults to URL-encoded title; generated if undefined'
+      title:
         type: 'string'
-        description: 'The name of this entity'
+        description: 'The title of this entity'
         maximum: 256
       organization_ids:
         type: 'array'

@@ -314,7 +314,7 @@
       "required": [
         "id",
         "path_segment",
-        "name",
+        "title",
         "links",
         "created_on",
         "updated_on"
@@ -326,11 +326,11 @@
         },
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined"
+          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded title; generated if undefined"
         },
-        "name": {
+        "title": {
           "type": "string",
-          "description": "The name of this entity",
+          "description": "The title of this entity",
           "maximum": 256
         },
         "links": {
@@ -374,16 +374,16 @@
       "id": "ThemePost",
       "description": "The representation of a new theme to be added to the stori.es platform",
       "required": [
-        "name"
+        "title"
       ],
       "properties": {
         "path_segment": {
           "type": "string",
-          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded name; generated if undefined"
+          "description": "The URL path segment uniquely identifying this theme; defaults to URL-encoded title; generated if undefined"
         },
-        "name": {
+        "title": {
           "type": "string",
-          "description": "The name of this entity",
+          "description": "The title of this entity",
           "maximum": 256
         },
         "organization_ids": {
