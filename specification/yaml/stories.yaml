@@ -321,8 +321,6 @@ models:
     required:
       - 'id'
       - 'path_segment'
-      - 'title'
-      - 'byline'
       - 'links'
       - 'created_on'
       - 'updated_on'
@@ -332,13 +330,7 @@ models:
         description: 'The unique ID for this entity; format: /stories/[story path segment]'
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title'
-      title:
-        type: 'string'
-        description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded default content title; generated if undefined'
       links:
         $ref: 'ResourceLinks'
         description: 'Metadata describing resources associated with this entity'
@@ -368,18 +360,10 @@ models:
   StoryPost:
     id: 'StoryPost'
     description: 'The representation of a new story to be added to the stori.es platform'
-    required:
-      - 'title'
     properties:
       path_segment:
         type: 'string'
-        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded story title'
-      title:
-        type: 'string'
-        description: 'The title of this entity'
-      byline:
-        type: 'string'
-        description: 'The byline of this story; defaults to [Profile Given Name] of [Profile City], [Profile State]'
+        description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded default content title; generated if undefined'
       content_ids:
         type: 'array'
         description: 'The IDs of content documents associated with this entity'

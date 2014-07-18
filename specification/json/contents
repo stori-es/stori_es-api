@@ -403,6 +403,7 @@
         "id",
         "path_segment",
         "permalink",
+        "byline",
         "links",
         "created_on",
         "updated_on",
@@ -424,6 +425,10 @@
         "title": {
           "type": "string",
           "description": "The title of this entity"
+        },
+        "byline": {
+          "type": "string",
+          "description": "The byline of this entity; defaults to [Profile Given Name] of [Profile City], [Profile State]"
         },
         "links": {
           "$ref": "ResourceLinks",
@@ -486,6 +491,10 @@
         "title": {
           "type": "string",
           "description": "The title of this entity"
+        },
+        "byline": {
+          "type": "string",
+          "description": "The byline of this entity; defaults to [Profile Given Name] of [Profile City], [Profile State]"
         },
         "entity_id": {
           "type": "string",
