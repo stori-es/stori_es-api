@@ -30,7 +30,7 @@ apis:
             message: 'Resource successfully retrieved'
             responseModel: 'ApiResponse'
           -
-            code: 403
+            code: 401
             message: 'Not authorized to access the requested resource'
             responseModel: 'ApiResponse'
           -
@@ -72,7 +72,7 @@ apis:
             message: 'Invalid input'
             responseModel: 'ApiResponse'
           -
-            code: 403
+            code: 401
             message: 'Not authorized to update the requested resource'
             responseModel: 'ApiResponse'
           -
@@ -173,7 +173,7 @@ models:
           - 'fail'
           - 'error'
       http_code:
-        type: 'string'
+        type: 'integer'
         description: 'HTTP response status code'
       messages:
         type: 'array'

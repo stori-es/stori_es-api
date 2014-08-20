@@ -36,7 +36,7 @@
               "responseModel": "ApiResponse"
             },
             {
-              "code": 403,
+              "code": 401,
               "message": "Not authorized to access the requested resource",
               "responseModel": "ApiResponse"
             },
@@ -89,7 +89,7 @@
               "responseModel": "ApiResponse"
             },
             {
-              "code": 403,
+              "code": 401,
               "message": "Not authorized to update the requested resource",
               "responseModel": "ApiResponse"
             },
@@ -226,7 +226,7 @@
           ]
         },
         "http_code": {
-          "type": "string",
+          "type": "integer",
           "description": "HTTP response status code"
         },
         "messages": {
