@@ -295,11 +295,6 @@ models:
         description: 'The IDs of organizations with access to this theme'
         items: 
           type: 'string'
-      entity_ids:
-        type: 'array'
-        description: 'The IDs of entities utilizing this theme'
-        items: 
-          type: 'string'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

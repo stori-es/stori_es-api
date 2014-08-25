@@ -439,11 +439,6 @@ models:
         description: 'The IDs of stories associated with this entity'
         items: 
           type: 'string'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

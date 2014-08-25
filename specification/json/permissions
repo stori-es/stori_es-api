@@ -494,13 +494,6 @@
             "type": "string"
           }
         },
-        "block_ids": {
-          "type": "array",
-          "description": "The IDs of the blocks that compose this document",
-          "items": {
-            "type": "string"
-          }
-        },
         "owner_id": {
           "type": "string",
           "description": "The ID of the owner of this entity"

@@ -496,10 +496,6 @@
           "type": "string",
           "description": "The title of this entity"
         },
-        "content_id": {
-          "type": "string",
-          "description": "The ID of the content document associated with this entity"
-        },
         "story_ids": {
           "type": "array",
           "description": "The IDs of stories associated with this entity",
@@ -510,27 +506,6 @@
         "questionnaire_ids": {
           "type": "array",
           "description": "The IDs of source questionnaires associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tag_ids": {
-          "type": "array",
-          "description": "The IDs of tags associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "note_ids": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachment_ids": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
           "items": {
             "type": "string"
           }

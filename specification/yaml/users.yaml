@@ -360,11 +360,6 @@ models:
       default_profile_id:
         type: 'string'
         description: 'The ID of the default profile associated with this user'
-      note_ids:
-        type: 'array'
-        description: 'The IDs of note documents associated with this entity'
-        items: 
-          type: 'string'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        

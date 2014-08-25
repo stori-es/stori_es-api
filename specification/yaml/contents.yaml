@@ -382,11 +382,6 @@ models:
       theme_id:
         type: 'string'
         description: 'The ID of the theme associated with this entity'
-      block_ids:
-        type: 'array'
-        description: 'The IDs of the blocks that compose this document'
-        items:
-          type: 'string'
       permission_id:
         type: 'string'
         description: 'The ID of the permission document associated with this entity'

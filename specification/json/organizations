@@ -648,20 +648,6 @@
           "type": "string",
           "description": "The ID of the default theme associated with this entity"
         },
-        "note_ids": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachment_ids": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
         "owner_id": {
           "type": "string",
           "description": "The ID of the owner of this entity"

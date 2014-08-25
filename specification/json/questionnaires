@@ -514,59 +514,9 @@
           "type": "string",
           "description": "The title of this entity"
         },
-        "content_id": {
-          "type": "string",
-          "description": "The ID of the content document associated with this entity"
-        },
-        "next_id": {
-          "type": "string",
-          "description": "The ID of the next object in the clickstream; e.g. a confirmation content document"
-        },
-        "response_ids": {
-          "type": "array",
-          "description": "The IDs of responses associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "story_ids": {
-          "type": "array",
-          "description": "The IDs of stories associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
         "collection_ids": {
           "type": "array",
           "description": "The IDs of target collections associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "autotag_ids": {
-          "type": "array",
-          "description": "The IDs of autotags associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tag_ids": {
-          "type": "array",
-          "description": "The IDs of tags associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "note_ids": {
-          "type": "array",
-          "description": "The IDs of note documents associated with this entity",
-          "items": {
-            "type": "string"
-          }
-        },
-        "attachment_ids": {
-          "type": "array",
-          "description": "The IDs of attachment documents associated with this entity",
           "items": {
             "type": "string"
           }

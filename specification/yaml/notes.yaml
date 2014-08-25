@@ -350,9 +350,6 @@ models:
       entity_id:
         type: 'string'
         description: 'The ID of the entity this document is associated with'
-      block_id:
-        type: 'string'
-        description: 'The ID of the text block that composes this document'
       owner_id:
         type: 'string'
         description: 'The ID of the owner of this entity'        
