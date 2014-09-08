@@ -485,10 +485,6 @@
         "questionnaire_id": {
           "type": "string",
           "description": "The ID of the questionnaire this document is a response to"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

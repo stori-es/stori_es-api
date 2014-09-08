@@ -647,10 +647,6 @@
         "default_theme_id": {
           "type": "string",
           "description": "The ID of the default theme associated with this entity"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

@@ -476,10 +476,6 @@
         "default_profile_id": {
           "type": "string",
           "description": "The ID of the default profile associated with this user"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

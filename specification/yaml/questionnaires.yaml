@@ -392,9 +392,6 @@ models:
         description: 'The IDs of target collections associated with this entity'
         items: 
           type: 'string'
-      owner_id:
-        type: 'string'
-        description: 'The ID of the owner of this entity'        
   PatchOperation:
     id: 'PatchOperation'
     description: 'A JSON Patch operation (see <a href="http://tools.ietf.org/html/rfc6902" title="RFC6902 - JSON Patch">RFC6902</a> and <a href="http://jsonapi.org/format/#updating-a-document" title="JSON API - Updating a Document">JSON API</a>)'

@@ -507,10 +507,6 @@
         "permission_id": {
           "type": "string",
           "description": "The ID of the permission document associated with this entity"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

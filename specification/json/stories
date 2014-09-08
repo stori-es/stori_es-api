@@ -490,10 +490,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

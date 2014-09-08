@@ -467,10 +467,6 @@
         "permalink": {
           "type": "string",
           "description": "The URL of this entity; its value"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },

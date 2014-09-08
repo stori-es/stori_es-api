@@ -462,10 +462,6 @@
         "entity_id": {
           "type": "string",
           "description": "The ID of the entity this document is associated with"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The ID of the owner of this entity"
         }
       }
     },
