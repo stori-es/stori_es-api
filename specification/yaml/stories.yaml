@@ -364,6 +364,14 @@ models:
       path_segment:
         type: 'string'
         description: 'The URL path segment uniquely identifying this story; defaults to URL-encoded default content title; generated if undefined'
+      content_ids:
+        type: 'array'
+        description: 'The IDs of content documents associated with this entity'
+        items: 
+          type: 'string'
+      default_content_id:
+        type: 'string'
+        description: 'The ID of the default content document associated with this entity'
       permission_ids:
         type: 'array'
         description: 'The IDs of permission documents associated with this entity'
