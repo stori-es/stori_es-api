@@ -1844,19 +1844,6 @@
     }
   },
   "definitions": {
-    "ApiResponse": {
-      "id": "ApiResponse",
-      "description": "The baseline API response format for the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "required": [
-        "meta"
-      ],
-      "properties": {
-        "meta": {
-          "$ref": "#/definitions/Metadata",
-          "description": "Metadata describing this response"
-        }
-      }
-    },
     "Block": {
       "id": "Block",
       "description": "The representation of a block on the stori.es platform",
@@ -1864,7 +1851,6 @@
         "id",
         "block_type",
         "is_question",
-        "links",
         "created_on",
         "updated_on"
       ],
@@ -1916,10 +1902,6 @@
           "type": "boolean",
           "description": "Boolean flag indicating this block solicits responses"
         },
-        "links": {
-          "$ref": "#/definitions/ResourceLinks",
-          "description": "Metadata describing resources associated with this entity"
-        },
         "created_on": {
           "type": "string",
           "format": "date-time",
@@ -1935,33 +1917,50 @@
     "Collection": {
       "id": "Collection",
       "description": "The representation of a collection on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {          
-          "required": [
-            "title",
-            "links"
-          ],
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "The title of this entity"
-            },
-            "links": {
-              "$ref": "#/definitions/CollectionResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            },
-            "tags": {
-              "type": "array",
-              "description": "Tags associated with this entity",
-              "items": {
-                "type": "string",
-                "maximum": 45
-              }
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "title",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "links": {
+          "$ref": "#/definitions/CollectionResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
           }
         }
-      ]
+      }
     },
     "CollectionPost": {
       "id": "CollectionPost",
@@ -2001,70 +2000,82 @@
     "CollectionResourceLinks": {
       "id": "CollectionResourceLinks",
       "description": "Metadata describing associated resources for collections",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {          
-          "required": [
-            "content",
-            "stories"
-          ],
-          "properties": {
-            "content": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the content document associated with this entity"
-            },
-            "stories": {
-              "type": "array",
-              "description": "Metadata describing stories associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "questionnaires": {
-              "type": "array",
-              "description": "Metadata describing source questionnaires associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "attachments": {
-              "type": "array",
-              "description": "Metadata describing attachment documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+      "required": [
+        "content",
+        "stories",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the content document associated with this entity"
+        },
+        "stories": {
+          "type": "array",
+          "description": "Metadata describing stories associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "questionnaires": {
+          "type": "array",
+          "description": "Metadata describing source questionnaires associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Metadata describing attachment documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
         }
-      ]
+      }
     },
     "CollectionResponse": {
       "id": "CollectionResponse",
       "description": "The API response format for collection resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {          
-          "required": [
-            "collections"
-          ],
-          "properties": {
-            "collections": {
-              "type": "array",
-              "description": "Array of requested collection resources",
-              "items": {
-                "$ref": "#/definitions/Collection"
-              }
-            }
+      "required": [
+        "meta",
+        "collections"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "collections": {
+          "type": "array",
+          "description": "Array of requested collection resources",
+          "items": {
+            "$ref": "#/definitions/Collection"
           }
         }
-      ]
+      }
     },
     "Contact": {
       "id": "Contact",
@@ -2094,62 +2105,79 @@
     "Document": {
       "id": "Document",
       "description": "The representation of a document on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {
-          "required": [
-            "document_type",
-            "byline",
-            "links",
-            "publication_status"
-          ],
-          "properties": {
-            "document_type": {
-              "type": "string",
-              "description": "The type of document",
-              "enum": [
-                "AttachmentDocument",
-                "ContentDocument",
-                "FormDocument",
-                "NoteDocument",
-                "ResponseDocument"
-              ]
-            },
-            "title": {
-              "type": "string",
-              "description": "The title of this entity"
-            },
-            "byline": {
-              "type": "string",
-              "description": "The byline of this entity; defaults to [Owner Given Name] of [Owner City], [Owner State]"
-            },
-            "blocks": {
-              "type": "array",
-              "description": "The set of blocks that compose this document",
-              "items": {
-                "$ref": "#/definitions/Block"
-              }
-            },
-            "links": {
-              "$ref": "#/definitions/DocumentResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            },
-            "publication_status": {
-              "type": "string",
-              "description": "The current publication status of this entity",
-              "enum": [
-                "draft",
-                "published"
-              ]
-            },
-            "published_on": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The initial publication date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "document_type",
+        "byline",
+        "links",
+        "publication_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "document_type": {
+          "type": "string",
+          "description": "The type of document",
+          "enum": [
+            "AttachmentDocument",
+            "ContentDocument",
+            "FormDocument",
+            "NoteDocument",
+            "ResponseDocument"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "byline": {
+          "type": "string",
+          "description": "The byline of this entity; defaults to [Owner Given Name] of [Owner City], [Owner State]"
+        },
+        "blocks": {
+          "type": "array",
+          "description": "The set of blocks that compose this document",
+          "items": {
+            "$ref": "#/definitions/Block"
           }
+        },
+        "links": {
+          "$ref": "#/definitions/DocumentResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "publication_status": {
+          "type": "string",
+          "description": "The current publication status of this entity",
+          "enum": [
+            "draft",
+            "published"
+          ]
+        },
+        "published_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The initial publication date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
         }
-      ]
+      }
     },
     "DocumentPost": {
       "id": "DocumentPost",
@@ -2205,54 +2233,66 @@
     "DocumentResourceLinks": {
       "id": "DocumentResourceLinks",
       "description": "Metadata describing associated resources for documents",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {
-          "required": [
-            "entity",
-            "theme"
-          ],
-          "properties": {
-            "entity": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the entity this document is associated with"
-            },
-            "source": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
-            },
-            "theme": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the theme associated with this entity"
-            },
-            "permission": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the permission associated with this entity"
-            }
+      "required": [
+        "entity",
+        "theme",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the entity this document is associated with"
+        },
+        "source": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
+        },
+        "theme": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the theme associated with this entity"
+        },
+        "permission": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the permission associated with this entity"
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
         }
-      ]
+      }
     },
     "DocumentResponse": {
       "id": "DocumentResponse",
       "description": "The API response format for document resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {          
-          "required": [
-            "documents"
-          ],
-          "properties": {
-            "documents": {
-              "type": "array",
-              "description": "Array of requested document resources",
-              "items": {
-                "$ref": "#/definitions/Document"
-              }
-            }
+      "required": [
+        "meta",
+        "documents"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "documents": {
+          "type": "array",
+          "description": "Array of requested document resources",
+          "items": {
+            "$ref": "#/definitions/Document"
           }
         }
-      ]
+      }
     },
     "EmailContact": {
       "id": "EmailContact",
@@ -2405,38 +2445,55 @@
     "Organization": {
       "id": "Organization",
       "description": "The representation of an organization on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {          
-          "required": [
-            "name",
-            "links"
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The organization name (maximum 128 characters)",
-              "maximum": 128
-            },
-            "short_name": {
-              "type": "string",
-              "description": "The short form of the organization name (maximum 15 characters)",
-              "maximum": 15
-            },
-            "contacts": {
-              "type": "array",
-              "description": "Contacts associated with this entity",
-              "items": {
-                "$ref": "#/definitions/Contact"
-              }
-            },
-            "links": {
-              "$ref": "#/definitions/OrganizationResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "name",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The organization name (maximum 128 characters)",
+          "maximum": 128
+        },
+        "short_name": {
+          "type": "string",
+          "description": "The short form of the organization name (maximum 15 characters)",
+          "maximum": 15
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
           }
+        },
+        "links": {
+          "$ref": "#/definitions/OrganizationResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
         }
-      ]
+      }
     },
     "OrganizationPost": {
       "id": "OrganizationPost",
@@ -2510,82 +2567,99 @@
     "OrganizationResourceLinks": {
       "id": "OrganizationResourceLinks",
       "description": "Metadata describing associated resources for organizations",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {          
-          "required": [
-            "themes",
-            "default_theme"
-          ],
-          "properties": {
-            "profiles": {
-              "type": "array",
-              "description": "Metadata describing user profiles associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "questionnaires": {
-              "type": "array",
-              "description": "Metadata describing questionnaires associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "collections": {
-              "type": "array",
-              "description": "Metadata describing collections associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "permissions": {
-              "type": "array",
-              "description": "Metadata describing permissions associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "default_permission": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the default permission associated with this entity"
-            },
-            "themes": {
-              "type": "array",
-              "description": "Metadata describing themes associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "default_theme": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the default theme associated with this entity"
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "attachments": {
-              "type": "array",
-              "description": "Metadata describing attachment documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+      "required": [
+        "themes",
+        "default_theme",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "description": "Metadata describing user profiles associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "questionnaires": {
+          "type": "array",
+          "description": "Metadata describing questionnaires associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "collections": {
+          "type": "array",
+          "description": "Metadata describing collections associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Metadata describing permissions associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "default_permission": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the default permission associated with this entity"
+        },
+        "themes": {
+          "type": "array",
+          "description": "Metadata describing themes associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "default_theme": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the default theme associated with this entity"
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Metadata describing attachment documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
         }
-      ]
+      }
     },
     "OrganizationResponse": {
       "id": "OrganizationResponse",
       "description": "The API response format for organization resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
       "required": [
+        "meta",
         "organizations"
       ],
       "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
         "organizations": {
           "type": "array",
           "description": "Array of requested organization resources",
@@ -2627,24 +2701,41 @@
     "Permission": {
       "id": "Permission",
       "description": "The representation of a permission on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {          
-          "required": [
-            "links"
-          ],
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "The title of this entity"
-            },
-            "links": {
-              "$ref": "#/definitions/PermissionResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            }
-          }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "links": {
+          "$ref": "#/definitions/PermissionResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
         }
-      ]
+      }
     },
     "PermissionPost": {
       "id": "PermissionPost",
@@ -2673,53 +2764,65 @@
     "PermissionResourceLinks": {
       "id": "PermissionResourceLinks",
       "description": "Metadata describing associated resources for permissions",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {          
-          "required": [
-            "organization",
-            "content"
-          ],
-          "properties": {
-            "organization": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the organization using this permission"
-            },
-            "entities": {
-              "type": "array",
-              "description": "Metadata describing entities associated with this permission",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "content": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the content document associated with this entity"
-            }
+      "required": [
+        "organization",
+        "content",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "organization": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the organization using this permission"
+        },
+        "entities": {
+          "type": "array",
+          "description": "Metadata describing entities associated with this permission",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
-        }
-      ]
+        },
+        "content": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the content document associated with this entity"
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        }            
+      }
     },
     "PermissionResponse": {
       "id": "PermissionResponse",
       "description": "The API response format for permission resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {
-          "required": [
-            "permissions"
-          ],
-          "properties": {
-            "permissions": {
-              "type": "array",
-              "description": "Array of requested permission resources",
-              "items": {
-                "$ref": "#/definitions/Permission"
-              }
-            }
+      "required": [
+        "meta",
+        "permissions"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Array of requested permission resources",
+          "items": {
+            "$ref": "#/definitions/Permission"
           }
         }
-      ]
+      }
     },
     "PhoneContact": {
       "id": "PhoneContact",
@@ -2742,37 +2845,54 @@
     "Profile": {
       "id": "Profile",
       "description": "The representation of a profile on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {
-          "required": [
-            "links"
-          ],
-          "properties": {
-            "given_name": {
-              "type": "string",
-              "description": "The first name associated with this profile",
-              "maximum": 255
-            },
-            "surname": {
-              "type": "string",
-              "description": "The last name associated with this profile",
-              "maximum": 255
-            },
-            "contacts": {
-              "type": "array",
-              "description": "Contacts associated with this entity",
-              "items": {
-                "$ref": "#/definitions/Contact"
-              }
-            },
-            "links": {
-              "$ref": "#/definitions/ProfileResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "given_name": {
+          "type": "string",
+          "description": "The first name associated with this profile",
+          "maximum": 255
+        },
+        "surname": {
+          "type": "string",
+          "description": "The last name associated with this profile",
+          "maximum": 255
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
           }
+        },
+        "links": {
+          "$ref": "#/definitions/ProfileResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
         }
-      ]
+      }
     },
     "ProfilePost": {
       "id": "ProfilePost",
@@ -2818,98 +2938,127 @@
     "ProfileResourceLinks": {
       "id": "ProfileResourceLinks",
       "description": "Metadata describing associated resources for profiles",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {
-          "required": [
-            "organization"
-          ],
-          "properties": {
-            "organization": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "The organization this user profile is associated with"
-            },
-            "user": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "The user this organization-specific profile is associated with"
-            },
-            "stories": {
-              "type": "array",
-              "description": "Metadata describing stories associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+      "required": [
+        "organization",
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "organization": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "The organization this user profile is associated with"
+        },
+        "user": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "The user this organization-specific profile is associated with"
+        },
+        "stories": {
+          "type": "array",
+          "description": "Metadata describing stories associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
         }
-      ]
+      }
     },
     "ProfileResponse": {
       "id": "ProfileResponse",
       "description": "The API response format for profile resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "#ref": "#/definitions/ApiResponse" },
-        {          
-          "required": [
-            "profiles"
-          ],
-          "properties": {
-            "profiles": {
-              "type": "array",
-              "description": "Array of requested profile resources",
-              "items": {
-                "$ref": "#/definitions/Profile"
-              }
-            }
+      "required": [
+        "meta",
+        "profiles"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "profiles": {
+          "type": "array",
+          "description": "Array of requested profile resources",
+          "items": {
+            "$ref": "#/definitions/Profile"
           }
         }
-      ]
+      }
     },
     "Questionnaire": {
       "id": "Questionnaire",
       "description": "The representation of a questionnaire on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {          
-          "required": [
-            "title",
-            "links"
-          ],
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "The title of this entity"
-            },
-            "links": {
-              "$ref": "#/definitions/ResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            },
-            "tags": {
-              "type": "array",
-              "description": "Tags associated with this entity",
-              "items": {
-                "type": "string",
-                "maximum": 45
-              }
-            },
-            "story_tags": {
-              "type": "array",
-              "description": "Tags automatically added to stories associated with this entity",
-              "items": {
-                "type": "string",
-                "maximum": 45
-              }
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "title",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "links": {
+          "$ref": "#/definitions/QuestionnaireResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        },
+        "story_tags": {
+          "type": "array",
+          "description": "Tags automatically added to stories associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
           }
         }
-      ]
+      }
     },
     "QuestionnairePost": {
       "id": "QuestionnairePost",
@@ -2950,137 +3099,60 @@
     "QuestionnaireResourceLinks": {
       "id": "QuestionnaireResourceLinks",
       "description": "Metadata describing associated resources for questionnaires",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {          
-          "required": [
-            "forms",
-            "default_form",
-            "contents"
-          ],
-          "properties": {
-            "forms": {
-              "type": "array",
-              "description": "Metadata describing form documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "default_form": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the default form document associated with this entity"
-            },
-            "contents": {
-              "type": "array",
-              "description": "Metadata describing content documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "stories": {
-              "type": "array",
-              "description": "Metadata describing stories associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "collections": {
-              "type": "array",
-              "description": "Metadata describing target collections associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "attachments": {
-              "type": "array",
-              "description": "Metadata describing attachment documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "QuestionnaireResponse": {
-      "id": "QuestionnaireResponse",
-      "description": "The API response format for questionnaire resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {          
-          "required": [
-            "questionnaires"
-          ],
-          "properties": {
-            "questionnaires": {
-              "type": "array",
-              "description": "Array of requested questionnaire resources",
-              "items": {
-                "$ref": "#/definitions/Questionnaire"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "Resource": {
-      "id": "Resource",
-      "description": "The baseline representation of a resource on the stori.es platform",
       "required": [
-        "id",
-        "created_on",
-        "updated_on",
-        "is_archived"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "The unique ID for this entity"
-        },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        }
-      }
-    },
-    "ResourceLink": {
-      "id": "ResourceLink",
-      "description": "Metadata describing a resource",
-      "required": [
-        "href"
-      ],
-      "properties": {
-        "href": {
-          "type": "string",
-          "description": "The URL of the resource"
-        }
-      }
-    },
-    "ResourceLinks": {
-      "id": "ResourceLinks",
-      "description": "Baseline metadata describing associated resources",
-      "required": [
+        "forms",
+        "default_form",
+        "contents",
         "creator",
         "owner"
       ],
       "properties": {
+        "forms": {
+          "type": "array",
+          "description": "Metadata describing form documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "default_form": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the default form document associated with this entity"
+        },
+        "contents": {
+          "type": "array",
+          "description": "Metadata describing content documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "stories": {
+          "type": "array",
+          "description": "Metadata describing stories associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "collections": {
+          "type": "array",
+          "description": "Metadata describing target collections associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Metadata describing attachment documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
         "creator": {
           "$ref": "#/definitions/ResourceLink",
           "description": "Metadata describing the creator of this entity"
@@ -3095,6 +3167,40 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
+        }
+      }
+    },
+    "QuestionnaireResponse": {
+      "id": "QuestionnaireResponse",
+      "description": "The API response format for questionnaire resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "required": [
+        "meta",
+        "questionnaires"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "questionnaires": {
+          "type": "array",
+          "description": "Array of requested questionnaire resources",
+          "items": {
+            "$ref": "#/definitions/Questionnaire"
+          }
+        }
+      }
+    },
+    "ResourceLink": {
+      "id": "ResourceLink",
+      "description": "Metadata describing a resource",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "The URL of the resource"
         }
       }
     },
@@ -3197,28 +3303,45 @@
     "Story": {
       "id": "Story",
       "description": "The representation of a story on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {
-          "required": [
-            "links"
-          ],
-          "properties": {
-            "links": {
-              "$ref": "#/definitions/StoryResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            },
-            "tags": {
-              "type": "array",
-              "description": "Tags associated with this entity",
-              "items": {
-                "type": "string",
-                "maximum": 45
-              }
-            }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "links": {
+          "$ref": "#/definitions/StoryResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
           }
         }
-      ]
+      }
     },
     "StoryPost": {
       "id": "StoryPost",
@@ -3262,169 +3385,229 @@
     "StoryResourceLinks": {
       "id": "StoryResourceLinks",
       "description": "Metadata describing associated resources for stories",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {
-          "properties": {
-            "contents": {
-              "type": "array",
-              "description": "Metadata describing content documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "default_content": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "Metadata describing the default content document associated with this entity"
-            },
-            "responses": {
-              "type": "array",
-              "description": "Metadata describing response documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "permissions": {
-              "type": "array",
-              "description": "Metadata describing permissions associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "attachments": {
-              "type": "array",
-              "description": "Metadata describing attachment documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+      "properties": {
+        "required": [
+          "creator",
+          "owner"          
+        ],
+        "contents": {
+          "type": "array",
+          "description": "Metadata describing content documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
-        }
-      ]
+        },
+        "default_content": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the default content document associated with this entity"
+        },
+        "responses": {
+          "type": "array",
+          "description": "Metadata describing response documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Metadata describing permissions associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Metadata describing attachment documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        }        
+      }
     },
     "StoryResponse": {
       "id": "StoryResponse",
       "description": "The API response format for story resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {
-          "required": [
-            "stories"
-          ],
-          "properties": {
-            "stories": {
-              "type": "array",
-              "description": "Array of requested story resources",
-              "items": {
-                "$ref": "#/definitions/Story"
-              }
-            }
+      "required": [
+        "meta",
+        "stories"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "stories": {
+          "type": "array",
+          "description": "Array of requested story resources",
+          "items": {
+            "$ref": "#/definitions/Story"
           }
         }
-      ]
+      }
     },
     "Theme": {
       "id": "Theme",
       "description": "The representation of a theme on the stori.es platform",
-      "allOf": [
-        { "$ref": "#/definitions/Resource" },
-        {          
-          "required": [
-            "title",
-            "links"
-          ],
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "The title of this entity",
-              "maximum": 256
-            },
-            "links": {
-              "$ref": "#/definitions/ThemeResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            }
-          }
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "title",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity",
+          "maximum": 256
+        },
+        "links": {
+          "$ref": "#/definitions/ThemeResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
         }
-      ]
+      }
     },
     "ThemeResourceLinks": {
       "id": "ThemeResourceLinks",
       "description": "Metadata describing associated resources for themes",
-      "allOf": [
-        { "$ref": "#/definitions/ResourceLinks" },
-        {          
-          "properties": {
-            "organizations": {
-              "type": "array",
-              "description": "Metadata describing organizations with access to this theme",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "entities": {
-              "type": "array",
-              "description": "Metadata describing entities utilizing this theme",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+      "required": [
+        "creator",
+        "owner"          
+      ],
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "Metadata describing organizations with access to this theme",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
-        }
-      ]
+        },
+        "entities": {
+          "type": "array",
+          "description": "Metadata describing entities utilizing this theme",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        }        
+      }
     },
     "ThemeResponse": {
       "id": "ThemeResponse",
       "description": "The API response format for theme resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        { "$ref": "#/definitions/ApiResponse" },
-        {          
-          "required": [
-            "themes"
-          ],
-          "properties": {
-            "themes": {
-              "type": "array",
-              "description": "Array of requested theme resources",
-              "items": {
-                "$ref": "#/definitions/Theme"
-              }
-            }
+      "required": [
+        "meta",
+        "themes"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        },
+        "themes": {
+          "type": "array",
+          "description": "Array of requested theme resources",
+          "items": {
+            "$ref": "#/definitions/Theme"
           }
         }
-      ]
+      }
     },
     "User": {
       "id": "User",
       "description": "The representation of a user on the stori.es platform",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived",
+        "handle",
+        "links"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
         },
-        {
-          "required": [
-            "handle",
-            "links"
-          ],
-          "properties": {
-            "handle": {
-              "type": "string",
-              "description": "The user handle",
-              "maximum": 64
-            },
-            "links": {
-              "$ref": "#/definitions/UserResourceLinks",
-              "description": "Metadata describing resources associated with this entity"
-            }
-          }
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        },
+        "handle": {
+          "type": "string",
+          "description": "The user handle",
+          "maximum": 64
+        },
+        "links": {
+          "$ref": "#/definitions/UserResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
         }
-      ]
+      }
     },
     "UserPost": {
       "id": "UserPost",
@@ -3454,60 +3637,68 @@
     "UserResourceLinks": {
       "id": "UserResourceLinks",
       "description": "Metadata describing associated resources for users",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceLinks"
+      "required": [
+        "profiles",
+        "default_profile",
+        "creator",
+        "owner"        
+      ],
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "description": "Metadata describing organization-specific profiles associated with this user",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
         },
-        {
-          "required": [
-            "profiles",
-            "default_profile"
-          ],
-          "properties": {
-            "profiles": {
-              "type": "array",
-              "description": "Metadata describing organization-specific profiles associated with this user",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            },
-            "default_profile": {
-              "$ref": "#/definitions/ResourceLink",
-              "description": "The default profile associated with this user"
-            },
-            "notes": {
-              "type": "array",
-              "description": "Metadata describing note documents associated with this entity",
-              "items": {
-                "$ref": "#/definitions/ResourceLink"
-              }
-            }
+        "default_profile": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "The default profile associated with this user"
+        },
+        "notes": {
+          "type": "array",
+          "description": "Metadata describing note documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
           }
         }
-      ]
+      }
     },
     "UserResponse": {
       "id": "UserResponse",
       "description": "The API response format for user resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApiResponse"
+      "required": [
+        "meta",
+        "users"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
         },
-        {
-          "required": [
-            "users"
-          ],
-          "properties": {
-            "users": {
-              "type": "array",
-              "description": "Array of requested user resources",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
-            }
+        "users": {
+          "type": "array",
+          "description": "Array of requested user resources",
+          "items": {
+            "$ref": "#/definitions/User"
           }
         }
-      ]
+      }
     }
   }
 }
