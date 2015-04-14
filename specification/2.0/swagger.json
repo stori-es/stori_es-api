@@ -20,11 +20,50 @@
   "schemes": [
     "https"
   ],
+  "tags": [
+    {
+      "name": "Collections",
+      "description": "sets of stories"
+    },
+    {
+      "name": "Documents",
+      "description": "content and forms composed of blocks"
+    },
+    {
+      "name": "Organizations",
+      "description": "contexts containing stori.es objects"
+    },
+    {
+      "name": "Permissions",
+      "description": "licenses and authorities"
+    },
+    {
+      "name": "Profiles",
+      "description": "organization-specific user profiles"
+    },
+    {
+      "name": "Questionnaires",
+      "description": "forms and their associated stories"
+    },
+    {
+      "name": "Stories",
+      "description": "sets of documents"
+    },
+    {
+      "name": "Themes",
+      "description": "layout and styling"
+    },
+    {
+      "name": "Users",
+      "description": "authorized users with organization-specific profiles"
+    }
+  ],
   "paths": {
     "/collections": {
       "post": {
         "summary": "Create a new collection",
         "description": "",
+        "tags": [ "Collections" ],
         "operationId": "create_collection",
         "consumes": [
           "application/vnd.api+json"
@@ -75,6 +114,7 @@
       "get": {
         "summary": "Retrieve a specific collection",
         "description": "",
+        "tags": [ "Collections" ],
         "operationId": "get_collection",
         "consumes": [
           "application/vnd.api+json"
@@ -121,6 +161,7 @@
       "delete": {
         "summary": "Deletes a collection",
         "description": "",
+        "tags": [ "Collections" ],
         "operationId": "delete_collection",
         "consumes": [
           "application/vnd.api+json"
@@ -167,6 +208,7 @@
       "put": {
         "summary": "Updates a collection",
         "description": "",
+        "tags": [ "Collections" ],
         "operationId": "update_collection",
         "consumes": [
           "application/vnd.api+json"
@@ -230,6 +272,7 @@
       "post": {
         "summary": "Create a new document",
         "description": "",
+        "tags": [ "Documents" ],
         "operationId": "create_document",
         "consumes": [
           "application/vnd.api+json"
@@ -280,6 +323,7 @@
       "get": {
         "summary": "Retrieve a specific document",
         "description": "",
+        "tags": [ "Documents" ],
         "operationId": "get_document",
         "consumes": [
           "application/vnd.api+json"
@@ -326,6 +370,7 @@
       "delete": {
         "summary": "Delete a document",
         "description": "",
+        "tags": [ "Documents" ],
         "operationId": "delete_document",
         "consumes": [
           "application/vnd.api+json"
@@ -372,6 +417,7 @@
       "put": {
         "summary": "Update a document",
         "description": "",
+        "tags": [ "Documents" ],
         "operationId": "update_document",
         "consumes": [
           "application/vnd.api+json"
@@ -435,6 +481,7 @@
       "post": {
         "summary": "Create a new organization",
         "description": "",
+        "tags": [ "Organizations" ],
         "operationId": "create_organization",
         "consumes": [
           "application/vnd.api+json"
@@ -485,6 +532,7 @@
       "get": {
         "summary": "Retrieve a specific organization",
         "description": "",
+        "tags": [ "Organizations" ],
         "operationId": "get_organization",
         "consumes": [
           "application/vnd.api+json"
@@ -531,6 +579,7 @@
       "delete": {
         "summary": "Deletes an organization",
         "description": "",
+        "tags": [ "Organizations" ],
         "operationId": "delete_organization",
         "consumes": [
           "application/vnd.api+json"
@@ -577,6 +626,7 @@
       "put": {
         "summary": "Updates an organization",
         "description": "",
+        "tags": [ "Organizations" ],
         "operationId": "update_organization",
         "consumes": [
           "application/vnd.api+json"
@@ -640,6 +690,7 @@
       "post": {
         "summary": "Create a new permission",
         "description": "",
+        "tags": [ "Permissions" ],
         "operationId": "create_permission",
         "consumes": [
           "application/vnd.api+json"
@@ -690,6 +741,7 @@
       "get": {
         "summary": "Retrieve a specific permission",
         "description": "",
+        "tags": [ "Permissions" ],
         "operationId": "get_permission",
         "consumes": [
           "application/vnd.api+json"
@@ -736,6 +788,7 @@
       "delete": {
         "summary": "Deletes a permission",
         "description": "",
+        "tags": [ "Permissions" ],
         "operationId": "delete_permission",
         "consumes": [
           "application/vnd.api+json"
@@ -782,6 +835,7 @@
       "put": {
         "summary": "Updates a permission",
         "description": "",
+        "tags": [ "Permissions" ],
         "operationId": "update_permission",
         "consumes": [
           "application/vnd.api+json"
@@ -845,6 +899,7 @@
       "post": {
         "summary": "Create a new profile",
         "description": "",
+        "tags": [ "Profiles" ],
         "operationId": "create_profile",
         "consumes": [
           "application/vnd.api+json"
@@ -895,6 +950,7 @@
       "get": {
         "summary": "Retrieve a specific profile",
         "description": "",
+        "tags": [ "Profiles" ],
         "operationId": "get_profile",
         "consumes": [
           "application/vnd.api+json"
@@ -941,6 +997,7 @@
       "delete": {
         "summary": "Delete a profile",
         "description": "",
+        "tags": [ "Profiles" ],
         "operationId": "delete_profile",
         "consumes": [
           "application/vnd.api+json"
@@ -993,6 +1050,7 @@
       "put": {
         "summary": "Update a profile",
         "description": "",
+        "tags": [ "Profiles" ],
         "operationId": "update_profile",
         "consumes": [
           "application/vnd.api+json"
@@ -1050,6 +1108,7 @@
       "post": {
         "summary": "Create a new questionnaire",
         "description": "",
+        "tags": [ "Questionnaires" ],
         "operationId": "create_questionnaire",
         "consumes": [
           "application/vnd.api+json"
@@ -1100,6 +1159,7 @@
       "get": {
         "summary": "Retrieve a specific questionnaire",
         "description": "",
+        "tags": [ "Questionnaires" ],
         "operationId": "get_questionnaire",
         "consumes": [
           "application/vnd.api+json"
@@ -1146,6 +1206,7 @@
       "delete": {
         "summary": "Deletes a questionnaire",
         "description": "",
+        "tags": [ "Questionnaires" ],
         "operationId": "delete_questionnaire",
         "consumes": [
           "application/vnd.api+json"
@@ -1192,6 +1253,7 @@
       "put": {
         "summary": "Updates a questionnaire",
         "description": "",
+        "tags": [ "Questionnaires" ],
         "operationId": "update_questionnaire",
         "consumes": [
           "application/vnd.api+json"
@@ -1255,6 +1317,7 @@
       "post": {
         "summary": "Create a new story",
         "description": "",
+        "tags": [ "Stories" ],
         "operationId": "create_story",
         "consumes": [
           "application/vnd.api+json"
@@ -1305,6 +1368,7 @@
       "get": {
         "summary": "Retrieve a specific story",
         "description": "",
+        "tags": [ "Stories" ],
         "operationId": "get_story",
         "consumes": [
           "application/vnd.api+json"
@@ -1351,6 +1415,7 @@
       "delete": {
         "summary": "Delete a story",
         "description": "",
+        "tags": [ "Stories" ],
         "operationId": "delete_story",
         "consumes": [
           "application/vnd.api+json"
@@ -1397,6 +1462,7 @@
       "put": {
         "summary": "Update a story",
         "description": "",
+        "tags": [ "Stories" ],
         "operationId": "update_story",
         "consumes": [
           "application/vnd.api+json"
@@ -1460,6 +1526,7 @@
       "get": {
         "summary": "Retrieve a specific theme",
         "description": "",
+        "tags": [ "Themes" ],
         "operationId": "get_theme",
         "consumes": [
           "application/vnd.api+json"
@@ -1506,6 +1573,7 @@
       "put": {
         "summary": "Updates a theme",
         "description": "",
+        "tags": [ "Themes" ],
         "operationId": "update_theme",
         "consumes": [
           "application/vnd.api+json"
@@ -1569,6 +1637,7 @@
       "post": {
         "summary": "Create a new user",
         "description": "",
+        "tags": [ "Users" ],
         "operationId": "create_user",
         "consumes": [
           "application/vnd.api+json"
@@ -1619,6 +1688,7 @@
       "get": {
         "summary": "Retrieve a specific user",
         "description": "",
+        "tags": [ "Users" ],
         "operationId": "get_user",
         "consumes": [
           "application/vnd.api+json"
@@ -1665,6 +1735,7 @@
       "delete": {
         "summary": "Delete a user",
         "description": "",
+        "tags": [ "Users" ],
         "operationId": "delete_user",
         "consumes": [
           "application/vnd.api+json"
@@ -1711,6 +1782,7 @@
       "put": {
         "summary": "Update a user",
         "description": "",
+        "tags": [ "Users" ],
         "operationId": "update_user",
         "consumes": [
           "application/vnd.api+json"
