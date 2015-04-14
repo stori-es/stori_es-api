@@ -1,0 +1,3441 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "stori.es API",
+    "description": "The stori.es API provides a programmatic interface to the stori.es platform.",
+    "contact": {
+      "name": "API Support",
+      "email": "info@stori.es",
+      "url": "http://www.stori.es/support"
+    },
+    "license": {
+      "name": "stori.es Software as a Service Agreement",
+      "url": "http://www.stori.es/software-as-a-service-agreement"
+    },
+    "termsOfService": "http://www.stori.es/terms-of-service"
+  },
+  "host": "stori.es",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/collections": {
+      "post": {
+        "summary": "Create a new collection",
+        "description": "",
+        "operationId": "create_collection",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new collection to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectionPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection_id}": {
+      "get": {
+        "summary": "Retrieve a specific collection",
+        "description": "",
+        "operationId": "get_collection",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the collection to retrieve",
+            "name": "collection_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a collection",
+        "description": "",
+        "operationId": "delete_collection",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the collection to delete",
+            "name": "collection_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a collection",
+        "description": "",
+        "operationId": "update_collection",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the collection to update",
+            "name": "collection_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified collection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/CollectionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/documents": {
+      "post": {
+        "summary": "Create a new document",
+        "description": "",
+        "operationId": "create_document",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The new document to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/documents/{document_id}": {
+      "get": {
+        "summary": "Retrieve a specific document",
+        "description": "",
+        "operationId": "get_document",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "document_id",
+            "description": "The ID of the document to retrieve",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a document",
+        "description": "",
+        "operationId": "delete_document",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the document to delete",
+            "name": "document_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a document",
+        "description": "",
+        "operationId": "update_document",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "document_id",
+            "description": "The ID of the document to update",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified document",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Document"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/DocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/organizations": {
+      "post": {
+        "summary": "Create a new organization",
+        "description": "",
+        "operationId": "create_organization",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new organization to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/organizations/{organization_id}": {
+      "get": {
+        "summary": "Retrieve a specific organization",
+        "description": "",
+        "operationId": "get_organization",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the organization to retrieve",
+            "name": "organization_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an organization",
+        "description": "",
+        "operationId": "delete_organization",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the organization to delete",
+            "name": "organization_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an organization",
+        "description": "",
+        "operationId": "update_organization",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the organization to update",
+            "name": "organization_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified organization",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/permissions": {
+      "post": {
+        "summary": "Create a new permission",
+        "description": "",
+        "operationId": "create_permission",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new permission to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PermissionPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/permissions/{permission_id}": {
+      "get": {
+        "summary": "Retrieve a specific permission",
+        "description": "",
+        "operationId": "get_permission",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the permission to retrieve",
+            "name": "permission_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a permission",
+        "description": "",
+        "operationId": "delete_permission",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the permission to delete",
+            "name": "permission_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a permission",
+        "description": "",
+        "operationId": "update_permission",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the permission to update",
+            "name": "permission_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified permission",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/PermissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/profiles": {
+      "post": {
+        "summary": "Create a new profile",
+        "description": "",
+        "operationId": "create_profile",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new profile to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfilePost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{profile_id}": {
+      "get": {
+        "summary": "Retrieve a specific profile",
+        "description": "",
+        "operationId": "get_profile",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the profile to retrieve",
+            "name": "profile_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a profile",
+        "description": "",
+        "operationId": "delete_profile",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the profile to delete",
+            "name": "profile_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a profile",
+        "description": "",
+        "operationId": "update_profile",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the profile to update",
+            "name": "profile_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified profile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          }
+        }
+      }
+    },
+    "/questionnaires": {
+      "post": {
+        "summary": "Create a new questionnaire",
+        "description": "",
+        "operationId": "create_questionnaire",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new questionnaire to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuestionnairePost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          }
+        }
+      }
+    },
+    "/questionnaires/{questionnaire_id}": {
+      "get": {
+        "summary": "Retrieve a specific questionnaire",
+        "description": "",
+        "operationId": "get_questionnaire",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the questionnaire to retrieve",
+            "name": "questionnaire_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a questionnaire",
+        "description": "",
+        "operationId": "delete_questionnaire",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the questionnaire to delete",
+            "name": "questionnaire_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a questionnaire",
+        "description": "",
+        "operationId": "update_questionnaire",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the questionnaire to update",
+            "name": "questionnaire_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified questionnaire",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Questionnaire"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/QuestionnaireResponse"
+            }
+          }
+        }
+      }
+    },
+    "/stories": {
+      "post": {
+        "summary": "Create a new story",
+        "description": "",
+        "operationId": "create_story",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new story to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoryPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/stories/{story_id}": {
+      "get": {
+        "summary": "Retrieve a specific story",
+        "description": "",
+        "operationId": "get_story",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the story to retrieve",
+            "name": "story_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a story",
+        "description": "",
+        "operationId": "delete_story",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the story to delete",
+            "name": "story_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a story",
+        "description": "",
+        "operationId": "update_story",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the story to update",
+            "name": "story_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified story",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Story"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/StoryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/themes/{theme_id}": {
+      "get": {
+        "summary": "Retrieve a specific theme",
+        "description": "",
+        "operationId": "get_theme",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the theme to retrieve",
+            "name": "theme_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a theme",
+        "description": "",
+        "operationId": "update_theme",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the theme to update",
+            "name": "theme_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified theme",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Theme"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/ThemeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Create a new user",
+        "description": "",
+        "operationId": "create_user",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "The new user to be created",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPost"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource successfully created",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to create the requested resource",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "summary": "Retrieve a specific user",
+        "description": "",
+        "operationId": "get_user",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the user to retrieve",
+            "name": "user_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a user",
+        "description": "",
+        "operationId": "delete_user",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the user to delete",
+            "name": "user_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to delete the requested resource",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a user",
+        "description": "",
+        "operationId": "update_user",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The ID of the user to update",
+            "name": "user_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The modified user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully updated",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to update the requested resource",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiResponse": {
+      "id": "ApiResponse",
+      "description": "The baseline API response format for the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "required": [
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Metadata",
+          "description": "Metadata describing this response"
+        }
+      }
+    },
+    "Block": {
+      "id": "Block",
+      "description": "The representation of a block on the stori.es platform",
+      "required": [
+        "id",
+        "block_type",
+        "is_question",
+        "links",
+        "created_on",
+        "updated_on"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID for this entity"
+        },
+        "block_type": {
+          "type": "string",
+          "description": "The type of block this entity represents",
+          "enum": [
+            "/block_types/text",
+            "/block_types/document",
+            "/block_types/image",
+            "/block_types/audio",
+            "/block_types/video",
+            "/block_types/collection",
+            "/block_types/permission",
+            "/block_types/story_title",
+            "/block_types/story_ask",
+            "/block_types/first_name",
+            "/block_types/last_name",
+            "/block_types/email",
+            "/block_types/phone",
+            "/block_types/street_address",
+            "/block_types/city",
+            "/block_types/state",
+            "/block_types/zip_code",
+            "/block_types/updates_opt_in",
+            "/block_types/preferred_email_format",
+            "/block_types/text_field",
+            "/block_types/text_area",
+            "/block_types/single_choice",
+            "/block_types/multiple_choice",
+            "/block_types/date",
+            "/block_types/attachments"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "value": {
+          "type": "string",
+          "description": "The current value of this block, a JSON data structure unique to each block type (TBD)"
+        },
+        "is_question": {
+          "type": "boolean",
+          "description": "Boolean flag indicating this block solicits responses"
+        },
+        "links": {
+          "$ref": "#/definitions/ResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        }
+      }
+    },
+    "Collection": {
+      "id": "Collection",
+      "description": "The representation of a collection on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {          
+          "required": [
+            "title",
+            "links"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of this entity"
+            },
+            "links": {
+              "$ref": "#/definitions/CollectionResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this entity",
+              "items": {
+                "type": "string",
+                "maximum": 45
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CollectionPost": {
+      "id": "CollectionPost",
+      "description": "The representation of a new collection to be added to the stori.es platform",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "story_ids": {
+          "type": "array",
+          "description": "The IDs of stories associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "questionnaire_ids": {
+          "type": "array",
+          "description": "The IDs of source questionnaires associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        }
+      }
+    },
+    "CollectionResourceLinks": {
+      "id": "CollectionResourceLinks",
+      "description": "Metadata describing associated resources for collections",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {          
+          "required": [
+            "content",
+            "stories"
+          ],
+          "properties": {
+            "content": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the content document associated with this entity"
+            },
+            "stories": {
+              "type": "array",
+              "description": "Metadata describing stories associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "questionnaires": {
+              "type": "array",
+              "description": "Metadata describing source questionnaires associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "attachments": {
+              "type": "array",
+              "description": "Metadata describing attachment documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "CollectionResponse": {
+      "id": "CollectionResponse",
+      "description": "The API response format for collection resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {          
+          "required": [
+            "collections"
+          ],
+          "properties": {
+            "collections": {
+              "type": "array",
+              "description": "Array of requested collection resources",
+              "items": {
+                "$ref": "#/definitions/Collection"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Contact": {
+      "id": "Contact",
+      "description": "The representation of a contact associated with this entity",
+      "discriminator": "contact_type",
+      "required": [
+        "contact_type",
+        "title"
+      ],
+      "properties": {
+        "contact_type": {
+          "type": "string",
+          "description": "The type of contact",
+          "enum": [
+            "EmailContact",
+            "PhoneContact",
+            "GeolocationContact",
+            "SocialContact"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this contact"
+        }
+      }
+    },
+    "Document": {
+      "id": "Document",
+      "description": "The representation of a document on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {
+          "required": [
+            "document_type",
+            "byline",
+            "links",
+            "publication_status"
+          ],
+          "properties": {
+            "document_type": {
+              "type": "string",
+              "description": "The type of document",
+              "enum": [
+                "AttachmentDocument",
+                "ContentDocument",
+                "FormDocument",
+                "NoteDocument",
+                "ResponseDocument"
+              ]
+            },
+            "title": {
+              "type": "string",
+              "description": "The title of this entity"
+            },
+            "byline": {
+              "type": "string",
+              "description": "The byline of this entity; defaults to [Owner Given Name] of [Owner City], [Owner State]"
+            },
+            "blocks": {
+              "type": "array",
+              "description": "The set of blocks that compose this document",
+              "items": {
+                "$ref": "#/definitions/Block"
+              }
+            },
+            "links": {
+              "$ref": "#/definitions/DocumentResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            },
+            "publication_status": {
+              "type": "string",
+              "description": "The current publication status of this entity",
+              "enum": [
+                "draft",
+                "published"
+              ]
+            },
+            "published_on": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The initial publication date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+            }
+          }
+        }
+      ]
+    },
+    "DocumentPost": {
+      "id": "DocumentPost",
+      "description": "The representation of a new document to be added to the stori.es platform",
+      "required": [
+        "document_type"
+      ],
+      "properties": {
+        "document_type": {
+          "type": "string",
+          "description": "The type of document",
+          "enum": [
+            "AttachmentDocument",
+            "ContentDocument",
+            "FormDocument",
+            "NoteDocument",
+            "ResponseDocument"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "byline": {
+          "type": "string",
+          "description": "The byline of this entity; defaults to [Owner Given Name] of [Owner City], [Owner State]"
+        },
+        "blocks": {
+          "type": "array",
+          "description": "The set of blocks that compose this document",
+          "items": {
+            "$ref": "#/definitions/Block"
+          }
+        },
+        "entity_id": {
+          "type": "integer",
+          "description": "The ID of the entity this document is associated with"
+        },
+        "source_url": {
+          "type": "string",
+          "description": "The URL of the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
+        },
+        "theme_id": {
+          "type": "integer",
+          "description": "The ID of the theme associated with this entity"
+        },
+        "permission_id": {
+          "type": "integer",
+          "description": "The ID of the permission associated with this entity"
+        }
+      }
+    },
+    "DocumentResourceLinks": {
+      "id": "DocumentResourceLinks",
+      "description": "Metadata describing associated resources for documents",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {
+          "required": [
+            "entity",
+            "theme"
+          ],
+          "properties": {
+            "entity": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the entity this document is associated with"
+            },
+            "source": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
+            },
+            "theme": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the theme associated with this entity"
+            },
+            "permission": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the permission associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "DocumentResponse": {
+      "id": "DocumentResponse",
+      "description": "The API response format for document resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {          
+          "required": [
+            "documents"
+          ],
+          "properties": {
+            "documents": {
+              "type": "array",
+              "description": "Array of requested document resources",
+              "items": {
+                "$ref": "#/definitions/Document"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EmailContact": {
+      "id": "EmailContact",
+      "description": "The representation of an email contact associated with this entity",
+      "allOf": [
+        { "$ref": "#/definitions/Contact" },
+        {
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "The value of this contact"
+            }
+          }
+        }
+      ]
+    },
+    "GeolocationContact": {
+      "id": "GeolocationContact",
+      "description": "The representation of a geolocation contact associated with this entity",
+      "allOf": [
+        { "$ref": "#/definitions/Contact" },
+        {
+          "properties": {
+            "street_address_1": {
+              "type": "string",
+              "description": "Street address (first line)"
+            },
+            "street_address_2": {
+              "type": "string",
+              "description": "Street address (second line)"
+            },
+            "city": {
+              "type": "string",
+              "description": "City"
+            },
+            "state": {
+              "type": "string",
+              "description": "State"
+            },
+            "country": {
+              "type": "string",
+              "description": "Country"
+            },
+            "postal_code": {
+              "type": "string",
+              "description": "Postal Code"
+            },
+            "latitude": {
+              "type": "string",
+              "description": "Latitude"
+            },
+            "longitude": {
+              "type": "string",
+              "description": "Longitude"
+            }
+          }
+        }
+      ]
+    },
+    "Message": {
+      "id": "Message",
+      "description": "A message generated by a request",
+      "required": [
+        "summary",
+        "message_code"
+      ],
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "Target of this message (field, object, etc.)"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Message summary"
+        },
+        "message_code": {
+          "type": "string",
+          "description": "stori.es internal message code"
+        },
+        "detail_url": {
+          "type": "string",
+          "description": "URL for message details"
+        }
+      }
+    },
+    "Metadata": {
+      "id": "Metadata",
+      "description": "Metadata about this response",
+      "required": [
+        "self",
+        "http_code",
+        "status"
+      ],
+      "properties": {
+        "self": {
+          "type": "string",
+          "description": "Full request URL"
+        },
+        "status": {
+          "type": "string",
+          "description": "High-level status of response",
+          "enum": [
+            "success",
+            "fail",
+            "error"
+          ]
+        },
+        "http_code": {
+          "type": "integer",
+          "description": "HTTP response status code"
+        },
+        "messages": {
+          "type": "array",
+          "description": "Array of messages generated by request",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/Pagination",
+          "description": "Pagination details for this response"
+        }
+      }
+    },
+    "Navigation": {
+      "id": "Navigation",
+      "description": "Navigation details for this response",
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "URL for first set of results"
+        },
+        "prev": {
+          "type": "string",
+          "description": "URL for previous set of results"
+        },
+        "next": {
+          "type": "string",
+          "description": "URL for next set of results"
+        },
+        "last": {
+          "type": "string",
+          "description": "URL for last set of results"
+        }
+      }
+    },
+    "Organization": {
+      "id": "Organization",
+      "description": "The representation of an organization on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {          
+          "required": [
+            "name",
+            "links"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The organization name (maximum 128 characters)",
+              "maximum": 128
+            },
+            "short_name": {
+              "type": "string",
+              "description": "The short form of the organization name (maximum 15 characters)",
+              "maximum": 15
+            },
+            "contacts": {
+              "type": "array",
+              "description": "Contacts associated with this entity",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            },
+            "links": {
+              "$ref": "#/definitions/OrganizationResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "OrganizationPost": {
+      "id": "OrganizationPost",
+      "description": "The representation of a new organization to be added to the stori.es platform",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The organization name (maximum 128 characters)",
+          "maximum": 128
+        },
+        "short_name": {
+          "type": "string",
+          "description": "The short form of the organization name (maximum 15 characters)",
+          "maximum": 15
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "profile_ids": {
+          "type": "array",
+          "description": "The IDs of user profiles associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "questionnaire_ids": {
+          "type": "array",
+          "description": "The IDs of questionnaires associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "collection_ids": {
+          "type": "array",
+          "description": "The IDs of collections associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "permission_ids": {
+          "type": "array",
+          "description": "The IDs of permissions associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "default_permission_id": {
+          "type": "integer",
+          "description": "The ID of the default permission associated with this entity"
+        },
+        "theme_ids": {
+          "type": "array",
+          "description": "The IDs of themes associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "default_theme_id": {
+          "type": "integer",
+          "description": "The ID of the default theme associated with this entity"
+        }
+      }
+    },
+    "OrganizationResourceLinks": {
+      "id": "OrganizationResourceLinks",
+      "description": "Metadata describing associated resources for organizations",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {          
+          "required": [
+            "themes",
+            "default_theme"
+          ],
+          "properties": {
+            "profiles": {
+              "type": "array",
+              "description": "Metadata describing user profiles associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "questionnaires": {
+              "type": "array",
+              "description": "Metadata describing questionnaires associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "collections": {
+              "type": "array",
+              "description": "Metadata describing collections associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "permissions": {
+              "type": "array",
+              "description": "Metadata describing permissions associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "default_permission": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the default permission associated with this entity"
+            },
+            "themes": {
+              "type": "array",
+              "description": "Metadata describing themes associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "default_theme": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the default theme associated with this entity"
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "attachments": {
+              "type": "array",
+              "description": "Metadata describing attachment documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "OrganizationResponse": {
+      "id": "OrganizationResponse",
+      "description": "The API response format for organization resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "required": [
+        "organizations"
+      ],
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "description": "Array of requested organization resources",
+          "items": {
+            "$ref": "#/definitions/Organization"
+          }
+        }
+      }
+    },
+    "Pagination": {
+      "id": "Pagination",
+      "description": "Pagination details for this response",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return (default = 8, maximum = 50)",
+          "minimum": 1,
+          "maximum": 50,
+          "default": 8
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting index, 0-based (default = 0)",
+          "minimum": 0,
+          "defaultValue": 0
+        },
+        "sort": {
+          "description": "Sort order, indexed by resource",
+          "$ref": "#/definitions/Sort"
+        },
+        "navigation": {
+          "description": "Navigation details for this response",
+          "$ref": "#/definitions/Navigation"
+        }
+      }
+    },
+    "Permission": {
+      "id": "Permission",
+      "description": "The representation of a permission on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {          
+          "required": [
+            "links"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of this entity"
+            },
+            "links": {
+              "$ref": "#/definitions/PermissionResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "PermissionPost": {
+      "id": "PermissionPost",
+      "description": "The representation of a new permission to be added to the stori.es platform",
+      "required": [
+        "organization_id"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "organization_id": {
+          "type": "integer",
+          "description": "The ID of the organization using this permission"
+        },
+        "entity_ids": {
+          "type": "array",
+          "description": "The IDs of entities associated with this permission",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "PermissionResourceLinks": {
+      "id": "PermissionResourceLinks",
+      "description": "Metadata describing associated resources for permissions",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {          
+          "required": [
+            "organization",
+            "content"
+          ],
+          "properties": {
+            "organization": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the organization using this permission"
+            },
+            "entities": {
+              "type": "array",
+              "description": "Metadata describing entities associated with this permission",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "content": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the content document associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "PermissionResponse": {
+      "id": "PermissionResponse",
+      "description": "The API response format for permission resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {
+          "required": [
+            "permissions"
+          ],
+          "properties": {
+            "permissions": {
+              "type": "array",
+              "description": "Array of requested permission resources",
+              "items": {
+                "$ref": "#/definitions/Permission"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PhoneContact": {
+      "id": "PhoneContact",
+      "description": "The representation of a phone contact associated with this entity",
+      "allOf": [
+        { "$ref": "#/definitions/Contact" },
+        {
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "The value of this contact"
+            }
+          }
+        }
+      ]
+    },
+    "Profile": {
+      "id": "Profile",
+      "description": "The representation of a profile on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {
+          "required": [
+            "links"
+          ],
+          "properties": {
+            "given_name": {
+              "type": "string",
+              "description": "The first name associated with this profile",
+              "maximum": 255
+            },
+            "surname": {
+              "type": "string",
+              "description": "The last name associated with this profile",
+              "maximum": 255
+            },
+            "contacts": {
+              "type": "array",
+              "description": "Contacts associated with this entity",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            },
+            "links": {
+              "$ref": "#/definitions/ProfileResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "ProfilePost": {
+      "id": "ProfilePost",
+      "description": "The representation of a new profile to be added to the stori.es platform",
+      "required": [
+        "organization_id"
+      ],
+      "properties": {
+        "organization_id": {
+          "type": "integer",
+          "description": "The ID of the organization associated with this entity"
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "The ID of the user associated with this entity"
+        },
+        "given_name": {
+          "type": "string",
+          "description": "The first name associated with this profile",
+          "maximum": 255
+        },
+        "surname": {
+          "type": "string",
+          "description": "The last name associated with this profile",
+          "maximum": 255
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "story_ids": {
+          "type": "array",
+          "description": "The IDs of stories associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ProfileResourceLinks": {
+      "id": "ProfileResourceLinks",
+      "description": "Metadata describing associated resources for profiles",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {
+          "required": [
+            "organization"
+          ],
+          "properties": {
+            "organization": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "The organization this user profile is associated with"
+            },
+            "user": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "The user this organization-specific profile is associated with"
+            },
+            "stories": {
+              "type": "array",
+              "description": "Metadata describing stories associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ProfileResponse": {
+      "id": "ProfileResponse",
+      "description": "The API response format for profile resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "#ref": "#/definitions/ApiResponse" },
+        {          
+          "required": [
+            "profiles"
+          ],
+          "properties": {
+            "profiles": {
+              "type": "array",
+              "description": "Array of requested profile resources",
+              "items": {
+                "$ref": "#/definitions/Profile"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Questionnaire": {
+      "id": "Questionnaire",
+      "description": "The representation of a questionnaire on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {          
+          "required": [
+            "title",
+            "links"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of this entity"
+            },
+            "links": {
+              "$ref": "#/definitions/ResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this entity",
+              "items": {
+                "type": "string",
+                "maximum": 45
+              }
+            },
+            "story_tags": {
+              "type": "array",
+              "description": "Tags automatically added to stories associated with this entity",
+              "items": {
+                "type": "string",
+                "maximum": 45
+              }
+            }
+          }
+        }
+      ]
+    },
+    "QuestionnairePost": {
+      "id": "QuestionnairePost",
+      "description": "The representation of a new questionnaire to be added to the stori.es platform",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "collection_ids": {
+          "type": "array",
+          "description": "The IDs of target collections associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        },
+        "story_tags": {
+          "type": "array",
+          "description": "Tags automatically added to stories associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        }
+      }
+    },
+    "QuestionnaireResourceLinks": {
+      "id": "QuestionnaireResourceLinks",
+      "description": "Metadata describing associated resources for questionnaires",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {          
+          "required": [
+            "forms",
+            "default_form",
+            "contents"
+          ],
+          "properties": {
+            "forms": {
+              "type": "array",
+              "description": "Metadata describing form documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "default_form": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the default form document associated with this entity"
+            },
+            "contents": {
+              "type": "array",
+              "description": "Metadata describing content documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "stories": {
+              "type": "array",
+              "description": "Metadata describing stories associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "collections": {
+              "type": "array",
+              "description": "Metadata describing target collections associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "attachments": {
+              "type": "array",
+              "description": "Metadata describing attachment documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "QuestionnaireResponse": {
+      "id": "QuestionnaireResponse",
+      "description": "The API response format for questionnaire resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {          
+          "required": [
+            "questionnaires"
+          ],
+          "properties": {
+            "questionnaires": {
+              "type": "array",
+              "description": "Array of requested questionnaire resources",
+              "items": {
+                "$ref": "#/definitions/Questionnaire"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Resource": {
+      "id": "Resource",
+      "description": "The baseline representation of a resource on the stori.es platform",
+      "required": [
+        "id",
+        "created_on",
+        "updated_on",
+        "is_archived"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique ID for this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
+        }
+      }
+    },
+    "ResourceLink": {
+      "id": "ResourceLink",
+      "description": "Metadata describing a resource",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "The URL of the resource"
+        }
+      }
+    },
+    "ResourceLinks": {
+      "id": "ResourceLinks",
+      "description": "Baseline metadata describing associated resources",
+      "required": [
+        "creator",
+        "owner"
+      ],
+      "properties": {
+        "creator": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the creator of this entity"
+        },
+        "owner": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the owner of this entity"
+        },
+        "administrators": {
+          "type": "array",
+          "description": "Metadata describing the administrators of this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        }
+      }
+    },
+    "SocialContact": {
+      "id": "SocialContact",
+      "description": "The representation of a social contact associated with this entity",
+      "allOf": [
+        { "$ref": "#/definitions/Contact" },
+        {
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "description": "The value of this contact"
+            }
+          }
+        }
+      ]
+    },
+    "Sort": {
+      "id": "Sort",
+      "description": "Sort order details indexed by resource name",
+      "properties": {
+        "collections": {
+          "type": "array",
+          "description": "Sort order for collection resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "documents": {
+          "type": "array",
+          "description": "Sort order for document resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "organizations": {
+          "type": "array",
+          "description": "Sort order for organization resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Sort order for permission resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "description": "Sort order for profile resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "questionnaires": {
+          "type": "array",
+          "description": "Sort order for questionnaire resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "stories": {
+          "type": "array",
+          "description": "Sort order for story resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "themes": {
+          "type": "array",
+          "description": "Sort order for theme resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "Sort order for user resources",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Story": {
+      "id": "Story",
+      "description": "The representation of a story on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {
+          "required": [
+            "links"
+          ],
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/StoryResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this entity",
+              "items": {
+                "type": "string",
+                "maximum": 45
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StoryPost": {
+      "id": "StoryPost",
+      "description": "The representation of a new story to be added to the stori.es platform",
+      "properties": {
+        "content_ids": {
+          "type": "array",
+          "description": "The IDs of content documents associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "default_content_id": {
+          "type": "integer",
+          "description": "The ID of the default content document associated with this entity"
+        },
+        "response_ids": {
+          "type": "array",
+          "description": "The IDs of response documents associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "permission_ids": {
+          "type": "array",
+          "description": "The IDs of permissions associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        }
+      }
+    },
+    "StoryResourceLinks": {
+      "id": "StoryResourceLinks",
+      "description": "Metadata describing associated resources for stories",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {
+          "properties": {
+            "contents": {
+              "type": "array",
+              "description": "Metadata describing content documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "default_content": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "Metadata describing the default content document associated with this entity"
+            },
+            "responses": {
+              "type": "array",
+              "description": "Metadata describing response documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "permissions": {
+              "type": "array",
+              "description": "Metadata describing permissions associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "attachments": {
+              "type": "array",
+              "description": "Metadata describing attachment documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "StoryResponse": {
+      "id": "StoryResponse",
+      "description": "The API response format for story resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {
+          "required": [
+            "stories"
+          ],
+          "properties": {
+            "stories": {
+              "type": "array",
+              "description": "Array of requested story resources",
+              "items": {
+                "$ref": "#/definitions/Story"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Theme": {
+      "id": "Theme",
+      "description": "The representation of a theme on the stori.es platform",
+      "allOf": [
+        { "$ref": "#/definitions/Resource" },
+        {          
+          "required": [
+            "title",
+            "links"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of this entity",
+              "maximum": 256
+            },
+            "links": {
+              "$ref": "#/definitions/ThemeResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "ThemeResourceLinks": {
+      "id": "ThemeResourceLinks",
+      "description": "Metadata describing associated resources for themes",
+      "allOf": [
+        { "$ref": "#/definitions/ResourceLinks" },
+        {          
+          "properties": {
+            "organizations": {
+              "type": "array",
+              "description": "Metadata describing organizations with access to this theme",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "entities": {
+              "type": "array",
+              "description": "Metadata describing entities utilizing this theme",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ThemeResponse": {
+      "id": "ThemeResponse",
+      "description": "The API response format for theme resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        { "$ref": "#/definitions/ApiResponse" },
+        {          
+          "required": [
+            "themes"
+          ],
+          "properties": {
+            "themes": {
+              "type": "array",
+              "description": "Array of requested theme resources",
+              "items": {
+                "$ref": "#/definitions/Theme"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "User": {
+      "id": "User",
+      "description": "The representation of a user on the stori.es platform",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "required": [
+            "handle",
+            "links"
+          ],
+          "properties": {
+            "handle": {
+              "type": "string",
+              "description": "The user handle",
+              "maximum": 64
+            },
+            "links": {
+              "$ref": "#/definitions/UserResourceLinks",
+              "description": "Metadata describing resources associated with this entity"
+            }
+          }
+        }
+      ]
+    },
+    "UserPost": {
+      "id": "UserPost",
+      "description": "The representation of a new user to be added to the stori.es platform",
+      "required": [
+        "handle"
+      ],
+      "properties": {
+        "handle": {
+          "type": "string",
+          "description": "The user handle",
+          "maximum": 64
+        },
+        "profile_ids": {
+          "type": "array",
+          "description": "The IDs of organization-specific profiles associated with this user",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "default_profile_id": {
+          "type": "integer",
+          "description": "The ID of the default profile associated with this user"
+        }
+      }
+    },
+    "UserResourceLinks": {
+      "id": "UserResourceLinks",
+      "description": "Metadata describing associated resources for users",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceLinks"
+        },
+        {
+          "required": [
+            "profiles",
+            "default_profile"
+          ],
+          "properties": {
+            "profiles": {
+              "type": "array",
+              "description": "Metadata describing organization-specific profiles associated with this user",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            },
+            "default_profile": {
+              "$ref": "#/definitions/ResourceLink",
+              "description": "The default profile associated with this user"
+            },
+            "notes": {
+              "type": "array",
+              "description": "Metadata describing note documents associated with this entity",
+              "items": {
+                "$ref": "#/definitions/ResourceLink"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "UserResponse": {
+      "id": "UserResponse",
+      "description": "The API response format for user resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApiResponse"
+        },
+        {
+          "required": [
+            "users"
+          ],
+          "properties": {
+            "users": {
+              "type": "array",
+              "description": "Array of requested user resources",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
