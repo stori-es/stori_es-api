@@ -2675,7 +2675,7 @@
           "format": "int32",
           "description": "Starting index, 0-based (default = 0)",
           "minimum": 0,
-          "defaultValue": 0
+          "default": 0
         },
         "sort": {
           "description": "Sort order, indexed by resource",
