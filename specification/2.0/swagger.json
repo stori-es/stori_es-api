@@ -1905,12 +1905,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         }
       }
     },
@@ -1933,12 +1933,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2058,7 +2058,7 @@
     },
     "CollectionResponse": {
       "id": "CollectionResponse",
-      "description": "The API response format for collection resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for collection resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "collections"
@@ -2123,12 +2123,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2175,7 +2175,7 @@
         "published_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The initial publication date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         }
       }
     },
@@ -2275,7 +2275,7 @@
     },
     "DocumentResponse": {
       "id": "DocumentResponse",
-      "description": "The API response format for document resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for document resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "documents"
@@ -2461,12 +2461,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2650,7 +2650,7 @@
     },
     "OrganizationResponse": {
       "id": "OrganizationResponse",
-      "description": "The API response format for organization resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for organization resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "organizations"
@@ -2716,12 +2716,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2805,7 +2805,7 @@
     },
     "PermissionResponse": {
       "id": "PermissionResponse",
-      "description": "The API response format for permission resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for permission resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "permissions"
@@ -2860,12 +2860,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2985,7 +2985,7 @@
     },
     "ProfileResponse": {
       "id": "ProfileResponse",
-      "description": "The API response format for profile resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for profile resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "profiles"
@@ -3023,12 +3023,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -3172,7 +3172,7 @@
     },
     "QuestionnaireResponse": {
       "id": "QuestionnaireResponse",
-      "description": "The API response format for questionnaire resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for questionnaire resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "questionnaires"
@@ -3318,12 +3318,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -3448,7 +3448,7 @@
     },
     "StoryResponse": {
       "id": "StoryResponse",
-      "description": "The API response format for story resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for story resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "stories"
@@ -3486,12 +3486,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -3549,7 +3549,7 @@
     },
     "ThemeResponse": {
       "id": "ThemeResponse",
-      "description": "The API response format for theme resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for theme resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "themes"
@@ -3587,12 +3587,12 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see [RFC3339](http://tools.ietf.org/html/rfc3339))"
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -3695,7 +3695,7 @@
     },
     "UserResponse": {
       "id": "UserResponse",
-      "description": "The API response format for user resources on the stori.es platform; follows the [JSON API](http://jsonapi.org) standard",
+      "description": "The API response format for user resources on the stori.es platform; follows the <a href=\"http://jsonapi.org/\" title=\"JSON API Standard\">JSON API</a> standard",
       "required": [
         "meta",
         "users"
