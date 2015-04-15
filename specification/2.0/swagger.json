@@ -2111,6 +2111,7 @@
         "updated_on",
         "is_archived",
         "document_type",
+        "locale",
         "byline",
         "links",
         "publication_status"
@@ -2143,6 +2144,14 @@
             "FormDocument",
             "NoteDocument",
             "ResponseDocument"
+          ]
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of the document",
+          "enum": [
+            "en-US",
+            "es-US"
           ]
         },
         "title": {
