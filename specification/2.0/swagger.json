@@ -3385,11 +3385,11 @@
     "StoryResourceLinks": {
       "id": "StoryResourceLinks",
       "description": "Metadata describing associated resources for stories",
+      "required": [
+        "creator",
+        "owner"          
+      ],
       "properties": {
-        "required": [
-          "creator",
-          "owner"          
-        ],
         "contents": {
           "type": "array",
           "description": "Metadata describing content documents associated with this entity",
@@ -3603,6 +3603,13 @@
           "description": "The user handle",
           "maximum": 64
         },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
         "links": {
           "$ref": "#/definitions/UserResourceLinks",
           "description": "Metadata describing resources associated with this entity"
@@ -3631,6 +3638,13 @@
         "default_profile_id": {
           "type": "integer",
           "description": "The ID of the default profile associated with this user"
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts associated with this entity",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
         }
       }
     },
