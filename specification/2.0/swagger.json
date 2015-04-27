@@ -1847,69 +1847,304 @@
     "Block": {
       "description": "The representation of a block on the stori.es platform",
       "required": [
-        "id",
-        "block_type",
-        "is_question",
-        "created_on",
-        "updated_on"
+        "block_type"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID for this entity"
-        },
         "block_type": {
           "type": "string",
           "description": "The type of block this entity represents",
           "enum": [
-            "/block_types/text",
-            "/block_types/document",
-            "/block_types/image",
-            "/block_types/audio",
-            "/block_types/video",
-            "/block_types/collection",
-            "/block_types/permission",
-            "/block_types/story_title",
-            "/block_types/story_ask",
-            "/block_types/first_name",
-            "/block_types/last_name",
-            "/block_types/email",
-            "/block_types/phone",
-            "/block_types/street_address",
-            "/block_types/city",
-            "/block_types/state",
-            "/block_types/zip_code",
-            "/block_types/updates_opt_in",
-            "/block_types/preferred_email_format",
-            "/block_types/text_field",
-            "/block_types/text_area",
-            "/block_types/single_choice",
-            "/block_types/multiple_choice",
-            "/block_types/date",
-            "/block_types/attachments"
+            "AttachmentsQuestionBlock",
+            "AudioContentBlock",
+            "ButtonBlock",
+            "CityQuestionBlock",
+            "CollectionContentBlock",
+            "DateQuestionBlock",
+            "DocumentContentBlock",
+            "EmailFormatQuestionBlock",
+            "EmailQuestionBlock",
+            "FirstNameQuestionBlock",
+            "ImageContentBlock",
+            "LastNameQuestionBlock",
+            "MultipleChoiceQuestionBlock",
+            "PermissionBlock",
+            "PhoneQuestionBlock",
+            "RatingQuestionBlock",
+            "StateQuestionBlock",
+            "StoryAskQuestionBlock",
+            "StoryContentBlock",
+            "StoryTitleQuestionBlock",
+            "StreetAddressQuestionBlock",
+            "SubscriptionQuestionBlock",
+            "TextBoxQuestionBlock",
+            "TextContentBlock",
+            "VideoContentBlock",
+            "ZipCodeQuestionBlock"
           ]
         },
-        "title": {
+        "label": {
           "type": "string",
-          "description": "The title of this entity"
+          "description": "The label of this block",
+          "maximum": 255
+        },
+        "help_text": {
+          "type": "string",
+          "description": "The help text associated with this block",
+          "maximum": 512
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Boolean indicating a response to this question block is required"
+        },
+        "format": {
+          "type": "string",
+          "description": "The format of the block",
+          "enum": [
+            "single_line",
+            "multiple_lines_plain_text",
+            "multiple_lines_rich_text",
+            "single_select_radio",
+            "single_select_dropdown",
+            "multi_select_list",
+            "multi_select_checkbox",
+            "numbers",
+            "stars"
+          ]
+        },
+        "minimum_length": {
+          "type": "integer",
+          "description": "The minimum length of this block's value"
+        },
+        "maximum_length": {
+          "type": "integer",
+          "description": "The maximum length of this block's value"
+        },
+        "default_value": {
+          "type": "string",
+          "description": "The default value of this block"
         },
         "value": {
           "type": "string",
-          "description": "The current value of this block, a JSON data structure unique to each block type (TBD)"
+          "description": "The current value of this block"
         },
-        "is_question": {
+        "value_label": {
+          "type": "string",
+          "description": "The label of this block's value",
+          "enum": [
+            "Home",
+            "Mobile",
+            "Work",
+            "Other"
+          ]
+        },
+        "horizontal_position": {
+          "type": "string",
+          "description": "The horizontal position of the entity",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "description": "The relative size of the block",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        },
+        "options": {
+          "type": "array",
+          "description": "The options associated with this block",
+          "items": {
+            "$ref": "#/definitions/BlockOption"
+          }
+        },
+        "next_document": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the next document associated with this entity"
+        },
+        "audio": {
+          "$ref": "#/definitions/BlockAudioAttribute",
+          "description": "The audio associated with this block"
+        },
+        "collection": {
+          "$ref": "#/definitions/BlockCollectionAttribute",
+          "description": "The collection associated with this block"
+        },
+        "document": {
+          "$ref": "#/definitions/BlockDocumentAttribute",
+          "description": "The document associated with this block"
+        },
+        "image": {
+          "$ref": "#/definitions/BlockImageAttribute",
+          "description": "The image associated with this block"
+        },
+        "story": {
+          "$ref": "#/definitions/BlockStoryAttribute",
+          "description": "The story associated with this block"
+        },
+        "video": {
+          "$ref": "#/definitions/BlockVideoAttribute",
+          "description": "The video associated with this block"
+        }
+      }
+    },
+    "BlockAudioAttribute": {
+      "description": "The representation of an audio object associated with a block on the stori.es platform",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the entity",
+          "maximum": 250
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the entity",
+          "maximum": 250
+        },
+        "caption": {
+          "type": "string",
+          "description": "The text caption of the entity",
+          "maximum": 250
+        }
+      }
+    },
+    "BlockCollectionAttribute": {
+      "description": "The representation of a collection associated with a block on the stori.es platform",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the entity",
+          "maximum": 250
+        }
+      }
+    },
+    "BlockDocumentAttribute": {
+      "description": "The representation of an external document associated with a block on the stori.es platform",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the entity",
+          "maximum": 250
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the entity",
+          "maximum": 250
+        }
+      }
+    },
+    "BlockImageAttribute": {
+      "description": "The representation of an image associated with a block on the stori.es platform",
+      "required": [
+        "url",
+        "horizontal_position",
+        "size"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the entity",
+          "maximum": 250
+        },
+        "horizontal_position": {
+          "type": "string",
+          "description": "The horizontal position of the entity",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "description": "The relative size of the entity",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
+        },
+        "caption": {
+          "type": "string",
+          "description": "The text caption of the entity"
+        },
+        "alt_text": {
+          "type": "string",
+          "description": "The alternative text for the entity (e.g., for screen readers)",
+          "maximum": 250
+        }
+      }
+    },
+    "BlockOption": {
+      "description": "The representation of an option associated with a block on the stori.es platform",
+      "required": [
+        "id",
+        "value",
+        "selected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the option",
+          "maximum": 255
+        },
+        "value": {
+          "type": "string",
+          "description": "The display value of the option",
+          "maximum": 255
+        },
+        "selected": {
           "type": "boolean",
-          "description": "Boolean flag indicating this block solicits responses"
-        },
-        "created_on": {
+          "description": "Boolean indicating this option is selected"
+        }
+      }
+    },
+    "BlockStoryAttribute": {
+      "description": "The representation of a story associated with a block on the stori.es platform",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
           "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
+          "description": "The URL of the entity",
+          "maximum": 250
+        }
+      }
+    },
+    "BlockVideoAttribute": {
+      "description": "The representation of a video object associated with a block on the stori.es platform",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
           "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+          "description": "The URL of the entity",
+          "maximum": 250
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the entity",
+          "maximum": 250
+        },
+        "caption": {
+          "type": "string",
+          "description": "The text caption of the entity",
+          "maximum": 250
         }
       }
     },
