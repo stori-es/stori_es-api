@@ -2163,20 +2163,6 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
@@ -2192,6 +2178,20 @@
             "type": "string",
             "maximum": 45
           }
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
@@ -2341,6 +2341,7 @@
         "document_type",
         "locale",
         "byline",
+        "blocks",
         "links",
         "publication_status"
       ],
@@ -2348,20 +2349,6 @@
         "id": {
           "type": "integer",
           "description": "The unique ID for this entity"
-        },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
         },
         "document_type": {
           "type": "string",
@@ -2401,6 +2388,16 @@
           "$ref": "#/definitions/DocumentResourceLinks",
           "description": "Metadata describing resources associated with this entity"
         },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
         "publication_status": {
           "type": "string",
           "description": "The current publication status of this entity",
@@ -2413,6 +2410,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
@@ -2686,20 +2687,6 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        },
         "name": {
           "type": "string",
           "description": "The organization name (maximum 128 characters)",
@@ -2720,6 +2707,20 @@
         "links": {
           "$ref": "#/definitions/OrganizationResourceLinks",
           "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
@@ -2936,6 +2937,14 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity"
+        },
+        "links": {
+          "$ref": "#/definitions/PermissionResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
         "created_on": {
           "type": "string",
           "format": "date-time",
@@ -2949,14 +2958,6 @@
         "is_archived": {
           "type": "boolean",
           "description": "Status (true == archived; false == enabled)"
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of this entity"
-        },
-        "links": {
-          "$ref": "#/definitions/PermissionResourceLinks",
-          "description": "Metadata describing resources associated with this entity"
         }
       }
     },
@@ -3075,20 +3076,6 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        },
         "given_name": {
           "type": "string",
           "description": "The first name associated with this profile",
@@ -3109,6 +3096,20 @@
         "links": {
           "$ref": "#/definitions/ProfileResourceLinks",
           "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
@@ -3234,20 +3235,6 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        },
         "title": {
           "type": "string",
           "description": "The title of this entity"
@@ -3271,6 +3258,20 @@
             "type": "string",
             "maximum": 45
           }
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
@@ -3522,6 +3523,18 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
+        "links": {
+          "$ref": "#/definitions/StoryResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with this entity",
+          "items": {
+            "type": "string",
+            "maximum": 45
+          }
+        },
         "created_on": {
           "type": "string",
           "format": "date-time",
@@ -3535,18 +3548,6 @@
         "is_archived": {
           "type": "boolean",
           "description": "Status (true == archived; false == enabled)"
-        },
-        "links": {
-          "$ref": "#/definitions/StoryResourceLinks",
-          "description": "Metadata describing resources associated with this entity"
-        },
-        "tags": {
-          "type": "array",
-          "description": "Tags associated with this entity",
-          "items": {
-            "type": "string",
-            "maximum": 45
-          }
         }
       }
     },
@@ -3686,6 +3687,15 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity",
+          "maximum": 256
+        },
+        "links": {
+          "$ref": "#/definitions/ThemeResourceLinks",
+          "description": "Metadata describing resources associated with this entity"
+        },
         "created_on": {
           "type": "string",
           "format": "date-time",
@@ -3699,15 +3709,6 @@
         "is_archived": {
           "type": "boolean",
           "description": "Status (true == archived; false == enabled)"
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of this entity",
-          "maximum": 256
-        },
-        "links": {
-          "$ref": "#/definitions/ThemeResourceLinks",
-          "description": "Metadata describing resources associated with this entity"
         }
       }
     },
@@ -3784,20 +3785,6 @@
           "type": "integer",
           "description": "The unique ID for this entity"
         },
-        "created_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "is_archived": {
-          "type": "boolean",
-          "description": "Status (true == archived; false == enabled)"
-        },
         "handle": {
           "type": "string",
           "description": "The user handle",
@@ -3813,6 +3800,20 @@
         "links": {
           "$ref": "#/definitions/UserResourceLinks",
           "description": "Metadata describing resources associated with this entity"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "is_archived": {
+          "type": "boolean",
+          "description": "Status (true == archived; false == enabled)"
         }
       }
     },
