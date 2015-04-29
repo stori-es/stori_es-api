@@ -2161,9 +2161,6 @@
       "description": "The representation of a collection on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "title",
         "links"
       ],
@@ -2191,15 +2188,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -2349,9 +2349,6 @@
       "description": "The representation of a document on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "document_type",
         "locale",
         "byline",
@@ -2405,11 +2402,13 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "publication_status": {
@@ -2423,10 +2422,12 @@
         "published_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -2699,9 +2700,6 @@
       "description": "The representation of an organization on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "name",
         "links"
       ],
@@ -2734,15 +2732,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -2955,9 +2956,6 @@
       "description": "The representation of a permission on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "links"
       ],
       "properties": {
@@ -2976,15 +2974,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -3099,9 +3100,6 @@
       "description": "The representation of a profile on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "links"
       ],
       "properties": {
@@ -3133,15 +3131,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -3261,9 +3262,6 @@
       "description": "The representation of a questionnaire on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "title",
         "links"
       ],
@@ -3299,15 +3297,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -3557,9 +3558,7 @@
       "description": "The representation of a story on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
+
         "links"
       ],
       "properties": {
@@ -3582,15 +3581,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -3724,9 +3726,6 @@
       "description": "The representation of a theme on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "title",
         "links"
       ],
@@ -3747,15 +3746,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
@@ -3825,9 +3827,6 @@
       "description": "The representation of a user on the stori.es platform",
       "required": [
         "id",
-        "created_on",
-        "updated_on",
-        "is_archived",
         "handle",
         "links"
       ],
@@ -3855,15 +3854,18 @@
         "created_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The creation date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "updated_on": {
           "type": "string",
           "format": "date-time",
+          "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Status (true == archived; false == enabled)"
         }
       }
