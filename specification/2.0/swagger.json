@@ -2162,7 +2162,10 @@
       "required": [
         "id",
         "title",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -2354,7 +2357,10 @@
         "byline",
         "blocks",
         "links",
-        "publication_status"
+        "created_on",
+        "updated_on",
+        "publication_status",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -2386,7 +2392,7 @@
         },
         "byline": {
           "type": "string",
-          "description": "The byline of this entity; defaults to [Owner Given Name] of [Owner City], [Owner State]"
+          "description": "The byline of this entity; defaults to \"[Owner Given Name] of [Owner City], [Owner State]\""
         },
         "blocks": {
           "type": "array",
@@ -2701,7 +2707,10 @@
       "required": [
         "id",
         "name",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -2956,7 +2965,10 @@
       "description": "The representation of a permission on the stori.es platform",
       "required": [
         "id",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -3100,7 +3112,10 @@
       "description": "The representation of a profile on the stori.es platform",
       "required": [
         "id",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -3263,7 +3278,10 @@
       "required": [
         "id",
         "title",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -3558,8 +3576,10 @@
       "description": "The representation of a story on the stori.es platform",
       "required": [
         "id",
-
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -3727,7 +3747,10 @@
       "required": [
         "id",
         "title",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
@@ -3828,7 +3851,10 @@
       "required": [
         "id",
         "handle",
-        "links"
+        "links",
+        "created_on",
+        "updated_on",
+        "is_archived"
       ],
       "properties": {
         "id": {
