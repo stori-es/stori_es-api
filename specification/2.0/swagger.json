@@ -1883,7 +1883,7 @@
             "ZipCodeQuestionBlock"
           ]
         },
-        "label": {
+        "labels": {
           "$ref": "#/definitions/BlockLabels",
           "description": "String labels associated with this block"
         },
@@ -1917,11 +1917,11 @@
             "$ref": "#/definitions/BlockOption"
           }
         },
-        "style": {
+        "styles": {
           "$ref": "#/definitions/BlockStyles",
           "description": "Styles associated with this block"
         },
-        "constraint": {
+        "constraints": {
           "$ref": "#/definitions/BlockConstraints",
           "description": "Constraints associated with this block"
         },
@@ -2454,7 +2454,7 @@
         },
         "blocks": {
           "type": "array",
-          "description": "The set of blocks that compose this document",
+          "description": "The array of blocks that compose this document",
           "items": {
             "$ref": "#/definitions/Block"
           }
