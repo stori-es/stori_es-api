@@ -1885,7 +1885,7 @@
         },
         "labels": {
           "$ref": "#/definitions/BlockLabels",
-          "description": "String labels associated with this block"
+          "description": "The string labels associated with this block"
         },
         "format": {
           "type": "string",
@@ -1919,23 +1919,23 @@
         },
         "styles": {
           "$ref": "#/definitions/BlockStyles",
-          "description": "Styles associated with this block"
+          "description": "The styles associated with this block"
         },
         "constraints": {
           "$ref": "#/definitions/BlockConstraints",
-          "description": "Constraints associated with this block"
+          "description": "The constraints associated with this block"
         },
         "audio": {
           "$ref": "#/definitions/AudioResourceLink",
-          "description": "The audio associated with this block"
+          "description": "The audio resource associated with this block"
         },
         "collection": {
           "$ref": "#/definitions/CollectionResourceLink",
-          "description": "The collection associated with this block"
+          "description": "The stori.es collection associated with this block"
         },
         "document": {
           "$ref": "#/definitions/DocumentResourceLink",
-          "description": "The document associated with this block"
+          "description": "The document resource associated with this block"
         },
         "image": {
           "$ref": "#/definitions/ImageResourceLink",
@@ -1943,15 +1943,15 @@
         },
         "permission": {
           "$ref": "#/definitions/PermissionResourceLink",
-          "description": "The permission associated with this block"
+          "description": "The stori.es permission associated with this block"
         },
         "story": {
           "$ref": "#/definitions/StoryResourceLink",
-          "description": "The story associated with this block"
+          "description": "The stori.es story associated with this block"
         },
         "video": {
           "$ref": "#/definitions/VideoResourceLink",
-          "description": "The video associated with this block"
+          "description": "The video resource associated with this block"
         },
         "next_document": {
           "$ref": "#/definitions/ResourceLink",
@@ -2003,12 +2003,12 @@
         },
         "left": {
           "type": "string",
-          "description": "The label of this block's left value",
+          "description": "The label of this block's left side",
           "maximum": 25
         },
         "right": {
           "type": "string",
-          "description": "The label of this block's right value",
+          "description": "The label of this block's right side",
           "maximum": 25
         }
       }
