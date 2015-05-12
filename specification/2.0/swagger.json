@@ -2383,7 +2383,6 @@
     "Contact": {
       "type": "object",
       "description": "The representation of a contact associated with this entity",
-      "discriminator": "contact_type",
       "required": [
         "contact_type",
         "title"
@@ -2402,6 +2401,14 @@
         "title": {
           "type": "string",
           "description": "The title of this contact"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of this contact"
+        },
+        "location": {
+          "$ref": "#/definitions/Location",
+          "description": "The geographic location associated with this contact"
         }
       }
     },
@@ -2607,66 +2614,43 @@
         }
       }
     },
-    "EmailContact": {
+    "Location": {
       "type": "object",
-      "description": "The representation of an email contact associated with this entity",
-      "allOf": [
-        { "$ref": "#/definitions/Contact" },
-        {
-          "required": [
-            "value"
-          ],
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "The value of this contact"
-            }
-          }
+      "description": "The representation of a geographic location",
+      "properties": {
+        "street_address_1": {
+          "type": "string",
+          "description": "Street address (first line)"
+        },
+        "street_address_2": {
+          "type": "string",
+          "description": "Street address (second line)"
+        },
+        "city": {
+          "type": "string",
+          "description": "City"
+        },
+        "state": {
+          "type": "string",
+          "description": "State"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal Code"
+        },
+        "latitude": {
+          "type": "string",
+          "description": "Latitude"
+        },
+        "longitude": {
+          "type": "string",
+          "description": "Longitude"
         }
-      ]
-    },
-    "GeolocationContact": {
-      "type": "object",
-      "description": "The representation of a geolocation contact associated with this entity",
-      "allOf": [
-        { "$ref": "#/definitions/Contact" },
-        {
-          "properties": {
-            "street_address_1": {
-              "type": "string",
-              "description": "Street address (first line)"
-            },
-            "street_address_2": {
-              "type": "string",
-              "description": "Street address (second line)"
-            },
-            "city": {
-              "type": "string",
-              "description": "City"
-            },
-            "state": {
-              "type": "string",
-              "description": "State"
-            },
-            "country": {
-              "type": "string",
-              "description": "Country"
-            },
-            "postal_code": {
-              "type": "string",
-              "description": "Postal Code"
-            },
-            "latitude": {
-              "type": "string",
-              "description": "Latitude"
-            },
-            "longitude": {
-              "type": "string",
-              "description": "Longitude"
-            }
-          }
-        }
-      ]
+      }
     },
     "Message": {
       "type": "object",
@@ -3143,24 +3127,6 @@
         }
       }
     },
-    "PhoneContact": {
-      "type": "object",
-      "description": "The representation of a phone contact associated with this entity",
-      "allOf": [
-        { "$ref": "#/definitions/Contact" },
-        {
-          "required": [
-            "value"
-          ],
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "The value of this contact"
-            }
-          }
-        }
-      ]
-    },
     "Profile": {
       "type": "object",
       "description": "The representation of a profile on the stori.es platform",
@@ -3528,24 +3494,6 @@
           "description": "The URL of the resource"
         }
       }
-    },
-    "SocialContact": {
-      "type": "object",
-      "description": "The representation of a social contact associated with this entity",
-      "allOf": [
-        { "$ref": "#/definitions/Contact" },
-        {
-          "required": [
-            "value"
-          ],
-          "properties": {
-            "value": {
-              "type": "string",
-              "description": "The value of this contact"
-            }
-          }
-        }
-      ]
     },
     "Sort": {
       "type": "object",
