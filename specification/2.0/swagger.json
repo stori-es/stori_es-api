@@ -1956,6 +1956,16 @@
             "large"
           ]
         },
+        "left_label": {
+          "type": "string",
+          "description": "The label of this block's left value",
+          "maximum": 25
+        },
+        "right_label": {
+          "type": "string",
+          "description": "The label of this block's right value",
+          "maximum": 25
+        },
         "options": {
           "type": "array",
           "description": "The options associated with this block",
@@ -1968,39 +1978,43 @@
           "description": "Metadata describing the next document associated with this entity"
         },
         "audio": {
-          "$ref": "#/definitions/BlockAudioAttribute",
+          "$ref": "#/definitions/AudioResourceLink",
           "description": "The audio associated with this block"
         },
         "collection": {
-          "$ref": "#/definitions/BlockCollectionAttribute",
+          "$ref": "#/definitions/CollectionResourceLink",
           "description": "The collection associated with this block"
         },
         "document": {
-          "$ref": "#/definitions/BlockDocumentAttribute",
+          "$ref": "#/definitions/DocumentResourceLink",
           "description": "The document associated with this block"
         },
         "image": {
-          "$ref": "#/definitions/BlockImageAttribute",
+          "$ref": "#/definitions/ImageResourceLink",
           "description": "The image associated with this block"
         },
+        "permission": {
+          "$ref": "#/definitions/PermissionResourceLink",
+          "description": "The permission associated with this block"
+        },
         "story": {
-          "$ref": "#/definitions/BlockStoryAttribute",
+          "$ref": "#/definitions/StoryResourceLink",
           "description": "The story associated with this block"
         },
         "video": {
-          "$ref": "#/definitions/BlockVideoAttribute",
+          "$ref": "#/definitions/VideoResourceLink",
           "description": "The video associated with this block"
         }
       }
     },
-    "BlockAudioAttribute": {
+    "AudioResourceLink": {
       "type": "object",
-      "description": "The representation of an audio object associated with a block on the stori.es platform",
+      "description": "The representation of an audio resource associated with a block on the stori.es platform",
       "required": [
-        "url"
+        "href"
       ],
       "properties": {
-        "url": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
@@ -2017,28 +2031,28 @@
         }
       }
     },
-    "BlockCollectionAttribute": {
+    "CollectionResourceLink": {
       "type": "object",
       "description": "The representation of a collection associated with a block on the stori.es platform",
       "required": [
-        "url"
+        "href"
       ],
       "properties": {
-        "url": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
         }
       }
     },
-    "BlockDocumentAttribute": {
+    "DocumentResourceLink": {
       "type": "object",
-      "description": "The representation of an external document associated with a block on the stori.es platform",
+      "description": "The representation of an external document resource associated with a block on the stori.es platform",
       "required": [
-        "url"
+        "href"
       ],
       "properties": {
-        "url": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
@@ -2050,16 +2064,16 @@
         }
       }
     },
-    "BlockImageAttribute": {
+    "ImageResourceLink": {
       "type": "object",
-      "description": "The representation of an image associated with a block on the stori.es platform",
+      "description": "The representation of an image resource associated with a block on the stori.es platform",
       "required": [
-        "url",
+        "href",
         "horizontal_position",
         "size"
       ],
       "properties": {
-        "url": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
@@ -2118,28 +2132,42 @@
         }
       }
     },
-    "BlockStoryAttribute": {
+    "PermissionResourceLink": {
       "type": "object",
-      "description": "The representation of a story associated with a block on the stori.es platform",
+      "description": "The representation of a permission associated with a block on the stori.es platform",
       "required": [
-        "url"
+        "href"
       ],
       "properties": {
-        "url": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
         }
       }
     },
-    "BlockVideoAttribute": {
+    "StoryResourceLink": {
       "type": "object",
-      "description": "The representation of a video object associated with a block on the stori.es platform",
+      "description": "The representation of a story associated with a block on the stori.es platform",
       "required": [
-        "url"
+        "href"
       ],
       "properties": {
-        "url": {
+        "href": {
+          "type": "string",
+          "description": "The URL of the entity",
+          "maximum": 250
+        }
+      }
+    },
+    "VideoResourceLink": {
+      "type": "object",
+      "description": "The representation of a video resource associated with a block on the stori.es platform",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
           "type": "string",
           "description": "The URL of the entity",
           "maximum": 250
@@ -2475,10 +2503,6 @@
           "type": "integer",
           "description": "The ID of the entity this document is associated with"
         },
-        "source_url": {
-          "type": "string",
-          "description": "The URL of the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
-        },
         "theme_id": {
           "type": "integer",
           "description": "The ID of the theme associated with this entity"
@@ -2634,8 +2658,8 @@
           "type": "string",
           "description": "stori.es internal message code"
         },
-        "detail_url": {
-          "type": "string",
+        "detail": {
+          "$ref": "#/definitions/ResourceLink",
           "description": "URL for message details"
         }
       }
