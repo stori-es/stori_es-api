@@ -1884,18 +1884,8 @@
           ]
         },
         "label": {
-          "type": "string",
-          "description": "The label of this block",
-          "maximum": 255
-        },
-        "help_text": {
-          "type": "string",
-          "description": "The help text associated with this block",
-          "maximum": 512
-        },
-        "required": {
-          "type": "boolean",
-          "description": "Boolean indicating a response to this question block is required"
+          "$ref": "#/definitions/BlockLabels",
+          "description": "String labels associated with this block"
         },
         "format": {
           "type": "string",
@@ -1912,14 +1902,6 @@
             "stars"
           ]
         },
-        "minimum_length": {
-          "type": "integer",
-          "description": "The minimum length of this block's value"
-        },
-        "maximum_length": {
-          "type": "integer",
-          "description": "The maximum length of this block's value"
-        },
         "default_value": {
           "type": "string",
           "description": "The default value of this block"
@@ -1928,44 +1910,6 @@
           "type": "string",
           "description": "The current value of this block"
         },
-        "value_label": {
-          "type": "string",
-          "description": "The label of this block's value",
-          "enum": [
-            "Home",
-            "Mobile",
-            "Work",
-            "Other"
-          ]
-        },
-        "horizontal_position": {
-          "type": "string",
-          "description": "The horizontal position of the entity",
-          "enum": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "size": {
-          "type": "string",
-          "description": "The relative size of the block",
-          "enum": [
-            "small",
-            "medium",
-            "large"
-          ]
-        },
-        "left_label": {
-          "type": "string",
-          "description": "The label of this block's left value",
-          "maximum": 25
-        },
-        "right_label": {
-          "type": "string",
-          "description": "The label of this block's right value",
-          "maximum": 25
-        },
         "options": {
           "type": "array",
           "description": "The options associated with this block",
@@ -1973,9 +1917,13 @@
             "$ref": "#/definitions/BlockOption"
           }
         },
-        "next_document": {
-          "$ref": "#/definitions/ResourceLink",
-          "description": "Metadata describing the next document associated with this entity"
+        "style": {
+          "$ref": "#/definitions/BlockStyles",
+          "description": "Styles associated with this block"
+        },
+        "constraint": {
+          "$ref": "#/definitions/BlockConstraints",
+          "description": "Constraints associated with this block"
         },
         "audio": {
           "$ref": "#/definitions/AudioResourceLink",
@@ -2004,6 +1952,88 @@
         "video": {
           "$ref": "#/definitions/VideoResourceLink",
           "description": "The video associated with this block"
+        },
+        "next_document": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the next document associated with this entity"
+        }
+      }
+    },
+    "BlockConstraints": {
+      "type": "object",
+      "description": "The constraints associated with a block on the stori.es platform",
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "Boolean indicating a response to this question block is required"
+        },
+        "minimum_length": {
+          "type": "integer",
+          "description": "The minimum length of this block's value"
+        },
+        "maximum_length": {
+          "type": "integer",
+          "description": "The maximum length of this block's value"
+        }
+      }
+    },
+    "BlockLabels": {
+      "type": "object",
+      "description": "The labels associated with a block on the stori.es platform",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "The primary label of this block",
+          "maximum": 255
+        },
+        "help": {
+          "type": "string",
+          "description": "The help text associated with this block",
+          "maximum": 512
+        },
+        "value": {
+          "type": "string",
+          "description": "The label of this block's value",
+          "enum": [
+            "Home",
+            "Mobile",
+            "Work",
+            "Other"
+          ]
+        },
+        "left": {
+          "type": "string",
+          "description": "The label of this block's left value",
+          "maximum": 25
+        },
+        "right": {
+          "type": "string",
+          "description": "The label of this block's right value",
+          "maximum": 25
+        }
+      }
+    },
+    "BlockStyles": {
+      "type": "object",
+      "description": "The styles associated with a block on the stori.es platform",
+      "properties": {
+        "horizontal_position": {
+          "type": "string",
+          "description": "The horizontal position of the entity",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "description": "The relative size of the entity",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ]
         }
       }
     },
