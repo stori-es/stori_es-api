@@ -2013,6 +2013,31 @@
         }
       }
     },
+    "BlockOption": {
+      "type": "object",
+      "description": "The representation of an option associated with a block on the stori.es platform",
+      "required": [
+        "id",
+        "value",
+        "selected"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the option",
+          "maximum": 255
+        },
+        "value": {
+          "type": "string",
+          "description": "The display value of the option",
+          "maximum": 255
+        },
+        "selected": {
+          "type": "boolean",
+          "description": "Boolean indicating this option is selected"
+        }
+      }
+    },
     "BlockStyles": {
       "type": "object",
       "description": "The styles associated with a block on the stori.es platform",
@@ -2134,31 +2159,6 @@
           "type": "string",
           "description": "The alternative text for the entity (e.g., for screen readers)",
           "maximum": 250
-        }
-      }
-    },
-    "BlockOption": {
-      "type": "object",
-      "description": "The representation of an option associated with a block on the stori.es platform",
-      "required": [
-        "id",
-        "value",
-        "selected"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the option",
-          "maximum": 255
-        },
-        "value": {
-          "type": "string",
-          "description": "The display value of the option",
-          "maximum": 255
-        },
-        "selected": {
-          "type": "boolean",
-          "description": "Boolean indicating this option is selected"
         }
       }
     },
@@ -3648,6 +3648,13 @@
             "type": "integer"
           }
         },
+        "collection_ids": {
+          "type": "array",
+          "description": "The IDs of collections associated with this entity",
+          "items": {
+            "type": "integer"
+          }
+        },
         "tags": {
           "type": "array",
           "description": "Tags associated with this entity",
@@ -3701,6 +3708,13 @@
         "attachments": {
           "type": "array",
           "description": "Metadata describing attachment documents associated with this entity",
+          "items": {
+            "$ref": "#/definitions/ResourceLink"
+          }
+        },
+        "collections": {
+          "type": "array",
+          "description": "Metadata describing collections associated with this entity",
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
