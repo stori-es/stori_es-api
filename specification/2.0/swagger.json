@@ -1917,6 +1917,14 @@
             "$ref": "#/definitions/BlockOption"
           }
         },
+        "interaction": {
+          "type": "string",
+          "description": "The interaction style of the block",
+          "enum": [
+            "discrete",
+            "half"
+          ]
+        },
         "styles": {
           "$ref": "#/definitions/BlockStyles",
           "description": "The styles associated with this block"
