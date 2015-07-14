@@ -1841,6 +1841,46 @@
           }
         }
       }
+    },
+    "/users/self": {
+      "get": {
+        "summary": "Retrieve the current user",
+        "description": "This endpoint requires the API user to be currently signed into the stori.es administrative dashboard for authentication purposes",
+        "tags": [ "Users" ],
+        "operationId": "get_self",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access the requested resource",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          },
+          "503": {
+            "description": "Service is currently unavailable",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
