@@ -66,10 +66,10 @@
         "tags": [ "Collections" ],
         "operationId": "create_collection",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -117,10 +117,10 @@
         "tags": [ "Collections" ],
         "operationId": "get_collection",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -164,10 +164,10 @@
         "tags": [ "Collections" ],
         "operationId": "delete_collection",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -211,10 +211,10 @@
         "tags": [ "Collections" ],
         "operationId": "update_collection",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -275,10 +275,10 @@
         "tags": [ "Documents" ],
         "operationId": "create_document",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -326,10 +326,10 @@
         "tags": [ "Documents" ],
         "operationId": "get_document",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -373,10 +373,10 @@
         "tags": [ "Documents" ],
         "operationId": "delete_document",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -420,10 +420,10 @@
         "tags": [ "Documents" ],
         "operationId": "update_document",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -484,10 +484,10 @@
         "tags": [ "Organizations" ],
         "operationId": "create_organization",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -535,10 +535,10 @@
         "tags": [ "Organizations" ],
         "operationId": "get_organization",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -582,10 +582,10 @@
         "tags": [ "Organizations" ],
         "operationId": "delete_organization",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -629,10 +629,10 @@
         "tags": [ "Organizations" ],
         "operationId": "update_organization",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -693,10 +693,10 @@
         "tags": [ "Permissions" ],
         "operationId": "create_permission",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -744,10 +744,10 @@
         "tags": [ "Permissions" ],
         "operationId": "get_permission",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -791,10 +791,10 @@
         "tags": [ "Permissions" ],
         "operationId": "delete_permission",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -838,10 +838,10 @@
         "tags": [ "Permissions" ],
         "operationId": "update_permission",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -902,10 +902,10 @@
         "tags": [ "Profiles" ],
         "operationId": "create_profile",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -953,10 +953,10 @@
         "tags": [ "Profiles" ],
         "operationId": "get_profile",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1000,10 +1000,10 @@
         "tags": [ "Profiles" ],
         "operationId": "delete_profile",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1053,10 +1053,10 @@
         "tags": [ "Profiles" ],
         "operationId": "update_profile",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1111,10 +1111,10 @@
         "tags": [ "Questionnaires" ],
         "operationId": "create_questionnaire",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1162,10 +1162,10 @@
         "tags": [ "Questionnaires" ],
         "operationId": "get_questionnaire",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1209,10 +1209,10 @@
         "tags": [ "Questionnaires" ],
         "operationId": "delete_questionnaire",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1256,10 +1256,10 @@
         "tags": [ "Questionnaires" ],
         "operationId": "update_questionnaire",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1320,10 +1320,10 @@
         "tags": [ "Stories" ],
         "operationId": "create_story",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1371,10 +1371,10 @@
         "tags": [ "Stories" ],
         "operationId": "get_story",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1418,10 +1418,10 @@
         "tags": [ "Stories" ],
         "operationId": "delete_story",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1465,10 +1465,10 @@
         "tags": [ "Stories" ],
         "operationId": "update_story",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1529,10 +1529,10 @@
         "tags": [ "Themes" ],
         "operationId": "get_theme",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1576,10 +1576,10 @@
         "tags": [ "Themes" ],
         "operationId": "update_theme",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1640,10 +1640,10 @@
         "tags": [ "Users" ],
         "operationId": "create_user",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1691,10 +1691,10 @@
         "tags": [ "Users" ],
         "operationId": "get_user",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1738,10 +1738,10 @@
         "tags": [ "Users" ],
         "operationId": "delete_user",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1785,10 +1785,10 @@
         "tags": [ "Users" ],
         "operationId": "update_user",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -1849,10 +1849,10 @@
         "tags": [ "Users" ],
         "operationId": "get_self",
         "consumes": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "produces": [
-          "application/vnd.api+json"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -3151,7 +3151,7 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
-        }            
+        }
       }
     },
     "PermissionResponse": {
@@ -3718,7 +3718,7 @@
       "description": "Metadata describing associated resources for stories",
       "required": [
         "creator",
-        "owner"          
+        "owner"
       ],
       "properties": {
         "contents": {
@@ -3781,7 +3781,7 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
-        }        
+        }
       }
     },
     "StoryResponse": {
@@ -3854,7 +3854,7 @@
       "description": "Metadata describing associated resources for themes",
       "required": [
         "creator",
-        "owner"          
+        "owner"
       ],
       "properties": {
         "organizations": {
@@ -3885,7 +3885,7 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
-        }        
+        }
       }
     },
     "ThemeResponse": {
@@ -3999,7 +3999,7 @@
         "profiles",
         "default_profile",
         "creator",
-        "owner"        
+        "owner"
       ],
       "properties": {
         "profiles": {
