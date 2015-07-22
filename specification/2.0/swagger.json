@@ -2595,6 +2595,10 @@
         "permission_id": {
           "type": "integer",
           "description": "The ID of the permission associated with this entity"
+        },
+        "source": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
         }
       }
     },
