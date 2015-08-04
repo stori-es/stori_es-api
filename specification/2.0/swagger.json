@@ -2282,6 +2282,10 @@
           "type": "string",
           "description": "The title of this entity"
         },
+        "summary": {
+          "type": "string",
+          "description": "The summary of this entity"
+        },
         "links": {
           "$ref": "#/definitions/CollectionResourceLinks",
           "description": "Metadata describing resources associated with this entity"
@@ -2323,6 +2327,10 @@
         "title": {
           "type": "string",
           "description": "The title of this entity"
+        },
+        "summary": {
+          "type": "string",
+          "description": "The summary of this entity"
         },
         "story_ids": {
           "type": "array",
@@ -3364,6 +3372,10 @@
           "type": "string",
           "description": "The title of this entity"
         },
+        "summary": {
+          "type": "string",
+          "description": "The summary of this entity"
+        },
         "links": {
           "$ref": "#/definitions/QuestionnaireResourceLinks",
           "description": "Metadata describing resources associated with this entity"
@@ -3413,6 +3425,10 @@
         "title": {
           "type": "string",
           "description": "The title of this entity"
+        },
+        "summary": {
+          "type": "string",
+          "description": "The summary of this entity"
         },
         "collection_ids": {
           "type": "array",
