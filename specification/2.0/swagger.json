@@ -1569,68 +1569,6 @@
             }
           }
         }
-      },
-      "put": {
-        "summary": "Updates a theme",
-        "description": "",
-        "tags": [ "Themes" ],
-        "operationId": "update_theme",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "The ID of the theme to update",
-            "name": "theme_id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The modified theme",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Theme"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource successfully updated",
-            "schema": {
-              "$ref": "#/definitions/ThemeResponse"
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "schema": {
-              "$ref": "#/definitions/ThemeResponse"
-            }
-          },
-          "401": {
-            "description": "Not authorized to update the requested resource",
-            "schema": {
-              "$ref": "#/definitions/ThemeResponse"
-            }
-          },
-          "404": {
-            "description": "Resource not found",
-            "schema": {
-              "$ref": "#/definitions/ThemeResponse"
-            }
-          },
-          "503": {
-            "description": "Service is currently unavailable",
-            "schema": {
-              "$ref": "#/definitions/ThemeResponse"
-            }
-          }
-        }
       }
     },
     "/users": {
