@@ -3984,7 +3984,8 @@
       "type": "object",
       "description": "The representation of a new user to be added to the stori.es platform",
       "required": [
-        "handle"
+        "handle",
+        "default_profile_id"
       ],
       "properties": {
         "handle": {
