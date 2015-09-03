@@ -2270,6 +2270,10 @@
           "type": "string",
           "description": "The summary of this entity"
         },
+        "theme_id": {
+          "type": "integer",
+          "description": "The ID of the theme associated with this entity"
+        },
         "story_ids": {
           "type": "array",
           "description": "The IDs of stories associated with this entity",
@@ -2300,6 +2304,7 @@
       "required": [
         "content",
         "stories",
+        "theme",
         "creator",
         "owner"
       ],
@@ -2314,6 +2319,10 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
+        },
+        "theme": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the theme associated with this entity"
         },
         "questionnaires": {
           "type": "array",
@@ -2535,10 +2544,6 @@
             "$ref": "#/definitions/Block"
           }
         },
-        "theme_id": {
-          "type": "integer",
-          "description": "The ID of the theme associated with this entity"
-        },
         "permission_id": {
           "type": "integer",
           "description": "The ID of the permission associated with this entity"
@@ -2554,7 +2559,6 @@
       "description": "Metadata describing associated resources for documents",
       "required": [
         "entity",
-        "theme",
         "creator",
         "owner"
       ],
@@ -2566,10 +2570,6 @@
         "source": {
           "$ref": "#/definitions/ResourceLink",
           "description": "Metadata describing the source this document is associated with (e.g.: an attachment's URL; a response's form document)"
-        },
-        "theme": {
-          "$ref": "#/definitions/ResourceLink",
-          "description": "Metadata describing the theme associated with this entity"
         },
         "permission": {
           "$ref": "#/definitions/ResourceLink",
@@ -3369,6 +3369,10 @@
           "type": "string",
           "description": "The summary of this entity"
         },
+        "theme_id": {
+          "type": "integer",
+          "description": "The ID of the theme associated with this entity"
+        },
         "collection_ids": {
           "type": "array",
           "description": "The IDs of target collections associated with this entity",
@@ -3401,6 +3405,7 @@
         "forms",
         "default_form",
         "contents",
+        "theme",
         "creator",
         "owner"
       ],
@@ -3422,6 +3427,10 @@
           "items": {
             "$ref": "#/definitions/ResourceLink"
           }
+        },
+        "theme": {
+          "$ref": "#/definitions/ResourceLink",
+          "description": "Metadata describing the theme associated with this entity"
         },
         "stories": {
           "type": "array",
