@@ -3208,13 +3208,6 @@
           "items": {
             "$ref": "#/definitions/Contact"
           }
-        },
-        "story_ids": {
-          "type": "array",
-          "description": "The IDs of stories associated with this entity",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     },
