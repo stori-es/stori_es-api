@@ -2209,6 +2209,7 @@
         "links",
         "created_on",
         "updated_on",
+        "publication_status",
         "is_archived"
       ],
       "properties": {
@@ -2247,6 +2248,20 @@
           "format": "date-time",
           "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "publication_status": {
+          "type": "string",
+          "description": "The current publication status of this entity",
+          "enum": [
+            "draft",
+            "published"
+          ]
+        },
+        "published_on": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -2427,7 +2442,6 @@
         "links",
         "created_on",
         "updated_on",
-        "publication_status",
         "is_archived"
       ],
       "properties": {
@@ -2484,20 +2498,6 @@
           "format": "date-time",
           "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
-        },
-        "publication_status": {
-          "type": "string",
-          "description": "The current publication status of this entity",
-          "enum": [
-            "draft",
-            "published"
-          ]
-        },
-        "published_on": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
@@ -3300,6 +3300,7 @@
         "links",
         "created_on",
         "updated_on",
+        "publication_status",
         "is_archived"
       ],
       "properties": {
@@ -3346,6 +3347,20 @@
           "format": "date-time",
           "readOnly": true,
           "description": "The most recent modification date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
+        },
+        "publication_status": {
+          "type": "string",
+          "description": "The current publication status of this entity",
+          "enum": [
+            "draft",
+            "published"
+          ]
+        },
+        "published_on": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The initial publication date and time for this entity, normalized to UTC (see <a href=\"http://tools.ietf.org/html/rfc3339/\" title=\"Date and Time on the Internet: Timestamps\">RFC3339</a>)"
         },
         "is_archived": {
           "type": "boolean",
